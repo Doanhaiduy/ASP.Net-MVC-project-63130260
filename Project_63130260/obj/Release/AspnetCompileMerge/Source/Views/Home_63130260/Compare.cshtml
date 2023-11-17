@@ -1,0 +1,172 @@
+﻿@model List<DATA_63130260.Entity.product_item>
+@{
+    ViewBag.Title = "Compare";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<!-- /compare-->
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        COMPARE PRODUCT
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINS COMPARE  -->
+<section class=" px-[60px] md:xl-[100px] 2xl:px-[300px] py-[60px] gap-8">
+    <div class="container">
+        <div class="grid grid-cols-1 gap-x-5">
+            <div class="overflow-x-auto">
+                <table class="table w-full min-w-max">
+                    <thead class="">
+                        <tr>
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Product Info
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize ">
+                                    <img class="w-40 block mx-auto mb-4 object-cover h-40"
+                                         src="@product.product.product_image"
+                                         alt="@product.product.name">
+                                    <p class="block mb-4 max-w-[120px] md:max-w-[200px] xl:max-w-[360px] min-h-[60px] mx-auto">
+                                        @product.product.name
+                                    </p>
+                                    <form class="flex items-center gap-2 justify-center xl:flex-row flex-col" action="/Home_63130260/AddProductToCart" method="post">
+                                        <button class="xl:w-[40%] md:w-2/3 w-[90%] inline-block bg-black leading-none py-4 px-5 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                            Add to Cart
+                                        </button>
+                                        <input type="hidden" name="idProduct" value="@product.product_id" />
+                                        <input type="hidden" name="qty" value="1" />
+                                        <a href="@Url.Action("RemoveFromCompare","Home_63130260", new { id = product.product_id })"
+                                           class="xl:w-[40%] md:w-2/3 w-[90%] inline-block bg-black leading-none py-4 px-5 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                            Remove
+                                        </a>
+                                    </form>
+                                </th>
+                            }
+                            @if (Model.Count == 1)
+                            {
+                                <th class="">
+                                    <a href="/product_63130260"
+                                       class="inline-block bg-black leading-none py-4 px-5 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                       + Add products to compare
+                                    </a>
+                                </th>
+                            }
+                            @if (Model.Count == 0)
+                            {
+                                <th>
+                                    <a href="/product_63130260"
+                                       class="inline-block bg-black leading-none py-4 px-5 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                        + Add products to compare
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="/product_63130260"
+                                       class="inline-block bg-black leading-none py-4 px-5 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                        + Add products to compare
+                                    </a>
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Price
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(product);
+
+                                <td class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                    @if (price == product.price)
+                                    {
+                                        <span>@String.Format("{0:N0}đ", product.price)</span>
+                                    }
+                                    else
+                                    {
+                                        <div class="flex flex-col gap-2">
+                                            <span class="line-through">@String.Format("{0:N0}đ", product.price)</span>
+                                            <span class="">@String.Format("{0:N0}đ", price)</span>
+                                        </div>
+                                    }
+                                </td>
+                            }
+                        </tr>
+                        <tr class="">
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Description
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                <td class="p-3 border border-solid border-gray-300 text-center font-medium text-sm ">
+                                    <p class="md:w-[200px] w-[100px] xl:w-[360px]  mx-auto">@product.product.description</p>
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Availability
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                <td class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                    <span class="badge bg-success w-[30px]">
+                                        @(product.qty_in_stock >0 ? "In Stock" : "No More Stock")
+                                    </span>
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Weight
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                <td class="p-3 border border-solid border-gray-300 text-center font-medium text-sm ">
+                                    @product.product.product_attributes.weight gam
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Dimensions
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                <td class="p-3 border border-solid border-gray-300 text-center font-medium text-sm">
+                                    @product.product.product_attributes.length x @product.product.product_attributes.width x @product.product.product_attributes.height mm
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <th class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                Materials
+                            </th>
+                            @foreach (var product in Model)
+                            {
+                                <td class="p-3 border border-solid border-gray-300 text-center font-medium text-sm capitalize">
+                                    @product.product.product_attributes.materials
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

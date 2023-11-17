@@ -1,0 +1,539 @@
+﻿@model DATA_63130260.Entity.product_item
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<style>
+    .swiper {
+        width: 1000px;
+    }
+
+    .swiper-button-next::after, .swiper-button-prev::after {
+        font-size: 16px;
+    }
+
+    .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #f97316;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+<!-- SHOP -->
+<!-- /detail/:id -->
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase mx-5">
+                        <a href="/Product_63130260"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Products</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        @Model.product.name
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINS PRODUCT -->
+<!-- DETAIL -->
+<section class=" px-[30px] md:px-[100px] 2xl:px-[200px] py-[60px] gap-8 ">
+
+    <div class="px-4 py-4 mx-auto lg:py-8 md:px-6">
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-full px-4 md:w-1/2 ">
+                <div class="sticky top-0 z-20 overflow-hidden ">
+                    @{
+                        var mapReview = new DATA_63130260.mapReview();
+                        var valueRating = mapReview.GetAvgRatingProduct(Model.id);
+                            var listReview = mapReview.GetAllReviews(Model.id);
+                    }
+
+                    <div class="relative mb-6 lg:mb-10">
+                        <img src="@Model.product.product_image"
+                             alt="" class="object-contain w-full h-full">
+                    </div>
+                    <div class="flex-wrap hidden md:flex ">
+                        <div class="w-1/2 p-2 sm:w-1/4">
+                            <a href="#"
+                               class="block border border-orange-100   hover:border-orange-300 ">
+                                <img src="@Model.product.product_image"
+                                     alt=""
+                                     class="object-cover w-full lg:h-32">
+                            </a>
+                        </div>
+                        <div class="w-1/2 p-2 sm:w-1/4">
+                            <a href="#"
+                               class="block border border-orange-100  hover:border-orange-300">
+                                <img src="@Model.product.product_image"
+                                     alt=""
+                                     class="object-cover w-full lg:h-32">
+                            </a>
+                        </div>
+                        <div class="w-1/2 p-2 sm:w-1/4">
+                            <a href="#"
+                               class="block border border-orange-100   hover:border-orange-300">
+                                <img src="@Model.product.product_image"
+                                     alt=""
+                                     class="object-cover w-full lg:h-32">
+                            </a>
+                        </div>
+                        <div class="w-1/2 p-2 sm:w-1/4">
+                            <a href="#"
+                               class="block border border-orange-100   hover:border-orange-300">
+                                <img src="@Model.product.product_image"
+                                     alt=""
+                                     class="object-cover w-full lg:h-32">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full px-4 md:w-1/2 ">
+                <div class="lg:pl-20">
+                    <div class="pb-6 mb-8 border-b border-gray-200 ">
+                        @*<span class="text-lg font-medium text-rose-500 ">New</span>*@
+                        <h2 class="max-w-xl mt-2 mb-6 text-xl font-bold  md:text-4xl">
+                            @Model.product.name
+                        </h2>
+                        <div class="flex flex-wrap items-center mb-6">
+                            <ul class="flex mb-4 mr-2 lg:mb-0 hover:text-orange-500 items-center">
+                                @if (valueRating != 0)
+                                {
+                                    <li class="mr-2  text-orange-500">
+                                        @string.Format("{0:0.0}", valueRating) |
+                                    </li>
+                                    for (int i = 0; i < (int)Math.Ceiling(valueRating); i++)
+                                    {
+                                        <li>
+                                            <a href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     width="16" height="16"
+                                                     fill="#f97316"
+                                                     class="w-4 mr-1 text-red-500  bi bi-star "
+                                                     viewBox="0 0 16 16">
+                                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                                                </svg>
+                                            </a>
+                                        </li>
+
+                                    }
+                            <li class="ml-2 text-orange-500">
+                                |  <a href="#reviews">@listReview.Count Reviews</a>
+                            </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="mb-4 text-xs underline  lg:mb-0" href="#">
+                                            Be the first to review the product
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+
+                        </div>
+                        <p class="max-w-md mb-8 text-gray-700 ">
+                            @Model.product.description
+                        </p>
+                        <div class="p-4 mb-8 border border-gray-300 ">
+                            <h2 class="mb-4 text-xl font-semibold ">
+                                Currently  <span class="px-2 bg-orange-500 text-gray-50">@Model.qty_sold</span>
+                                products have been sold
+                            </h2>
+                            <div class="mb-1 text-xs font-medium text-gray-700 ">
+                                Hurry up! left @Model.qty_in_stock in Stock
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5  ">
+                                <div class="bg-orange-600  h-2.5 rounded-full"
+                                     style="width:@(Math.Round((double)Model.qty_sold / (double)Model.qty_received * 100, 2))%;">
+                                </div>
+                            </div>
+                        </div>
+                        <p class="inline-block text-2xl font-semibold text-gray-700  ">
+                            @{
+                                var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(Model);
+                            }
+                            @if (price != Model.price)
+                            {
+
+                                <span>@string.Format("{0:#,0đ}", price)</span>
+                                <span class="text-base font-normal text-gray-500 line-through ">@string.Format("{0:#,0đ}", Model.price)</span>
+                            }
+                            else
+                            {
+                                <span>@string.Format("{0:#,0đ}", Model.price)</span>
+                            }
+                        </p>
+                    </div>
+
+                    <form class="flex flex-wrap items-center "
+                          action="/Home_63130260/AddProductToCart"
+                          method="post">
+                        <div class="mb-4 mr-4 lg:mb-0">
+                            <div class="w-28">
+                                <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
+                                    <p onclick="decrement()" class="select-none text-center w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer    hover:text-gray-700  hover:bg-gray-300">
+                                        <span class="m-auto text-2xl font-thin">-</span>
+                                    </p>
+                                    <input type="number" min="1"
+                                           max="@Model.qty_in_stock" name="qty"
+                                           step="1" id="qty"
+                                           value="1"
+                                           class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none    focus:outline-none text-md hover:text-black"
+                                           placeholder="1">
+                                    <p onclick="increment()" class="select-none text-center w-20 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer     hover:text-gray-700 hover:bg-gray-300">
+                                        <span class="m-auto text-2xl font-thin">+</span>
+                                    </p>
+                                    <input type="hidden" name="idProduct"
+                                           value="@Model.id" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4 mr-4 lg:mb-0">
+                            <button class="relative px-6 py-2 font-bold text-white rounded-lg group">
+                                <span class="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-1 -translate-y-1 bg-red-600 ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+                                <span class="absolute inset-0 w-full h-full transition duration-300 transform translate-x-1 translate-y-1 bg-orange-500 ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0 mix-blend-screen"></span>
+                                <span class="relative">Add to Cart</span>
+                            </button>
+
+                        </div>
+                        <div class="mb-4 mr-4 lg:mb-0">
+                            <a href="@Url.Action("AddToCompare","Home_63130260", new { id = Model.product_id })" class="flex items-center justify-center w-full h-10 p-2 text-gray-700 border border-gray-300 lg:w-11 hover:text-gray-50   hover:bg-orange-600 hover:border-orange-600    ">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </a>
+                        </div>
+                        <div class="mb-4 lg:mb-0">
+                            <a class="flex items-center justify-center w-full h-10 p-2 text-gray-700 border border-gray-300 lg:w-11 hover:text-gray-50   hover:bg-orange-600 hover:border-orange-600    ">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16"
+                                     fill="currentColor" class=" bi bi-heart"
+                                     viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="flex flex-wrap mt-6">
+                            <a href="#" class="mr-2">
+                                <img src="/content/assets/images/payment.webp" alt="payment icon">
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Description PRODUCT -->
+
+
+<section class=" px-[60px] md:px-[140px] xl:px-[300px] py-[60px] gap-8">
+    <div class="grid grid-cols-1 gap-x-5">
+        <div class="border border-solid border-gray-300 p-8">
+
+
+            <div id="description" class="custom-tab-content">
+                <p class="my-1 ">
+                    <a class="pb-3 leading-none capitalize transition-all text-orange-500 text-xl sm:text-md before:absolute before:left-auto before:right-0 before:bottom-0 before:w-0 before:h-2px before:empty before:bg-orange relative before:transition-all ease-out"
+                       href="#description">Description</a>
+                </p>
+                <div>
+                    <p class="mb-5">
+                        @Model.product.description
+                    </p>
+
+                </div>
+            </div>
+            <div class="flex justify-center items-center py-4">
+                <img src="@Model.product_image" class="rounded-[12px] w-full h-[600px] object-cover" alt="Alternate Text" />
+
+            </div>
+            <div id="product-details" class="custom-tab-content"></div>
+
+            <p class="mt-5 mb-1 active">
+                <a class="pb-3 leading-none capitalize transition-all text-orange-500 text-xl sm:text-md before:absolute before:left-auto before:right-0 before:bottom-0 before:w-0 before:h-2px before:empty before:bg-orange relative before:transition-all ease-out"
+                   href="#product-details">Product Details</a>
+            </p>
+            <div class="review-bottom">
+                <div class="single-product-desc">
+                    <div class="product-anotherinfo-wrapper">
+                        <ul>
+                            @if (Model.product.product_attributes != null)
+                            {
+                                string dimensions = @Model.product.product_attributes.length + " x " + @Model.product.product_attributes.width + " x " + @Model.product.product_attributes.height + " mm";
+                                <li class="mb-4">
+                                    <span class="font-semibold w-28 inline-block">Weight</span>
+                                    @Model.product.product_attributes.weight gam
+                                </li>
+                                <li class="mb-4">
+                                    <span class="font-semibold w-28 inline-block">Dimensions</span>@dimensions
+                                </li>
+                                <li class="mb-4">
+                                    <span class="font-semibold w-28 inline-block">Materials</span>
+                                    @Model.product.product_attributes.materials
+                                </li>
+                                <li class="mb-4">
+                                    <span class="font-semibold w-28 inline-block">
+                                        Other
+                                        Info
+                                    </span>@Model.product.product_attributes.other_info
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Customer Reviews -->
+
+
+<section class=" px-[60px] md:px-[140px] xl:px-[300px] py-[60px] gap-8" id="reviews">
+    <div class="max-w-xl mx-auto">
+        <h1 class="mb-4 text-3xl font-bold text-center ">
+            Customer Reviews
+        </h1>
+        <p class="mb-16 text-base text-center text-gray-500">
+            This section displays customer reviews for the product. Ratings are based on a scale of 0 to 5 stars.
+        </p>
+    </div>
+  
+    @if (listReview.Count > 0)
+    {
+        foreach (var item in listReview)
+        {
+            <div class="flex flex-wrap py-4 mb-6 border-t border-b border-gray-200 items-center">
+                <div class="w-full px-4 mb-4 lg:mb-0 md:w-1/4">
+                    <h2 class="mb-1 text-lg font-semibold text-gray-900 capitalize">
+                        @item.site_user.first_name @item.site_user.last_name
+                    </h2>
+                    <p class="text-xs text-gray-600 ">
+                        @item.rating_date.Value.ToString("dd, MMM yyyy - HH:mm")
+                    </p>
+                </div>
+                <div class="w-full px-4 mb-4 md:w-1/4 lg:mb-0">
+                    <div class="flex items-center">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="@(i < item.rating_value ? "orange" : "gray")"
+                                 class="w-4 mr-1 bi bi-star-fill" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                            </svg>
+                        }
+                        <p class="ml-2 text-sm font-medium text-gray-500 ">
+                            @string.Format("{0:0.0}", item.rating_value)
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full px-4 md:w-2/5">
+
+                    <p class="mb-3 text-sm text-gray-500 ">
+                        @item.comment
+                    </p>
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center"> This product has no reviews yet </p>
+    }
+
+
+</section>
+<!-- LIST PRODUCT -->
+
+<section class="py-[60px] flex items-center flex-col px-[60px] md:px-[120px]">
+    <h2 class="font-semibold text-[45px] text-orange-500  font-serif text-center">
+        Related Products
+    </h2>
+    <p class="font-normal text-black text-base text-center">
+        Contrary to popular
+        belief, Lorem Ipsum is not simply random text.
+    </p>
+    <div class="swiper mt-[60px]  max-w-full">
+        <div class="swiper-wrapper pb-[60px] " id="swiper">
+            <!-- product -->
+            @foreach (var item in ViewBag.listProductRelated)
+            {
+                var priceitem = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item);
+                <div class="swiper-slide " role="group">
+                    <div class="border border-solid border-gray-300 transition-all hover:shadow-product group rounded-[12px] mt-4 relative">
+                        <div id="tab2" class="relative overflow-hidden pt-4">
+                            <div class="tab-contents">
+                                <div id="product4" class="tab-content  h-[260px] w-[220px] mx-auto">
+                                    <img class="w-full object-cover h-full "
+                                         src="@item.product.product_image"
+                                         alt="product image" loading="lazy">
+                                </div>
+
+                            </div>
+                            @if (priceitem != item.price)
+                            {
+                                var promotion = DATA_63130260.mapPromotion.GetPromotionDetails((int)item.product.category_id);
+                                <div class="px-2 py-1 bg-orange-500 text-white absolute top-0 right-0 rounded-tr-[12px] rounded-bl-[12px]">
+                                    <span class="font-medium uppercase text-sm  inline-block py-1 leading-none ">Sale</span>
+                                    <span class="font-medium uppercase text-sm  inline-block py-1 leading-none">-@promotion.discount_rate%</span>
+                                </div>
+                            }
+                            <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
+                                <ul class="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
+                                    <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                        <a href="#modal-cart"
+                                           class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                           data-tippy-content="Quick View"
+                                           aria-label="Quick View">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+                                    </li>
+                                    <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                        <a href="whishlist.html"
+                                           class="text-black flex items-center justify-center text-md hover:text-orange"
+                                           data-tippy-content="Add to wishlist"
+                                           aria-label="Add to wishlist">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                        <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
+                                           class="text-black flex items-center justify-center text-md hover:text-orange"
+                                           data-tippy-content="Compare"
+                                           aria-label="compare">
+                                            <i class="fa-solid fa-arrows-rotate"></i>
+                                        </a>
+                                    </li>
+                                    <li class="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
+                                        <a href="#modal-addto-cart"
+                                           class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                           data-tippy-content="Add to cart"
+                                           aria-label="Add to cart">
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="py-5 px-4">
+                            <ul class="mb-3 text-sm capitalize">
+                                <li class="flex flex-wrap items-center justify-between">
+                                    <span>
+                                        <span>Sold: </span><span class="text-orange-500">@item.qty_sold</span>
+                                    </span>
+                                    <span>
+                                        <span>Available: </span> <span class="text-orange-500">@item.qty_in_stock</span>
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="h-2 bg-gray-600 rounded">
+                                <div class="h-full bg-orange-500 rounded-l"
+                                     aria-label="progress bar" role="progressbar"
+                                     style="width: @(Math.Round((double)item.qty_sold / (double)item.qty_received * 100, 2))%"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h3 class="mt-4 ">
+                                <a class="block text-base hover:text-orange-500 transition-all min-h-[96px] line-clamp-4"
+                                   href="/Product_63130260/Details/@item.product.id">
+                                    @item.product.name
+                                </a>
+                            </h3>
+                            <h4 class="font-bold text-md leading-none text-orange-500 mt-3">
+                                <del class="font-normal text-sm mr-1 inline-block">$110.00</del>@String.Format("{0:N0}đ", item.price)
+                            </h4>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-buttons">
+            <div class="swiper-button-prev right-auto left-4 w-12 h-12 rounded-full bg-white border border-solid border-gray-200 text-sm text-black opacity-100 transition-all hover:text-orange-500 hover:border-orange-500 top-[40%]"></div>
+            <div class="swiper-button-next left-auto right-4 w-12 h-12 rounded-full bg-white border border-solid border-gray-200 text-sm text-black opacity-100 transition-all hover:text-orange-500 hover:border-orange-500 top-[40%]"></div>
+        </div>
+
+        <!-- If we need scrollbar -->
+    </div>
+
+</section>
+@section scripts{
+    <script>
+        const swiper = new Swiper('.swiper', {
+            observer: true,
+            observeParents: true,
+            parallax: true,
+            autoplay: {
+                delay: 5000,
+            },
+            centerInsufficientSlides: true,
+            breakpoints: {
+                1200: {
+                    slidesPerView: 3,
+                },
+                850: {
+                    slidesPerView: 2,
+                },
+                400: {
+                    slidesPerView: 1,
+                }
+
+            },
+
+            spaceBetween: 20,
+            direction: 'horizontal',
+
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                type: 'bullets',
+            },
+
+        });
+
+        //const decrement = document.querySelector(".decrement");
+        //const increment = document.querySelector(".increment");
+
+        const decrement = function () {
+            if (document.getElementById("qty").value != 1) {
+                document.getElementById("qty").value--;
+            }
+        }
+        const increment = function () {
+            document.getElementById("qty").value++;
+        }
+    </script>
+}

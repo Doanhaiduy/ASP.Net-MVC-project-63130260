@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<!-- /register-->
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        Register
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINS LOGIN -->
+<section class="px-[60px] md:px-[200px] 2xl:px-[300px] py-[60px] gap-8">
+    <div id="maintab">
+        <ul class="custom-tab-nav flex flex-wrap items-center justify-center mb-10">
+            <li class="mx-2 active">
+                <a class="font-semibold py-3 px-5 leading-none uppercase transition-all hover:text-orange-500  text-base md:text-md"
+                   href="/Auth_63130260/login">login</a> <span class="inline-block ml-2">|</span>
+            </li>
+            <li class="mx-2">
+                <a class="font-semibold py-3 px-5 leading-none uppercase transition-all hover:text-orange-500  text-orange-500 text-base md:text-md"
+                   href="#">register</a>
+            </li>
+        </ul>
+
+        <div>
+
+            <div id="register" class="custom-tab-content">
+                <div class="p-8 md:p-20 shadow-2xl max-w-4xl mx-auto">
+                    <form method="post" id="registerForm">
+                        <div class="flex gap-2 lg:flex-row md:flex-col flex-row ">
+                            <div class="w-1/2 md:w-full lg:w-1/2 relative">
+                                <span class="text-[12px] text-red-500 hidden absolute md:top-[-20px] top-[-40px]" id="first_name_error">Please enter a valid first name</span>
+                                <input class="border border-solid border-gray-300  py-1 px-5 w-full mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                       type="text" name="first_name" placeholder="First Name" value="@ViewBag.first_name" required>
+                            </div>
+
+                            <div class="w-1/2 md:w-full lg:w-1/2 relative">
+                                <span class="text-[12px] text-red-500 hidden absolute md:top-[-20px] top-[-40px]" id="last_name_error">Please enter a valid last name</span>
+                                <input class="border border-solid border-gray-300 py-1 px-5 w-full mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                       type="text" name="last_name" placeholder="Last Name" value="@ViewBag.last_name" required>
+                            </div>
+
+                        </div>
+
+                        <span class="text-[12px] text-red-500 hidden" id="email_error">Email invalidate</span>
+                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                               name="email_address" placeholder="Email" value="@ViewBag.email_address" required
+                               type="text">
+
+                        <span class="text-[12px] text-red-500 hidden" id="password_error">Password must contain at least 6 characters including letters and numbers</span>
+                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                               type="password" name="password" required
+                               placeholder="Password">
+                        <div class="button-box">
+                            <button class="inline-block w-full md:w-auto leading-none uppercase text-white text-sm bg-black px-5 py-4 transition-all hover:bg-orange-500">
+                                <span>Register</span>
+                            </button>
+                        </div>
+                        <p class="text-red-500 text-center">@ViewBag.error</p>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section scripts{
+
+    <script>
+        const inputFirstName = document.querySelector('input[name="first_name"]')
+        const inputLastName = document.querySelector('input[name="last_name"]')
+        const inputEmail = document.querySelector('input[name="email_address"]')
+        const inputPassword = document.querySelector('input[name="password"]')
+
+        var mailRegex = /^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var nameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]{2,}$/u
+        var passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/u
+        inputFirstName.onchange = function () {
+            if (inputFirstName.value.match(nameRegex)) {
+                inputFirstName.classList.remove("border-red-500")
+                document.getElementById("first_name_error").classList.add("hidden")
+            }
+            else {
+                inputFirstName.classList.add("border-red-500")
+                document.getElementById("first_name_error").classList.remove("hidden")
+
+            }
+        }
+
+        inputLastName.onchange = function () {
+            if (inputLastName.value.match(nameRegex)) {
+                inputLastName.classList.remove("border-red-500")
+                document.getElementById("last_name_error").classList.add("hidden")
+            }
+            else {
+                inputLastName.classList.add("border-red-500")
+                document.getElementById("last_name_error").classList.remove("hidden")
+
+            }
+        }
+
+        inputEmail.onchange = function () {
+            if (inputEmail.value.match(mailRegex)) {
+                inputEmail.classList.remove("border-red-500")
+                document.getElementById("email_error").classList.add("hidden")
+            }
+            else {
+                inputEmail.classList.add("border-red-500")
+                document.getElementById("email_error").classList.remove("hidden")
+
+            }
+        }
+
+        inputPassword.onchange = function () {
+            if (inputPassword.value.match(passwordRegex)) {
+                inputPassword.classList.remove("border-red-500")
+                document.getElementById("password_error").classList.add("hidden")
+            }
+            else {
+                inputPassword.classList.add("border-red-500")
+                document.getElementById("password_error").classList.remove("hidden")
+
+            }
+        }
+        document.getElementById('registerForm').addEventListener("submit", function (event) {
+            if (!inputEmail.value.match(mailRegex) || !inputPassword.value.match(passwordRegex) || !inputFirstName.value.match(nameRegex) || !inputLastName.value.match(nameRegex)) {
+                event.preventDefault();
+            }
+        });
+    </script>
+}

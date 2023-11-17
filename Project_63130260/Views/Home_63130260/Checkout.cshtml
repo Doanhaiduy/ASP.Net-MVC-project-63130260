@@ -1,0 +1,437 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+    var currUser = Project_63130260.App_Start.SessionConfig.GetUser();
+    var user = new DATA_63130260.mapUser().GetDetailUser(currUser.id);
+    //DATA_63130260.Entity.address address = new DATA_63130260.Entity.address();
+    //if (user != null)
+    //{
+    //    if (user.user_address != null)
+    //    {
+    //        var userAddress = user.user_address.FirstOrDefault(m => m.address.id == m.address_id && m.is_default == true);
+    //        if (userAddress != null)
+    //        {
+    //            address = userAddress.address;
+    //        }
+    //    }
+    //}
+
+    // Lấy ra danh sách những địa chỉ của người dùng hiện tại để hiển thị ra ô select
+    List<DATA_63130260.Entity.user_address> listUserAddress = new List<DATA_63130260.Entity.user_address>();
+    if (user != null)
+    {
+        if (user.user_address != null)
+        {
+            var listUserAddressTemp = user.user_address.Where(m => m.address.id == m.address_id).ToList();
+            if (listUserAddressTemp.Count > 0)
+            {
+                listUserAddress = listUserAddressTemp;
+            }
+        }
+    }
+
+    // Lấy ra danh sách những phương thức thanh toán để hiển thị ra ô radio
+    List<DATA_63130260.Entity.payment_type> paymentTypeList = new List<DATA_63130260.Entity.payment_type>();
+    var mapPayment = new DATA_63130260.mapPayment();
+    paymentTypeList = mapPayment.GetListPaymentType();
+
+    // Lấy ra danh sách những đơn vị vận chuyển để hiển thị ra ô select
+    List<DATA_63130260.Entity.shipping_method> shippingTypeList = new List<DATA_63130260.Entity.shipping_method>();
+    var mapshipping = new DATA_63130260.mapShipping();
+    shippingTypeList = mapshipping.GetListShippingType();
+
+    // Lấy ra danh sách những sản phẩm trong giỏ hàng để hiện thị
+    var mapCart = new DATA_63130260.mapCart();
+    var idCart = mapCart.GetCart(user.id).id;
+    var listItemCart = mapCart.GetCartItems(idCart);
+}
+
+
+<style>
+    #other-address {
+        transition: cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+    }
+</style>
+
+<!-- /checkout-->
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase mx-5">
+                        <a href="/Home_63130260/Cart"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">YOUR SHOPPING CART</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        Checkout
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- CONTAINS CHECKOUT -->
+<section class="px-[60px] md:px-[200px] 2xl:px-[300px] py-[60px] gap-8">
+
+    <form class="container" action="/home_63130260/PaymentWithPaypal" id="form-checkout">
+        <div class="grid grid-cols-12 gap-5">
+            <div class="col-span-12 lg:col-span-7">
+                <div>
+                    <h3 class="text-lg font-semibold mb-5">
+                        Billing
+                        Details
+                    </h3>
+                    <div class="personal-information">
+                        <input type="hidden" name="idCart" value="@idCart" />
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+                            <div>
+                                <div>
+                                    <label class="mb-3 inline-block">
+                                        First
+                                        Name
+                                    </label>
+                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                           type="text" name="order_first_name" value="@user.first_name" required>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <label class="mb-3 inline-block">
+                                        Last
+                                        Name
+                                    </label>
+                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                           type="text" name="order_last_name" value="@user.last_name" required>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2">
+                                <div>
+                                    <label class="mb-3 inline-block">
+                                        Phone
+                                        Number
+                                    </label>
+                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                           placeholder="Delivery Phone Number"
+                                           type="text" name="order_phone" value="@user.phone_number" required>
+
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-2">
+                                <div>
+                                    <label class="mb-3 inline-block">
+                                        Delivery
+                                        Address
+                                    </label>
+                                    <select id="choose-address"
+                                            name="shipping_address"
+                                            class="bg-transparent border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base">
+                                        @*@if (!string.IsNullOrEmpty(address.street_number))
+                                        {
+                                            <option value="default">
+                                                @address.street_number, @address.district, @address.city, @address.province, @address.postal_code (Default)
+                                            </option>
+                                        }*@
+
+
+                                        @if (listUserAddress.Count > 0)
+                                        {
+                                            foreach (var item in listUserAddress.OrderByDescending(x => x.is_default))
+                                            {
+                                                <option value="default" data-default="@item.is_default" data-idAddress="@item.address_id">
+                                                    @item.address.street_number, @item.address.district, @item.address.city, @item.address.province, @item.address.postal_code @(item.is_default == true ? "(Default)" : "")
+                                                </option>
+                                            }
+                                        }
+
+                                        <option value="other_address">
+                                            Enter Another Address
+                                        </option>
+                                    </select>
+                                    <input type="hidden" name="address_default" value="true" />
+                                    <input type="hidden" name="id_address_default" value="" />
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-2 grid gap-x-5  bg-white @(listUserAddress.Count <= 0 ? "": "h-0 transition-all  opacity-0 invisible")"
+                                 id="other-address">
+                                <div class="lg:col-span-2">
+                                    <div>
+                                        <label class="mb-3 inline-block">
+                                            Street
+                                            Number
+                                        </label>
+                                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                               type="text"
+                                               name="street_number">
+
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div>
+                                        <label class="mb-3 inline-block">District</label>
+                                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                               type="text"
+                                               name="district">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label class="mb-3 inline-block">City</label>
+                                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                               type="text"
+                                               name="city">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label class="mb-3 inline-block">Province</label>
+                                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                               type="text"
+                                               name="province">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label class="mb-3 inline-block">
+                                            Postcode
+                                            / ZIP
+                                        </label>
+                                        <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                               type="text" name="postal_code">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-2 bg-white">
+                                <div>
+                                    <label class="mb-3 inline-block">Transporters</label>
+                                    <select required id="shipping_method" name="shipping_method" class="bg-transparent border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base">
+
+                                        <option data-price="0" value="">
+                                            Select a Transporters
+                                        </option>
+                                        @foreach (var item in shippingTypeList)
+                                        {
+                                            <option value="@item.id" data-price="@item.price">@item.name</option>
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 flex flex-col gap-2 bg-white">
+                                <label class="mb-3 inline-block">
+                                    Payment
+                                    methods
+                                </label>
+                                @foreach (var item in paymentTypeList)
+                                {
+                                    <div class="flex items-center pl-4 border border-gray-300 rounded ">
+                                        <input id="bordered-radio-@item.id"
+                                               type="radio" value="@item.id" required
+                                               name="payment_method_id"
+                                               class="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="bordered-radio-@item.id"
+                                               class="w-full py-4 ml-2 text-sm font-medium text-gray-900 ">@item.name @(item.name == "COD" ? " (Cash On Delivery)" : null)</label>
+                                        </div>
+                                    }
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="additional-info-wrap mt-4">
+                        <h4 class="text-base font-semibold">
+                            Additional
+                            information
+                        </h4>
+                        <div class="additional-info">
+                            <label class="mb-3 inline-block">
+                                Order
+                                notes
+                            </label>
+                            <textarea class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-36 focus:outline-none text-base"
+                                      placeholder="Notes about your order, e.g. special notes for delivery."
+                                      name="order_note"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 lg:col-span-5 mt-4 mt-lg-0">
+                <div>
+                    <h3 class="text-lg font-semibold mb-5">
+                        Your order
+                    </h3>
+                    <div class="bg-gray-100 p-10">
+                        <div class="your-order-product-info">
+                            <ul class="flex flex-wrap items-center justify-between">
+                                <li class="text-base font-semibold">
+                                    Product
+                                </li>
+                                <li class="text-base font-semibold">
+                                    Total
+                                </li>
+                            </ul>
+                            <ul class="border-t border-b border-gray-600 py-5 my-5">
+
+                                @foreach (var item in listItemCart)
+                                {
+
+                                    var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item.product_item);
+
+                                    <li class="flex flex-wrap items-center justify-between mt-4">
+                                        <img src="@item.product_item.product.product_image" class="w-[50px] h-[50px] object-cover" alt="Alternate Text" />
+                                        <span class="w-[60%] ">@item.product_item.product.name</span>
+                                        <span> X @item.qty</span>
+                                        @if (price == item.product_item.price)
+                                        {
+                                            <span>@String.Format("{0:N0}đ", price)</span>
+                                        }
+                                        else
+                                        {
+                                            <div class="flex flex-col gap-1">
+                                                <span class="line-through">@String.Format("{0:N0}đ", item.product_item.price)</span>
+                                                <span>@String.Format("{0:N0}đ", price)</span>
+                                            </div>
+                                        }
+
+                                    </li>
+                                }
+                            </ul>
+                            <ul class="flex flex-wrap items-center justify-between">
+                                <li class="text-base font-semibold">
+                                    Shipping
+                                </li>
+                                <li class="text-base font-semibold" id="shipping-price">
+                                    ...
+                                </li>
+                            </ul>
+                            <ul class="flex flex-wrap items-center justify-between border-t border-b border-gray-600 py-5 my-5">
+                                <li class="text-base font-semibold">
+                                    Total
+                                </li>
+                                <li id="toltal">
+                                    <p class="text-base font-semibold">
+                                        @{
+                                            decimal total = 0;
+                                            foreach (var item2 in listItemCart)
+                                            {
+                                                var price2 = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item2.product_item);
+                                                total += price2 * (decimal)item2.qty;
+
+                                            }
+                                        }
+                                        @String.Format("{0:N0}đ", total)
+
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="accordion">
+                            <div class="set mb-4">
+                                <button class="text-base font-semibold active"
+                                        aria-label="button">
+                                    Order notes
+                                </button>
+                                <div class="content overflow-hidden p-4 bg-white mt-3">
+                                    <p id="show_note">
+                                        ...
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    @if (listItemCart.Sum(m => m.product_item.price * m.qty) != total)
+                    {
+                        <input type="hidden" name="totalOrder" value="@total" />
+                    }
+                    <div class="mt-6">
+                        <button class="block w-full text-center leading-none uppercase text-white text-sm bg-black px-5 py-5 transition-all hover:bg-orange-500 font-semibold @(listItemCart.Count <=0 ? "pointer-events-none opacity-50" : "Place Order")">
+                            @(listItemCart.Count <=0 ? "You need to add products to your cart to checkout" : "Place Order")
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+@section scripts{
+    <script>
+    const chooseAddress = document.getElementById("choose-address")
+    const formOtherAddress = document.getElementById("other-address")
+
+    chooseAddress.onchange = function () {
+        if (chooseAddress.value === "other_address") {
+
+
+            formOtherAddress.classList.remove("h-0", "opacity-0", "invisible");
+            formOtherAddress.classList.add("h-[310px]", "opacity-100", "visible")
+
+            formOtherAddress.querySelectorAll("input").forEach(item => {
+                item.setAttribute("required", "true");
+            });
+        }
+        else {
+            var addressDefaultInput = document.querySelector("input[name='address_default']");
+            var idAddressDefaultInput = document.querySelector("input[name='id_address_default']");
+            var selectedOption = chooseAddress.options[chooseAddress.selectedIndex];
+            var isDefault = selectedOption.getAttribute("data-default");
+            var id = selectedOption.getAttribute("data-idAddress");
+            addressDefaultInput.value = isDefault || ""
+            idAddressDefaultInput.value =  id;
+
+            formOtherAddress.classList.add("h-0", "opacity-0", "invisible");
+            formOtherAddress.classList.remove("h-[310px]", "opacity-1", "visible")
+            formOtherAddress.querySelectorAll("input").forEach(item => {
+                item.removeAttribute("required")
+            });
+        }
+    }
+
+    const shipping_method = document.getElementById("shipping_method");
+    shipping_method.onchange = function () {
+        const selectedOption = shipping_method.options[shipping_method.selectedIndex];
+        const dataPrice = selectedOption.getAttribute("data-price");
+        var price = parseFloat(dataPrice)
+        document.getElementById("shipping-price").innerText = price.toLocaleString();
+        document.getElementById("toltal").innerHTML = `<li class="text-base font-semibold" id="toltal">
+                                    @String.Format("{0:N0}đ", total) +  ${price.toLocaleString()}đ
+                                </li>`;
+        }
+        const inputNote = document.querySelector('textarea[name="order_note"]')
+        const showNote = document.getElementById("show_note")
+        console.log(inputNote)
+        inputNote.onkeyup = function () {
+            showNote.innerText = inputNote.value;
+        }
+
+        var radioButtons = document.querySelectorAll("input[name='payment_method_id']");
+
+        radioButtons.forEach(function (radioButton) {
+            radioButton.addEventListener("change", function () {
+                var selectedValue = document.querySelector("input[name='payment_method_id']:checked").value;
+                var form = document.getElementById("form-checkout"); 
+
+                if (selectedValue == 1) {
+                    form.action = "/home_63130260/PaymentWithPaypal"
+                    form.method = "get"
+                }
+                else {
+                    form.action = "/home_63130260/Checkout"
+                    form.method = "Post"
+                }
+            });
+        });
+    </script>
+}

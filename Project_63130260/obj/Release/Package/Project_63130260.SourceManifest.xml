@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\Project_63130260\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\Project_63130260\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\Project_63130260\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

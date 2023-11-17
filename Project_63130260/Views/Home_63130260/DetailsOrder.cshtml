@@ -1,0 +1,224 @@
+﻿@model DATA_63130260.Entity.shop_order
+@{
+    ViewBag.Title = "DetailsOrder";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        Order details #@Model.id
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<section class=" bg-white p-8 rounded-md w-full">
+    <div class=" flex items-center justify-between pb-6">
+        <div>
+            <h2 class="text-gray-600 font-semibold text-[30px]">
+                Order details #@Model.id
+            </h2>
+            <!-- <span class="text-[20px]">Tất cả đơn hàng đã mua</span> -->
+        </div>
+    </div>
+    <div class="grid md:grid-cols-5 grid-col-3 gap-4 p-4 border rounded-lg ">
+        <div class="">
+            <p class="text-[18px] font-semibold">Code orders</p>
+            <span>#@Model.id</span>
+        </div>
+        <div class="">
+            <p class="text-[18px] font-semibold">Address</p>
+            <span>@Model.address.district, @Model.address.street_number, @Model.address.city, @Model.address.province, @Model.address.postal_code</span>
+        </div>
+        <div class="">
+            <p class="text-[18px] font-semibold">Time order</p>
+            <span>@Model.order_date.Value.ToString("hh:mm MMM dd, yyyy")</span>
+        </div>
+        <div class="">
+            <p class="text-[18px] font-semibold">
+                Shipping unit
+            </p>
+            <span>@Model.shipping_method1.name</span>
+        </div>
+        <div class="">
+            <p class="text-[18px] font-semibold">Status</p>
+            <span>@(Model.order_status == false? "In Transit": "Delivered")</span>
+        </div>
+    </div>
+    <div>
+        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <div class="inline-block min-w-full shadow rounded-lg overflow-auto">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                        <tr>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Image
+                            </th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Product name
+                            </th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Price
+                            </th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Quantity
+                            </th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Total
+                            </th>
+                            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    @{
+                        var mapOrder = new DATA_63130260.mapOrder();
+                        var list = mapOrder.GetOrderItems(Model.id);
+                        var mapReview = new DATA_63130260.mapReview();
+                    }
+
+                    <tbody>
+                        @foreach (var item in list)
+                        {
+
+                            <tr>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 md:w-[120px] md:h-[150px] w-[80px] h-[100px] ">
+
+                                            <img class="w-full h-full object-cover"
+                                                 src="@item.product_item.product.product_image"
+                                                 alt="" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        @item.product_item.product.name
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        @{
+                                            var price = item.price;
+                                            if (item.discount_rate != 0)
+                                            {
+                                                price = item.product_item.price - (item.product_item.price / 100) * item.discount_rate;
+                                            }
+                                        }
+                                        @if (item.discount_rate == 0)
+                                        {
+                                            <span>@String.Format("{0:N0}đ", item.price)</span>
+                                        }
+                                        else
+                                        {
+                                            <div class="flex flex-col gap-1">
+                                                <span class="line-through">@String.Format("{0:N0}đ", item.product_item.price)</span>
+                                                <span>@String.Format("{0:N0}đ", price)</span>
+                                            </div>
+                                        }
+
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        @item.qty
+
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        @string.Format("{0:#,0đ}", price * item.qty)
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
+                                    @if (!mapReview.CheckReviewedProduct(item.id))
+                {
+                                        <a href="@Url.Action("Review","product_63130260", new { id = @item.product_item_id, ordered_product_id = item.id })" class="relative inline-flex items-center justify-start px-4 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-orange-500 group border border-orange-500">
+                                            <span class="w-48 h-48 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                                            <span class="relative w-full text-left text-[14px] text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">Review</span>
+                                        </a>
+                }
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center flex-col md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
+        <div class="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full  space-y-6">
+
+        </div>
+        <div class="flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-100 space-y-6 rounded-lg">
+            <h3 class="text-xl font-semibold leading-5 text-gray-800">
+                Bill
+            </h3>
+            <div class="flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4">
+                <div class="flex justify-between w-full">
+                    <p class="text-base  leading-4 text-gray-800">
+                        Provisional total
+                    </p>
+                    <p class="text-base  leading-4 text-gray-600">
+                        @string.Format("{0:#,0}đ", Model.order_total - Model.shipping_method1.price)
+                    </p>
+                </div>
+                <div class="flex justify-between items-center w-full">
+                    <p class="text-base  leading-4 text-gray-800">
+                        Discount
+                    </p>
+                    <p class="text-base  leading-4 text-gray-600">
+                        0đ (0%)
+                    </p>
+                </div>
+                <div class="flex justify-between items-center w-full">
+                    <p class="text-base  leading-4 text-gray-800">
+                        Transport fee
+                    </p>
+                    <p class="text-base  leading-4 text-gray-600">
+                        @string.Format("{0:#,0}đ", Model.shipping_method1.price)
+
+                    </p>
+                </div>
+                <div class="flex justify-between items-center w-full">
+                    <p class="text-base  leading-4 text-gray-800">
+                        Payment methods
+                    </p>
+                    <p class="text-base  leading-4 text-gray-600">
+                        @Model.payment_type.name 
+                        @if(Model.payment_method_id == 1)
+                        {
+                            <span>
+                                (@Math.Round((double)Model.order_total / 24275, 2).ToString()$)
+                            </span>
+                        }
+
+
+                    </p>
+                </div>
+            </div>
+            <div class="flex justify-between items-center w-full">
+                <p class="text-base  font-semibold leading-4 text-gray-800">
+                    Total
+                </p>
+                <p class="text-base  font-semibold leading-4 text-gray-600">
+                    @string.Format("{0:#,0}", Model.order_total)đ
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

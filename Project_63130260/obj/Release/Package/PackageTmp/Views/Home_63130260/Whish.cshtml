@@ -1,0 +1,271 @@
+﻿
+@{
+    ViewBag.Title = "Whish";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<!-- /whish-->
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="index.html"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        YOUR WHISH LIST PAGE
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINS CART -->
+<!-- ITEM PRODUCT CART -->
+<section class="px-[200px] 2xl:px-[300px] py-[60px] gap-8">
+    <div class="grid grid-cols-1 gap-x-5">
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-max">
+                <thead>
+                    <tr>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Image
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Product
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Price
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Quantity
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Total
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Remove
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Checkout
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td class="w-32 p-3 border border-solid border-gray-200 text-center">
+                            <a href="#">
+                                <img src="assets/images/product3.webp"
+                                     alt="product image">
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="transition-all hover:text-orange">
+                                Birpod
+                                product unsde
+                            </a><span>m / gold</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span><span>$80.00</span></span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <div class="flex count border border-solid border-gray-200 p-2 h-11">
+                                <button class="decrement flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    -
+                                </button>
+                                <input type="number" min="1" max="100"
+                                       step="1" value="1"
+                                       class="quantity__input flex-auto w-8 text-center focus:outline-none input-appearance-none">
+                                <button class="increment flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    +
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span>$80.00</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <a href="#"
+                               class="inline-block mx-1 hover:text-orange transition-all">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="inline-block bg-black leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                Add
+                                To Cart
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-32 p-3 border border-solid border-gray-200 text-center">
+                            <a href="#">
+                                <img src="assets/images/product3.webp"
+                                     alt="product image">
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="transition-all hover:text-orange">
+                                Birpod
+                                product unsde
+                            </a><span>m / gold</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span><span>$80.00</span></span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <div class="flex count border border-solid border-gray-200 p-2 h-11">
+                                <button class="decrement flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    -
+                                </button>
+                                <input type="number" min="1" max="100"
+                                       step="1" value="1"
+                                       class="quantity__input flex-auto w-8 text-center focus:outline-none input-appearance-none">
+                                <button class="increment flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    +
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span>$80.00</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <a href="#"
+                               class="inline-block mx-1 hover:text-orange transition-all">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="inline-block bg-black leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                Add
+                                To Cart
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-32 p-3 border border-solid border-gray-200 text-center">
+                            <a href="#">
+                                <img src="assets/images/product3.webp"
+                                     alt="product image">
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="transition-all hover:text-orange">
+                                Birpod
+                                product unsde
+                            </a><span>m / gold</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span><span>$80.00</span></span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <div class="flex count border border-solid border-gray-200 p-2 h-11">
+                                <button class="decrement flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    -
+                                </button>
+                                <input type="number" min="1" max="100"
+                                       step="1" value="1"
+                                       class="quantity__input flex-auto w-8 text-center focus:outline-none input-appearance-none">
+                                <button class="increment flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    +
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span>$80.00</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <a href="#"
+                               class="inline-block mx-1 hover:text-orange transition-all">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="inline-block bg-black leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                Add
+                                To Cart
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-32 p-3 border border-solid border-gray-200 text-center">
+                            <a href="#">
+                                <img src="assets/images/product3.webp"
+                                     alt="product image">
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="transition-all hover:text-orange">
+                                Birpod
+                                product unsde
+                            </a><span>m / gold</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span><span>$80.00</span></span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <div class="flex count border border-solid border-gray-200 p-2 h-11">
+                                <button class="decrement flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    -
+                                </button>
+                                <input type="number" min="1" max="100"
+                                       step="1" value="1"
+                                       class="quantity__input flex-auto w-8 text-center focus:outline-none input-appearance-none">
+                                <button class="increment flex-auto w-5 leading-none"
+                                        aria-label="button">
+                                    +
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <span>$80.00</span>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+
+                            <a href="#"
+                               class="inline-block mx-1 hover:text-orange transition-all">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </a>
+                        </td>
+                        <td class="p-3 border border-solid border-gray-200 text-center">
+                            <a href="#"
+                               class="inline-block bg-black leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                                Add
+                                To Cart
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

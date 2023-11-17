@@ -1,0 +1,258 @@
+﻿@model List<DATA_63130260.Entity.product_item>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+<p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i> Deleted Items</p>
+
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <div class="mt-12 mx-4">
+        <p class="text-xl pb-3 flex items-center ml-3">
+            <i class="fas fa-list mr-3"></i> Deleted Products
+        </p>
+        <div class="bg-white overflow-x-auto">
+            <table class="leading-normal ">
+                <thead>
+                    <tr class="text-md">
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                            ID
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                            Product name
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left font-semibold text-gray-600 uppercase tracking-wider">
+                            Price
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left font-semibold text-gray-600 uppercase tracking-wider">
+                            Quantity
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                            Category
+                        </th>
+
+                        <th class="px-5 py-3 border-b-2 w-full border-gray-200 bg-gray-100 text-left font-semibold text-gray-600 uppercase tracking-wider">
+                            Description
+                        </th>
+                        <th colspan="2" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left font-semibold text-gray-600 uppercase tracking-wider">
+                            Tools
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap text-lg font-bold">
+                                    #@item.id
+                                </p>
+                            </td>
+                            <td class="w-1/5  px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 w-14 h-14">
+                                        @*@{
+                                                var imageUrl = item.Anh;
+                                                if (!System.IO.File.Exists(Server.MapPath(imageUrl)))
+                                                {
+                                                    imageUrl = Url.Content("/assets/imgs/index/product/pro_1.webp");
+                                                }
+                                            }*@
+
+                                        <img class="w-full h-full object-cover"
+                                             src="@item.product.product_image"
+                                             alt="Product" />
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-gray-900 text-lg whitespace-no-wrap">
+                                            @item.product.name
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span class="absolute inset-0 bg-green-200 opacity-50 rounded-full "></span>
+                                    <span class="relative text-lg">
+                                        @string.Format("{0:#,0đ}", item.price)
+
+                                    </span>
+                                </span>
+                            </td>
+
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-md">
+                                <p class="addQuantiy text-gray-900 whitespace-no-wrap @(item.qty_in_stock <= 20? "text-red-600 font-bold": null)" data-productId="@item.id" data-test1="@item.qty_in_stock" data-test2="@item.qty_received">
+                                    @(item.qty_in_stock)
+                                    @*<span class="px-2 py-1 ml-1 bg-green-200 rounded-full cursor-pointer ">+</span>*@
+
+                                </p>
+
+                            </td>
+
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-md">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                    @item.product.product_category.category_name
+                                </p>
+                            </td>
+
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-md">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                    @item.product.description
+                                </p>
+                            </td>
+                            <td class="px-2 py-5 border-b border-gray-200 bg-white text-md">
+                                <a class="cursor-pointer  whitespace-no-wrap px-3 py-2 bg-orange-500 text-white rounded-xl flex gap-2 items-center" href="@Url.Action("RestoreItemsProducts","DeletedItems_63130260", new { id = item.product_id })">
+                                    <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                    Restore
+                                </a>
+                            </td>
+                            @*<td class="px-2 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <a class="cursor-pointer  whitespace-no-wrap px-3 py-2 bg-red-600 text-white rounded-xl flex gap-2 items-center" href="@Url.Action("DeleteProduct","product_63130260", new { id = item.product_id })">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        Delete
+                                    </a>
+                                </td>*@
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <p class="pt-3 text-gray-600">
+        </p>
+    </div>
+
+    @{
+        var map = new DATA_63130260.mapDeletedItems();
+        var listDeletedOrder = map.getListDeletedOrder();
+    }
+
+    <div class="mt-12 mx-4">
+        <p class="text-xl pb-3 flex items-center ml-3">
+            <i class="fas fa-list mr-3"></i> Deleted Orders
+        </p>
+        <div class="overflow-x-auto">
+            <div class="mt-7 overflow-x-auto">
+                <table class="w-full whitespace-nowrap leading-normal">
+                    <thead>
+                        <tr class="text-md font-bold">
+                            <td class="">
+                                <p class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+
+                                    ID
+                                </p>
+                            </td>
+                            <td class="">
+                                <p class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                    Status
+                                </p>
+
+                            </td>
+                            <td class=">
+                                <p class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                    Shipping unit
+                                </p>
+
+                            </td>
+                            <td class="">
+                                <p class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                    Total
+                                </p>
+                            </td>
+                            <td class="">
+                                <p class="px-2 py-3 border-b-2 border-gray-200 bg-gray-100 text-left font-semibold text-gray-600 uppercase tracking-wider">
+                                    Order date
+                                </p>
+                            </td>
+                            <td class="">
+                                <p class="px-3 py-3 border-b-2 border-gray-200 bg-gray-100 text-left font-semibold text-gray-600 uppercase tracking-wider">
+                                    Status
+                                </p>
+                            </td>
+                            <td colspan="2" class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-center  font-semibold text-gray-600 uppercase tracking-wider">
+                                Action
+                            </td>
+
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        @foreach (var item in listDeletedOrder)
+                        {
+
+                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                                <td class="">
+                                    <div class="flex items-center pl-5">
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2">#@item.id</p>
+
+                                    </div>
+                                </td>
+
+                                <td class="pl-12">
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M9.16667 2.5L16.6667 10C17.0911 10.4745 17.0911 11.1922 16.6667 11.6667L11.6667 16.6667C11.1922 17.0911 10.4745 17.0911 10 16.6667L2.5 9.16667V5.83333C2.5 3.99238 3.99238 2.5 5.83333 2.5H9.16667" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <circle cx="7.50004" cy="7.49967" r="1.66667" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                        </svg>
+                                        <p class="text-sm leading-none text-gray-600 ml-2">@(item.order_status == false? "In Transit": "Delivered")</p>
+                                    </div>
+                                </td>
+
+                                <td class="pl-10">
+                                    <div class="flex items-center">
+                                        <p class="text-sm leading-none text-gray-600 ml-2">@item.shipping_method1.name</p>
+                                    </div>
+                                </td>
+
+                                <td class="">
+                                    <div class="flex items-center pl-5">
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2"> @string.Format("{0:#,0đ}", item.order_total)</p>
+
+                                    </div>
+                                </td>
+
+                                <td class="">
+                                    <button class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded"> @item.order_date.Value.ToString("HH:mm MMM dd, yyyy")</button>
+                                </td>
+
+                                <td class="">
+                                    <p class="focus:ring-2 text-center  @(item.order_status == false ? "pointer-events-none" : "pointer-events-none bg-green-200") focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-2 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none" type="button">
+                                        @(item.order_status == false? "In Transit" : "Delivered successfully")
+                                    </p>
+                                </td>
+
+                                <td class="px-4">
+                                    <a class="cursor-pointer justify-center  whitespace-no-wrap px-2 py-2 bg-orange-500 text-white rounded-xl flex gap-2 items-center" href="@Url.Action("RestoreItemsOrders","DeletedItems_63130260", new { id = item.id })">
+                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                        Restore
+                                    </a>
+                                </td>
+                                <td class="">
+                                    <a href="@Url.Action("Details","Order_63130260", new { id = item.id })" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none" type="button">
+                                        Details
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="pt-3 text-gray-600">
+        </p>
+    </div>
+</div>
+
+
+
+

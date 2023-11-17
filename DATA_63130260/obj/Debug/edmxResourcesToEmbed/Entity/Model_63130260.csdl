@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Project_63130260Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Project_63130260Entities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Project_63130260Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Project_63130260Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="addresses" EntityType="Project_63130260Model.address" />
+    <EntitySet Name="order_line" EntityType="Project_63130260Model.order_line" />
+    <EntitySet Name="payment_type" EntityType="Project_63130260Model.payment_type" />
+    <EntitySet Name="products" EntityType="Project_63130260Model.product" />
+    <EntitySet Name="product_attributes" EntityType="Project_63130260Model.product_attributes" />
+    <EntitySet Name="product_category" EntityType="Project_63130260Model.product_category" />
+    <EntitySet Name="product_item" EntityType="Project_63130260Model.product_item" />
+    <EntitySet Name="promotions" EntityType="Project_63130260Model.promotion" />
+    <EntitySet Name="shipping_method" EntityType="Project_63130260Model.shipping_method" />
+    <EntitySet Name="shop_order" EntityType="Project_63130260Model.shop_order" />
+    <EntitySet Name="shopping_cart" EntityType="Project_63130260Model.shopping_cart" />
+    <EntitySet Name="shopping_cart_item" EntityType="Project_63130260Model.shopping_cart_item" />
+    <EntitySet Name="site_admin" EntityType="Project_63130260Model.site_admin" />
+    <EntitySet Name="site_user" EntityType="Project_63130260Model.site_user" />
+    <EntitySet Name="sysdiagrams" EntityType="Project_63130260Model.sysdiagram" />
+    <EntitySet Name="user_address" EntityType="Project_63130260Model.user_address" />
+    <EntitySet Name="user_review" EntityType="Project_63130260Model.user_review" />
+    <AssociationSet Name="fk_shoporder_shipaddress" Association="Project_63130260Model.fk_shoporder_shipaddress">
+      <End Role="address" EntitySet="addresses" />
+      <End Role="shop_order" EntitySet="shop_order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_useradd_address" Association="Project_63130260Model.fk_useradd_address">
+      <End Role="address" EntitySet="addresses" />
+      <End Role="user_address" EntitySet="user_address" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderline_order" Association="Project_63130260Model.fk_orderline_order">
+      <End Role="shop_order" EntitySet="shop_order" />
+      <End Role="order_line" EntitySet="order_line" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderline_proditem" Association="Project_63130260Model.fk_orderline_proditem">
+      <End Role="product_item" EntitySet="product_item" />
+      <End Role="order_line" EntitySet="order_line" />
+    </AssociationSet>
+    <AssociationSet Name="fk_review_product" Association="Project_63130260Model.fk_review_product">
+      <End Role="order_line" EntitySet="order_line" />
+      <End Role="user_review" EntitySet="user_review" />
+    </AssociationSet>
+    <AssociationSet Name="FK_shop_order_payment_type" Association="Project_63130260Model.FK_shop_order_payment_type">
+      <End Role="payment_type" EntitySet="payment_type" />
+      <End Role="shop_order" EntitySet="shop_order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pro_procat" Association="Project_63130260Model.fk_pro_procat">
+      <End Role="product_category" EntitySet="product_category" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_prodattr_product" Association="Project_63130260Model.fk_prodattr_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="product_attributes" EntitySet="product_attributes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_proditem_product" Association="Project_63130260Model.fk_proditem_product">
+      <End Role="product" EntitySet="products" />
+      <End Role="product_item" EntitySet="product_item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_promotion_product_category" Association="Project_63130260Model.FK_promotion_product_category">
+      <End Role="product_category" EntitySet="product_category" />
+      <End Role="promotion" EntitySet="promotions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_shopcartitem_proditem" Association="Project_63130260Model.fk_shopcartitem_proditem">
+      <End Role="product_item" EntitySet="product_item" />
+      <End Role="shopping_cart_item" EntitySet="shopping_cart_item" />
+    </AssociationSet>
+    <AssociationSet Name="fk_shoporder_shipmethod" Association="Project_63130260Model.fk_shoporder_shipmethod">
+      <End Role="shipping_method" EntitySet="shipping_method" />
+      <End Role="shop_order" EntitySet="shop_order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_shoporder_user" Association="Project_63130260Model.fk_shoporder_user">
+      <End Role="site_user" EntitySet="site_user" />
+      <End Role="shop_order" EntitySet="shop_order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_shopcart_user" Association="Project_63130260Model.fk_shopcart_user">
+      <End Role="site_user" EntitySet="site_user" />
+      <End Role="shopping_cart" EntitySet="shopping_cart" />
+    </AssociationSet>
+    <AssociationSet Name="fk_shopcartitem_shopcart" Association="Project_63130260Model.fk_shopcartitem_shopcart">
+      <End Role="shopping_cart" EntitySet="shopping_cart" />
+      <End Role="shopping_cart_item" EntitySet="shopping_cart_item" />
+    </AssociationSet>
+    <AssociationSet Name="fk_review_user" Association="Project_63130260Model.fk_review_user">
+      <End Role="site_user" EntitySet="site_user" />
+      <End Role="user_review" EntitySet="user_review" />
+    </AssociationSet>
+    <AssociationSet Name="fk_useradd_user" Association="Project_63130260Model.fk_useradd_user">
+      <End Role="site_user" EntitySet="site_user" />
+      <End Role="user_address" EntitySet="user_address" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="address">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="street_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="district" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="postal_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="shop_order" Relationship="Project_63130260Model.fk_shoporder_shipaddress" FromRole="address" ToRole="shop_order" />
+    <NavigationProperty Name="user_address" Relationship="Project_63130260Model.fk_useradd_address" FromRole="address" ToRole="user_address" />
+  </EntityType>
+  <EntityType Name="order_line">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_item_id" Type="Int32" />
+    <Property Name="order_id" Type="Int32" />
+    <Property Name="qty" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="discount_rate" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="reviewed" Type="Boolean" />
+    <NavigationProperty Name="shop_order" Relationship="Project_63130260Model.fk_orderline_order" FromRole="order_line" ToRole="shop_order" />
+    <NavigationProperty Name="product_item" Relationship="Project_63130260Model.fk_orderline_proditem" FromRole="order_line" ToRole="product_item" />
+    <NavigationProperty Name="user_review" Relationship="Project_63130260Model.fk_review_product" FromRole="order_line" ToRole="user_review" />
+  </EntityType>
+  <EntityType Name="payment_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="shop_order" Relationship="Project_63130260Model.FK_shop_order_payment_type" FromRole="payment_type" ToRole="shop_order" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="product_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product_category" Relationship="Project_63130260Model.fk_pro_procat" FromRole="product" ToRole="product_category" />
+    <NavigationProperty Name="product_attributes" Relationship="Project_63130260Model.fk_prodattr_product" FromRole="product" ToRole="product_attributes" />
+    <NavigationProperty Name="product_item" Relationship="Project_63130260Model.fk_proditem_product" FromRole="product" ToRole="product_item" />
+  </EntityType>
+  <EntityType Name="product_attributes">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="weight" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="length" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="width" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="height" Type="Decimal" Precision="7" Scale="2" />
+    <Property Name="materials" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="other_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product" Relationship="Project_63130260Model.fk_prodattr_product" FromRole="product_attributes" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="products" Relationship="Project_63130260Model.fk_pro_procat" FromRole="product_category" ToRole="product" />
+    <NavigationProperty Name="promotions" Relationship="Project_63130260Model.FK_promotion_product_category" FromRole="product_category" ToRole="promotion" />
+  </EntityType>
+  <EntityType Name="product_item">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="qty_received" Type="Int32" />
+    <Property Name="qty_in_stock" Type="Int32" />
+    <Property Name="qty_sold" Type="Int32" />
+    <Property Name="product_image" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="3" />
+    <NavigationProperty Name="order_line" Relationship="Project_63130260Model.fk_orderline_proditem" FromRole="product_item" ToRole="order_line" />
+    <NavigationProperty Name="product" Relationship="Project_63130260Model.fk_proditem_product" FromRole="product_item" ToRole="product" />
+    <NavigationProperty Name="shopping_cart_item" Relationship="Project_63130260Model.fk_shopcartitem_proditem" FromRole="product_item" ToRole="shopping_cart_item" />
+  </EntityType>
+  <EntityType Name="promotion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="discount_rate" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="start_date" Type="DateTime" Precision="3" />
+    <Property Name="end_date" Type="DateTime" Precision="3" />
+    <Property Name="active" Type="Boolean" />
+    <NavigationProperty Name="product_category" Relationship="Project_63130260Model.FK_promotion_product_category" FromRole="promotion" ToRole="product_category" />
+  </EntityType>
+  <EntityType Name="shipping_method">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="shop_order" Relationship="Project_63130260Model.fk_shoporder_shipmethod" FromRole="shipping_method" ToRole="shop_order" />
+  </EntityType>
+  <EntityType Name="shop_order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="order_date" Type="DateTime" Precision="3" />
+    <Property Name="order_first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="order_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="order_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="payment_method_id" Type="Int32" />
+    <Property Name="shipping_address" Type="Int32" />
+    <Property Name="shipping_method" Type="Int32" />
+    <Property Name="order_total" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="order_status" Type="Boolean" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="order_note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="address" Relationship="Project_63130260Model.fk_shoporder_shipaddress" FromRole="shop_order" ToRole="address" />
+    <NavigationProperty Name="order_line" Relationship="Project_63130260Model.fk_orderline_order" FromRole="shop_order" ToRole="order_line" />
+    <NavigationProperty Name="payment_type" Relationship="Project_63130260Model.FK_shop_order_payment_type" FromRole="shop_order" ToRole="payment_type" />
+    <NavigationProperty Name="shipping_method1" Relationship="Project_63130260Model.fk_shoporder_shipmethod" FromRole="shop_order" ToRole="shipping_method" />
+    <NavigationProperty Name="site_user" Relationship="Project_63130260Model.fk_shoporder_user" FromRole="shop_order" ToRole="site_user" />
+  </EntityType>
+  <EntityType Name="shopping_cart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <NavigationProperty Name="site_user" Relationship="Project_63130260Model.fk_shopcart_user" FromRole="shopping_cart" ToRole="site_user" />
+    <NavigationProperty Name="shopping_cart_item" Relationship="Project_63130260Model.fk_shopcartitem_shopcart" FromRole="shopping_cart" ToRole="shopping_cart_item" />
+  </EntityType>
+  <EntityType Name="shopping_cart_item">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cart_id" Type="Int32" />
+    <Property Name="product_item_id" Type="Int32" />
+    <Property Name="qty" Type="Int32" />
+    <NavigationProperty Name="product_item" Relationship="Project_63130260Model.fk_shopcartitem_proditem" FromRole="shopping_cart_item" ToRole="product_item" />
+    <NavigationProperty Name="shopping_cart" Relationship="Project_63130260Model.fk_shopcartitem_shopcart" FromRole="shopping_cart_item" ToRole="shopping_cart" />
+  </EntityType>
+  <EntityType Name="site_admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email_address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="site_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email_address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="shop_order" Relationship="Project_63130260Model.fk_shoporder_user" FromRole="site_user" ToRole="shop_order" />
+    <NavigationProperty Name="shopping_cart" Relationship="Project_63130260Model.fk_shopcart_user" FromRole="site_user" ToRole="shopping_cart" />
+    <NavigationProperty Name="user_review" Relationship="Project_63130260Model.fk_review_user" FromRole="site_user" ToRole="user_review" />
+    <NavigationProperty Name="user_address" Relationship="Project_63130260Model.fk_useradd_user" FromRole="site_user" ToRole="user_address" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user_address">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="address_id" Type="Int32" />
+    <Property Name="is_default" Type="Boolean" />
+    <NavigationProperty Name="address" Relationship="Project_63130260Model.fk_useradd_address" FromRole="user_address" ToRole="address" />
+    <NavigationProperty Name="site_user" Relationship="Project_63130260Model.fk_useradd_user" FromRole="user_address" ToRole="site_user" />
+  </EntityType>
+  <EntityType Name="user_review">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="ordered_product_id" Type="Int32" />
+    <Property Name="rating_value" Type="Int32" />
+    <Property Name="rating_date" Type="DateTime" Precision="3" />
+    <Property Name="comment" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="order_line" Relationship="Project_63130260Model.fk_review_product" FromRole="user_review" ToRole="order_line" />
+    <NavigationProperty Name="site_user" Relationship="Project_63130260Model.fk_review_user" FromRole="user_review" ToRole="site_user" />
+  </EntityType>
+  <Association Name="fk_shoporder_shipaddress">
+    <End Type="Project_63130260Model.address" Role="address" Multiplicity="0..1" />
+    <End Type="Project_63130260Model.shop_order" Role="shop_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="address">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shop_order">
+        <PropertyRef Name="shipping_address" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_useradd_address">
+    <End Type="Project_63130260Model.address" Role="address" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.user_address" Role="user_address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="address">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_address">
+        <PropertyRef Name="address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_orderline_order">
+    <End Type="Project_63130260Model.shop_order" Role="shop_order" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.order_line" Role="order_line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shop_order">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order_line">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_orderline_proditem">
+    <End Type="Project_63130260Model.product_item" Role="product_item" Multiplicity="0..1" />
+    <End Type="Project_63130260Model.order_line" Role="order_line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product_item">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order_line">
+        <PropertyRef Name="product_item_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_review_product">
+    <End Type="Project_63130260Model.order_line" Role="order_line" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.user_review" Role="user_review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order_line">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_review">
+        <PropertyRef Name="ordered_product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_shop_order_payment_type">
+    <End Type="Project_63130260Model.payment_type" Role="payment_type" Multiplicity="0..1" />
+    <End Type="Project_63130260Model.shop_order" Role="shop_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="payment_type">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shop_order">
+        <PropertyRef Name="payment_method_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pro_procat">
+    <End Type="Project_63130260Model.product_category" Role="product_category" Multiplicity="0..1" />
+    <End Type="Project_63130260Model.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_prodattr_product">
+    <End Type="Project_63130260Model.product" Role="product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.product_attributes" Role="product_attributes" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="product_attributes">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_proditem_product">
+    <End Type="Project_63130260Model.product" Role="product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.product_item" Role="product_item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="product_item">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_promotion_product_category">
+    <End Type="Project_63130260Model.product_category" Role="product_category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.promotion" Role="promotion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="promotion">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_shopcartitem_proditem">
+    <End Type="Project_63130260Model.product_item" Role="product_item" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.shopping_cart_item" Role="shopping_cart_item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product_item">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shopping_cart_item">
+        <PropertyRef Name="product_item_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_shoporder_shipmethod">
+    <End Type="Project_63130260Model.shipping_method" Role="shipping_method" Multiplicity="0..1" />
+    <End Type="Project_63130260Model.shop_order" Role="shop_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shipping_method">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shop_order">
+        <PropertyRef Name="shipping_method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_shoporder_user">
+    <End Type="Project_63130260Model.site_user" Role="site_user" Multiplicity="0..1" />
+    <End Type="Project_63130260Model.shop_order" Role="shop_order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="site_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shop_order">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_shopcart_user">
+    <End Type="Project_63130260Model.site_user" Role="site_user" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.shopping_cart" Role="shopping_cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="site_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shopping_cart">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_shopcartitem_shopcart">
+    <End Type="Project_63130260Model.shopping_cart" Role="shopping_cart" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.shopping_cart_item" Role="shopping_cart_item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="shopping_cart">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shopping_cart_item">
+        <PropertyRef Name="cart_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_review_user">
+    <End Type="Project_63130260Model.site_user" Role="site_user" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.user_review" Role="user_review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="site_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_review">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_useradd_user">
+    <End Type="Project_63130260Model.site_user" Role="site_user" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Project_63130260Model.user_address" Role="user_address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="site_user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="user_address">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

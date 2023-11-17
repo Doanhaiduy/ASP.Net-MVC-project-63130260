@@ -1,0 +1,149 @@
+﻿@model IEnumerable<DATA_63130260.Entity.shop_order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i> List of order</p>
+
+<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <div class="sm:px-6 w-full">
+        <div class="px-4 md:px-10 py-4 md:py-7">
+            <div class="flex items-center justify-between">
+                <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2 "></p>
+
+
+            </div>
+        </div>
+        <p class="text-red-500 text-[20px] my-2">@ViewBag.error</p>
+
+        <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+            <div class="sm:flex items-center justify-between">
+                <div class="flex items-center">
+                    <a class="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800" href="/admin/order_63130260/">
+                        <div class="py-2 px-8  rounded-full @(ViewBag.selected == null? "bg-indigo-100 text-indigo-700" : "text-gray-600" )">
+                            <p>All</p>
+                        </div>
+                    </a>
+                    <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" href="/admin/order_63130260?selected=false&all=0">
+                        <div class="py-2 px-8 hover:text-indigo-700 hover:bg-indigo-100 rounded-full @(ViewBag.selected == false? " bg-indigo-100 text-indigo-700" : "text-gray-600" )">
+                            <p>In Transit</p>
+                        </div>
+                    </a>
+                    <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" href="/admin/order_63130260?selected=true&all=0">
+                        <div class="py-2 px-8 hover:text-indigo-700 hover:bg-indigo-100 rounded-full @(ViewBag.selected == true ? " bg-indigo-100 text-indigo-700" : "text-gray-600" )">
+                            <p>Delivered</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-7 overflow-x-auto">
+                <table class="w-full whitespace-nowrap ">
+                    <thead>
+                        <tr class="text-sm font-bold">
+                            <td class="px-3 py-3 border-b-2 border-gray-200  text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                <p class="p-2">
+
+                                    ID
+                                </p>
+                            </td>
+                            <td class="px-3 py-3 border-b-2 border-gray-200text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                <p class="p-2">
+                                    Status
+                                </p>
+
+                            </td>
+                            <td class="px-3 py-3 border-b-2 border-gray-200 text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                <p class="p-2">
+                                    Shipping unit
+                                </p>
+
+                            </td>
+                            <td class="px-3 py-3 border-b-2 border-gray-200  text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                <p class="p-2">
+                                    Total
+                                </p>
+                            </td>
+                            <td class="px-3 py-3 border-b-2 border-gray-200  text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                <p class="p-2">
+                                    Order date
+                                </p>
+                            </td>
+                            <td class="px-3 py-3 border-b-2 border-gray-200  text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                <p class="p-2">
+                                    Status
+                                </p>
+                            </td>
+                            <td colspan="2" class="text-center px-3 py-3 border-b-2 border-gray-200  text-left  font-semibold text-gray-600 uppercase tracking-wider">
+                                Action
+                            </td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                                <td class="">
+                                    <div class="flex items-center pl-5">
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2">#@item.id</p>
+
+                                    </div>
+                                </td>
+
+                                <td class="pl-12">
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M9.16667 2.5L16.6667 10C17.0911 10.4745 17.0911 11.1922 16.6667 11.6667L11.6667 16.6667C11.1922 17.0911 10.4745 17.0911 10 16.6667L2.5 9.16667V5.83333C2.5 3.99238 3.99238 2.5 5.83333 2.5H9.16667" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <circle cx="7.50004" cy="7.49967" r="1.66667" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></circle>
+                                        </svg>
+                                        <p class="text-sm leading-none text-gray-600 ml-2">@(item.order_status == false? "In Transit": "Delivered")</p>
+                                    </div>
+                                </td>
+
+                                <td class="pl-10">
+                                    <div class="flex items-center">
+                                        <p class="text-sm leading-none text-gray-600 ml-2">@item.shipping_method1.name</p>
+                                    </div>
+                                </td>
+
+                                <td class="">
+                                    <div class="flex items-center pl-5">
+                                        <p class="text-base font-medium leading-none text-gray-700 mr-2"> @string.Format("{0:#,0đ}", item.order_total)</p>
+
+                                    </div>
+                                </td>
+
+                                <td class="pl-5">
+                                    <button class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded"> @item.order_date.Value.ToString("HH:mm MMM dd, yyyy")</button>
+                                </td>
+
+                                <td class="">
+                                    <a href="@Url.Action("ConfirmSuccessDelivery","Order_63130260", new { id = item.id })" class="focus:ring-2  @(item.order_status == false ? "" : "pointer-events-none bg-green-200") focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none" type="button" onclick="toggleModal('modal-id')">
+                                        @(item.order_status == false? "Confirm delivery" : "Delivered successfully")
+                                    </a>
+                                </td>
+
+                                <td class="">
+                                    <a href="@Url.Action("DeleteOrder","Order_63130260", new { id = item.id })" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">Delete</a>
+                                </td>
+                                <td class="">
+                                    <a href="@Url.Action("Details","Order_63130260", new { id = item.id })" class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none" type="button" onclick="toggleModal('modal-id')">
+                                        Details
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

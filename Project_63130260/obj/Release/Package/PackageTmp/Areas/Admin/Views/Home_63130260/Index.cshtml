@@ -1,0 +1,499 @@
+﻿@model IEnumerable<DATA_63130260.Entity.site_user>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i>Dashboard</p>
+
+<div class="w-full overflow-x-hidden border-t flex flex-col">
+
+    @{
+        var mapStatistics = new DATA_63130260.mapStatistics();
+        int month = ViewBag.month;
+        int year = ViewBag.year;
+
+        var statis = mapStatistics.GetStatisticByMonth(month, year);
+        var statisPre = mapStatistics.GetStatisticByMonth(month == 1 ? 12 : month - 1, month == 1 ? year - 1 : year);
+
+        float percentRevenue = (statisPre.total_revenue != 0) ? ((float)statis.total_revenue - statisPre.total_revenue) / statisPre.total_revenue * 100 : 0.0001f;
+        float percentUsers = (statisPre.total_users != 0) ? ((float)statis.total_users - statisPre.total_users) / statisPre.total_users * 100 : 0.0001f;
+        float percentNewUsers = (statisPre.new_users != 0) ? ((float)(statis.new_users - statisPre.new_users) / statisPre.new_users * 100) : 0.0001f;
+        float percentOrders = (statisPre.total_orders != 0) ? ((float)statis.total_orders - statisPre.total_orders) / statisPre.total_orders * 100 : 0.0001f;
+        float percentCompeltedOrders = (statisPre.completed_orders != 0) ? ((float)statis.completed_orders - statisPre.completed_orders) / statisPre.completed_orders * 100 : 0.0001f;
+        float percentProducts = (statisPre.total_products != 0) ? ((float)statis.total_products - statisPre.total_products) / statisPre.total_products * 100 : 0.0001f;
+        //decimal percentNewProducts = (statis. - statisPre.total_revenue) / statisPre.total_revenue * 100;
+        float percentNewPromotions = (statisPre.total_promotions != 0) ? ((float)statis.total_promotions - statisPre.total_promotions) / statisPre.total_promotions * 100 : 0.0001f;
+    }
+    <main class="w-full flex-grow p-6">
+        <form method="get" id="monthlyStatisticsForm">
+            <p class="text-xl pb-3 flex items-center">
+                <i class="fas fa-list mr-3"></i> Monthly statistics <select name="month" id="monthSelect"
+                                                                            class="form-select appearance-none mx-3
+      block
+      px-3
+      py-1.5
+      text-[20px]
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                                                            aria-label="Default select example">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i"
+                                @(ViewBag.month == @i ? "selected" : null)>
+                            @i
+                        </option>
+                    }
+
+                </select>
+            </p>
+
+        </form>
+        <div class="grid grid-cols-12 gap-6 mt-5">
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between ">
+                        <div class="h-7 w-7 text-red-400 text-[26px]">
+
+                            <i class="fa-solid fa-coins h-7 w-7"></i>
+                        </div>
+                        <div class="@(percentRevenue < 0 ? " bg-red-500"
+                            : "bg-green-500" ) rounded-full h-6 px-2 flex
+                            justify-items-center text-white font-semibold
+                            text-sm">
+                            <span class="flex gap-2 items-center">
+                                @if (percentRevenue < 0)
+                                {<i class="fa-solid fa-arrow-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                }
+                                @(percentRevenue == 0.0001f ? "--" :
+                                    string.Format("{0:0.00}",
+                                    percentRevenue))%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                                @string.Format("{0:#,0đ}", statis.total_revenue)
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                Total
+                                Revenue
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-orange-400 text-[26px]">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        @*<div class="@(percentUsers < 0 ? " bg-red-500"
+                                : "bg-green-500" ) rounded-full h-6 px-2 flex
+                                justify-items-center text-white font-semibold
+                                text-sm">
+                                <span class="flex gap-2 items-center">
+                                    @if (percentUsers < 0) { <i
+                                        class="fa-solid fa-arrow-down"></i>
+                                        }
+                                        else
+                                        {
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                        }
+                                        @(percentUsers == 0.0001f ? "--" :
+                                        string.Format("{0:0.00}",
+                                        percentUsers))%</span>
+                            </div>*@
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                                @statis.total_users
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                Users
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-amber-400 text-[26px]">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <div class="@(percentNewUsers < 0 ? " bg-red-500"
+                            : "bg-green-500" ) rounded-full h-6 px-2 flex
+                            justify-items-center text-white font-semibold
+                            text-sm">
+                            <span class="flex gap-2 items-center">
+                                @if (percentNewUsers < 0)
+                                {<i class="fa-solid fa-arrow-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                }
+                                @(percentNewUsers == 0.0001f ? "--" :
+                                    string.Format("{0:0.00}",
+                                    percentNewUsers))%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                               +@statis.new_users
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                New Users
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-yellow-400 text-[26px]">
+
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </div>
+
+                        <div class="@(percentOrders < 0 ? " bg-red-500"
+                            : "bg-green-500" ) rounded-full h-6 px-2 flex
+                            justify-items-center text-white font-semibold
+                            text-sm">
+                            <span class="flex gap-2 items-center">
+                                @if (percentOrders < 0)
+                                {<i class="fa-solid fa-arrow-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                }
+                                @(percentOrders == 0.0001f ? "--" :
+                                    string.Format("{0:0.00}",
+                                    percentOrders))%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                               +@statis.total_orders
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                Orders
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-lime-400 text-[26px]">
+
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                        <div class="@(percentCompeltedOrders < 0 ? " bg-red-500"
+                            : "bg-green-500" ) rounded-full h-6 px-2 flex
+                            justify-items-center text-white font-semibold
+                            text-sm">
+                            <span class="flex gap-2 items-center">
+                                @if (percentCompeltedOrders < 0)
+                                {<i class="fa-solid fa-arrow-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                }
+                                @(percentCompeltedOrders == 0.0001f ? "--" :
+                                    string.Format("{0:0.00}",
+                                    percentCompeltedOrders))%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                               +@statis.completed_orders
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                Completed
+                                Orders
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-green-400 text-[26px]">
+
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        @*<div class="@(percentProducts < 0 ? " bg-red-500"
+                                : "bg-green-500" ) rounded-full h-6 px-2 flex
+                                justify-items-center text-white font-semibold
+                                text-sm">
+                                <span class="flex gap-2 items-center">
+                                    @if (percentProducts < 0) { <i
+                                        class="fa-solid fa-arrow-down"></i>
+                                        }
+                                        else
+                                        {
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                        }
+                                        @(percentProducts == 0.0001f ? "--" :
+                                        string.Format("{0:0.00}",
+                                        percentProducts))%</span>
+                            </div>*@
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                                @statis.total_products
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                Products
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-cyan-400 text-[26px]">
+
+                            <i class="fa-solid fa-calendar-plus"></i>
+                        </div>
+                        <div class="bg-green-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                            <span class="flex items-center">30%</span>
+                        </div>
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                                @statis.total_products
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                New
+                                Products
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+               href="#">
+                <div class="p-5">
+                    <div class="flex justify-between">
+                        <div class="h-7 w-7 text-blue-400 text-[26px]">
+
+                            <i class="fa-solid fa-tags mr-3"></i>
+                        </div>
+                        <div class="@(percentNewPromotions < 0 ? " bg-red-500"
+                            : "bg-green-500" ) rounded-full h-6 px-2 flex
+                            justify-items-center text-white font-semibold
+                            text-sm">
+                            <span class="flex gap-2 items-center">
+                                @if (percentNewPromotions < 0)
+                                {<i class="fa-solid fa-arrow-down"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                }
+                                @(percentNewPromotions == 0.0001f ? "--" :
+                                    string.Format("{0:0.00}",
+                                    percentNewPromotions))%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-2 w-full flex-1">
+                        <div>
+                            <div class="mt-3 text-3xl font-bold leading-8">
+                               +@statis.total_promotions
+                            </div>
+
+                            <div class="mt-1 text-base text-gray-600">
+                                Promotions
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="w-full mt-12">
+            <p class="text-xl pb-3 flex items-center">
+                <i class="fas fa-list mr-3"></i> list of customers
+            </p>
+            <div class="bg-white overflow-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class=" text-left py-3 px-4 uppercase font-semibold text-sm">
+                                ID
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                First name
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                Last name
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                Email
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                Password
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                Gender
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                Address
+                            </th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                Phone Number
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        @{
+                            var index = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            string addressRender = "";
+                            <tr class="@(index % 2 == 0 ? " bg-gray-200" : null)">
+                                <td class="text-left py-3 px-4">#@item.id</td>
+                                <td class=" text-left py-3 px-4">
+                                    @item.first_name
+                                </td>
+                                <td class=" text-left py-3 px-4">
+                                    @item.last_name
+                                </td>
+                                <td class="text-left py-3 px-4">
+                                    @item.email_address
+                                </td>
+                                <td class="text-left py-3 px-4">
+                                    <input type="password" name="name"
+                                           value="@item.password" readonly
+                                           class="bg-transparent outline-none password-input"
+                                           id="password-input" />
+                                    <i class="fa-regular fa-eye-slash show-password cursor-pointer select-none"
+                                       data-state="hidden"></i>
+                                    <i class="fa-regular fa-eye hide-password cursor-pointer select-none"
+                                       data-state="visible"
+                                       style="display: none;"></i>
+                                </td>
+
+                                <td class="text-left py-3 px-4">
+                                    @(item.gender.HasValue ? (item.gender.Value ?
+                                "Male" : "Female") : "---")
+                                </td>
+                                @{
+                                    var userAddress = item.user_address.FirstOrDefault(m
+                                    => m.user_id == item.id & m.is_default == true);
+
+                                    if (userAddress != null)
+                                    {
+                                        var address = userAddress.address;
+                                        addressRender = address.street_number + ", " +
+                                        address.district + ", " + address.city + ", " +
+                                        address.province + ", " + address.postal_code;
+                                    }
+                                }
+                                <td class="text-left py-3 px-4">
+                                    @(addressRender ??
+                                "---" )
+                                </td>
+                                <td class="text-left py-3 px-4">
+                                    <a class="hover:text-blue-500"
+                                       href="tel:@(item.phone_number ?? "")">
+                                        @(item.phone_number
+                                    ?? "---")
+                                    </a>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    </body>
+
+    <footer class="w-full bg-white text-right p-4">
+    </footer>
+</div>
+
+@section scripts{
+    <script>
+        // Ẩn hiện mật khẩu
+        const showPasswordIcons = document.querySelectorAll('.show-password');
+        const hidePasswordIcons = document.querySelectorAll('.hide-password');
+        const passwordInputs = document.querySelectorAll('.password-input');
+
+        showPasswordIcons.forEach((showIcon, index) => {
+            showIcon.addEventListener('click', () => {
+                passwordInputs[index].type = 'text';
+                showIcon.style.display = 'none';
+                hidePasswordIcons[index].style.display = 'inline';
+            });
+        });
+
+        hidePasswordIcons.forEach((hideIcon, index) => {
+            hideIcon.addEventListener('click', () => {
+                passwordInputs[index].type = 'password';
+                hideIcon.style.display = 'none';
+                showPasswordIcons[index].style.display = 'inline';
+            });
+        });
+
+
+        document.getElementById('monthSelect').addEventListener('change', function () {
+            document.getElementById('monthlyStatisticsForm').submit();
+        });
+    </script>
+}

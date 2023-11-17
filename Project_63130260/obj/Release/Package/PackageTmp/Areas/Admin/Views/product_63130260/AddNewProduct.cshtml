@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewBag.Title = "AddNewProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+<p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i> Add New Product</p>
+
+<section class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+    <div class="py-16 bg-stone-100 font-poppins ">
+        <div class="max-w-4xl px-4 py-4 mx-auto bg-white border shadow-sm  lg:py-4 md:px-6">
+            <div class="mb-10 ">
+                <h2 class="pb-2 mb-2 text-xl font-bold text-gray-800 md:text-3xl ">
+                    Enter Product Info
+                </h2>
+                <p class="text-sm">
+                    Enter product information in the form below
+                </p>
+            </div>
+            <form method="post" class="" enctype="multipart/form-data">
+                <h2 class="my-4 text-[22px]">Main Information:</h2>
+
+                <div class="mb-6">
+                    <label for=""
+                           class="block mb-2 text-sm font-medium">
+                        Product Name
+                    </label>
+                    <input type="text"
+                           name="name"
+                           class="block w-full px-4 py-3 mb-2 text-sm bg-gray-100 border focus:ring-2 focus:ring-inset focus:ring-orange-600 rounded outline-none"
+                           placeholder="Product name...." required>
+                </div>
+                @{
+                    var map = new DATA_63130260.mapCategory();
+                    var listCategory = map.GetListCategory();
+                }
+
+            <div class="mb-6 ">
+                <label for=""
+                       class="block mb-2 text-sm font-medium dark:text-gray-400">Category</label>
+                <div class="relative">
+                    <select name="category_id" required
+                            class="block w-full px-4 py-3 mb-2 text-md focus:ring-2 focus:ring-inset focus:ring-orange-600 outline-none text-gray-500 placeholder-gray-400 bg-gray-100 border rounded appearance-none outline-none ">
+                        <option value="">Choose category</option>
+                        @foreach (var item in listCategory)
+                        {
+                            <option value="@item.id">@item.category_name</option>
+                        }
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                             height="16" fill="currentColor"
+                             class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for=""
+                           class="block mb-2 text-sm font-medium dark:text-gray-400">Description</label>
+                    <textarea type="message" placeholder="Description.." required name="description"
+                              class="block w-full px-4 py-6 leading-tight outline-none placeholder-gray-400 bg-gray-100 border rounded  focus:ring-2 focus:ring-inset focus:ring-orange-600  "></textarea>
+                </div>
+                @*<div class="mb-6">
+            <label for=""
+                   class="block mb-2 text-sm font-medium dark:text-gray-400">Email</label>
+            <input type="email" placeholder="abc@gmail.com" required
+                   class="block w-full px-4 py-3 mb-3 leading-tight outline-none placeholder-gray-400 bg-gray-100 border rounded focus:ring-2 focus:ring-inset focus:ring-orange-600 ark:border-gray-800 dark:bg-gray-800 dark:placeholder-gray-500 dark:text-gray-400 dark:border-gray-800 ">
+        </div>*@
+                <div class="flex gap-5">
+                    <div class="mb-6 w-1/2">
+                        <label for="price" class="block mb-2 text-sm font-medium ">Price</label>
+                        <div class="relative mt-2 rounded-md shadow-sm">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <span class="text-gray-500 sm:text-sm">đ</span>
+                            </div>
+                            <input required min="10000" max="9999999999" type="number" name="price" id="price" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="0.00">
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <label for="currency" class="sr-only">Currency</label>
+                                <p class="h-full rounded-md border-0 bg-transparent py-2 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">VND</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 w-1/2">
+                        <label for="quantity" class="block mb-2 text-sm font-medium">Quantity</label>
+                        <div class="relative mt-2 rounded-md shadow-sm">
+                            <input min="1" required type="number" name="qty_in_stock" id="quantity" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="0">
+                        </div>
+                    </div>
+                </div>
+                @*<div class="mb-8 ">
+            <label class="mr-2 dark:text-gray-400">
+                <input type="radio" name="inline-radio" value="option 1"
+                       class="checked:bg-gray-600 " checked="">
+                <span class="ml-2">Male</span>
+            </label>
+            <label class="dark:text-gray-400">
+                <input type="radio" name="inline-radio" value="option 2">
+                <span class="ml-2">Female</span>
+            </label>
+        </div>
+        <div class="mb-8 ">
+            <h2 class="mb-4 text-sm font-semibold text-gray-700 dark:text-gray-400">
+                Choose
+                your proffession?
+            </h2>
+            <div class="flex flex-wrap items-center gap-6 ">
+                <div class="flex items-center ">
+                    <input type="checkbox"
+                           class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600">
+                    <label for=""
+                           class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">IT</label>
+                </div>
+                <div class="flex items-center ">
+                    <input type="checkbox"
+                           class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600">
+                    <label for=""
+                           class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Networking</label>
+                </div>
+                <div class="flex items-center ">
+                    <input type="checkbox"
+                           class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-gray-600">
+                    <label for=""
+                           class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Database</label>
+                </div>
+            </div>
+        </div>*@
+                <div class="flex">
+                    <div class="mb-6 w-1/2">
+                        <label for=""
+                               class="block mb-2 text-sm font-medium ">Product image</label>
+                        @*<div class="py-2 shrink-0">
+                    <img src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg"
+                         alt="" class="object-cover rounded-full w-11 h-11" />
+                </div>*@
+                        <label for="" class="block pt-2">
+                            <input type="file" required name="product_image"
+                                   class="block w-full text-sm text-slate-500 " accept="image/" />
+                        </label>
+                    </div>
+                    <div class="mb-6  w-1/2">
+                        <label for=""
+                               class="block mb-2 text-sm font-medium ">Product thumbnail</label>
+                        @*<div class="py-2 shrink-0">
+                    <img src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg"
+                         alt="" class="object-cover rounded-full w-11 h-11" />
+                </div>*@
+                        <label for="" class="block pt-2">
+                            <input type="file" required name="product_image2"
+                                   class="block w-full text-sm text-slate-500 " accept="image/" />
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+                <div>
+                    <h2 class="my-4 text-[22px]">Additional Information:</h2>
+                    <div class="flex gap-5 items-center">
+                        <div class="mb-4">
+                            <label for="length" class="block mb-2 text-sm font-medium">Length (mm):</label>
+                            <input required type="number" step="0.01" id="length" name="length" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="e.g. 172.83">
+                        </div>
+                        <span>x</span>
+                        <div class="mb-4">
+                            <label for="width" class="block mb-2 text-sm font-medium">Width (mm):</label>
+                            <input required type="number" step="0.01" id="width" name="width" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="e.g. 77.25">
+                        </div>
+                        <span>x</span>
+                        <div class="mb-4">
+                            <label for="height" class="block mb-2 text-sm font-medium">Height (mm):</label>
+                            <input required type="number" step="0.01" id="height" name="height" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="e.g. 10.39">
+                        </div>
+                    </div>
+                    <div class="flex gap-5 items-center">
+                        <div class="mb-4 w-1/2">
+                            <label for="weight" class="block mb-2 text-sm font-medium">Weight (g):</label>
+                            <input required type="number" step="0.01" id="weight" name="weight" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="e.g. 1000">
+                        </div>
+                        <div class="mb-4 w-1/2">
+                            <label for="materials" class="block mb-2 text-sm font-medium">Materials:</label>
+                            <input required type="text" id="materials" name="materials" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="e.g. Plastic">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for=""
+                               class="block mb-2 text-sm font-medium dark:text-gray-400">Other Infomation</label>
+                        <textarea type="message" placeholder="Other Infomation.." required name="other_info"
+                                  class="block w-full px-4 py-6 leading-tight outline-none placeholder-gray-400 bg-gray-100 border rounded  focus:ring-2 focus:ring-inset focus:ring-orange-600"></textarea>
+                    </div>
+                </div>
+         
+                <button class="px-6 py-2 text-base text-gray-100 bg-blue-600 rounded hover:bg-blue-500">
+                    Add
+                </button>
+
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,498 @@
+﻿@model List<DATA_63130260.Entity.product_item>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<style>
+    .swiper {
+        width: 1000px;
+    }
+
+    .swiper-button-next::after, .swiper-button-prev::after {
+        font-size: 16px;
+    }
+
+    .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #f97316;
+    }
+</style>
+<!-- BANNER -->
+<section class="py-[60px] flex items-center justify-center px-[20px] md:px-[60px] lg:px-[120px]">
+
+    <div class="py-20 ">
+       
+    <div class=" px-4 mx-auto md:px-0 font-poppins">
+        <div class="flex flex-wrap items-center px-4">
+            <div class="w-full px-4 mb-16 md:w-1/2 md:mb-0">
+                <span class="inline-block mb-4 text-md font-semibold leading-none text-red-500 capitalize ">
+                    #Feel The Rhythnm.
+                </span>
+                <h2 class="mb-6 text-3xl font-semibold leading-tight tracking-tight text-orange-500  md:text-5xl lg:text-6xl font-serif">
+                    Walk Up Your
+                    Passion Listen
+                    Good Music.
+                </h2>
+
+                <p class="mb-6 font-medium tracking-wide text-gray-600 md:text-lg">
+                    Discover the latest and most innovative electronic accessories that will enhance your daily life.
+                    Explore a world of cutting-edge technology and elevate your electronic experience to new heights.
+                </p>
+                <a href="/Product_63130260" class="relative inline-flex items-center justify-start inline-block px-5 py-3 overflow-hidden font-bold rounded-full group border-[2px] border-orange-500">
+                    <span class="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-orange-500 opacity-[3%] "></span>
+                    <span class="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-orange-500 opacity-100 group-hover:-translate-x-8 "></span>
+                    <span class="relative w-full text-left text-orange-500 transition-colors duration-200 ease-in-out group-hover:text-white">
+                        Explore
+                        More <i class="fa-solid fa-cart-shopping"></i>
+                    </span>
+                    <span class="absolute inset-0 border-2 border-white rounded-full"></span>
+                </a>
+
+            </div>
+            <div class="w-full px-4 md:w-1/2">
+                <div class="relative mx-auto md:mr-0 max-w-max">
+
+                    <div class="relative overflow-hidden rounded-7xl">
+                        <img src="~/Content/assets/images/banner.jpg"
+                             alt=""
+                             class="relative z-10 object-cover w-full h-full rounded-md">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- FEATURED PRODUCT -->
+<section class="flex justify-center items-center gap-[60px] px-[20px] md:px-[60px] lg:px-[120px] md:flex-row flex-col-reverse">
+    <div class="md:w-[50%] w-[80%]">
+        <img src="~/Content/assets/images/product1.webp" alt="">
+    </div>
+    <div class="md:w-[50%] w-[80%] flex flex-col gap-5 items-start text-[20px]">
+        <p>FEATURED PRODUCT</p>
+        <h2 class="mb-6 text-3xl font-semibold leading-tight tracking-tight text-orange-500  md:text-5xl lg:text-6xl font-serif">
+            Minimal
+            Headphone For Music Lover
+        </h2>
+        <div class="w-[60px] h-[4px] bg-orange-500"></div>
+        <p>
+            When an unknown printer took a galley of type and scrambled
+            it to make a type specimen book. sint occaeca Excepteur sint
+            occaecat cupidatat non proident.
+        </p>
+        <a href="/Product_63130260/Details/1" class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group border-orange-500 border">
+            <span class="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-orange-600 rounded-md group-hover:mt-0 group-hover:ml-0"></span>
+            <span class="absolute inset-0 w-full h-full bg-white rounded-md "></span>
+            <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-orange-600 rounded-md opacity-0 group-hover:opacity-100 "></span>
+            <span class="relative text-orange-600 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white">
+                Buy
+                Now
+            </span>
+        </a>
+    </div>
+</section>
+
+<!-- MINIMAL PRODUCT -->
+
+<section class="flex justify-center items-center gap-[60px]  px-[20px] md:px-[60px] lg:px-[120px] md:flex-row-reverse flex-col-reverse mt-12">
+    <div class="md:w-[50%] w-[80%]">
+        <img src="~/Content/assets/images/product2.webp" alt="">
+    </div>
+    <div class="md:w-[50%] w-[80%] flex flex-col gap-5 items-start text-[20px]">
+        <p>MINIMAL PRODUCT</p>
+        <h2 class="mb-6 text-3xl font-semibold leading-tight tracking-tight text-orange-500  md:text-5xl lg:text-6xl font-serif">
+            Minimal
+            Headphone For Music Lover
+        </h2>
+        <div class="w-[60px] h-[4px] bg-orange-500"></div>
+        <p>
+            When an unknown printer took a galley of type and scrambled
+            it to make a type specimen book. sint occaeca Excepteur sint
+            occaecat cupidatat non proident.
+        </p>
+        <a href="/Product_63130260/Details/1" class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-medium tracking-tighter text-white bg-gray-800 rounded-md group border-orange-500 border">
+            <span class="absolute inset-0 w-full h-full mt-1 ml-1 transition-all duration-300 ease-in-out bg-orange-600 rounded-md group-hover:mt-0 group-hover:ml-0"></span>
+            <span class="absolute inset-0 w-full h-full bg-white rounded-md "></span>
+            <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-in-out delay-100 bg-orange-600 rounded-md opacity-0 group-hover:opacity-100 "></span>
+            <span class="relative text-orange-600 transition-colors duration-200 ease-in-out delay-100 group-hover:text-white">
+                Buy
+                Now
+            </span>
+        </a>
+
+    </div>
+</section>
+
+<!-- DEAL COLLECTION -->
+<section class="py-[60px] flex items-center flex-col px-[20px] sm:px-[60px] md:px-[120px] ">
+    <h2 class="font-semibold text-[45px] text-orange-500  font-serif text-center">
+        Deal
+        Promotion
+    </h2>
+    <p class="font-normal text-black text-base text-center">
+        There are many
+        variations of passages of
+        Lorem
+    </p>
+    @*<div class="shadow-2xl py-4 px-[120px] mt-[60px]">
+            <p class="text-[20px]">
+                <span class="text-[36px] mr-1 ml-2">0-349</span>Day
+                <span class="text-[36px] mr-1 ml-2">01</span>Hr
+                <span class="text-[36px] mr-1 ml-2">20</span>Mins
+                <span class="text-[36px] mr-1 ml-2">05</span>Secs
+            </p>
+        </div>*@
+    <div class="swiper mt-[60px] max-w-full">
+        <div class="swiper-wrapper pb-[60px] " id="swiper">
+            <!-- product -->
+            @foreach (var item in Model)
+            {
+                var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item);
+                if (price != item.price)
+                {
+                    <div class="swiper-slide " role="group">
+                        <div class="border border-solid border-gray-300 transition-all hover:shadow-product group">
+
+                            <div id="tab2" class="relative overflow-hidden">
+                                <div class="tab-contents">
+                                    <div id="product4" class="tab-content  h-[260px] w-[220px] mx-auto">
+                                        <img class="w-full object-cover h-full "
+                                             src="@item.product.product_image"
+                                             alt="product image" loading="lazy">
+                                    </div>
+
+                                </div>
+                                @if (price != item.price)
+                                {
+                                    var promotion = DATA_63130260.mapPromotion.GetPromotionDetails((int)item.product.category_id);
+                                    <div class="px-2 py-1 bg-orange-500 text-white flex justify-center items-center ">
+                                        <span class="font-medium uppercase text-sm  inline-block py-1 leading-none ">Sale</span>
+                                        <span class="font-medium uppercase text-sm  inline-block py-1 leading-none">-@promotion.discount_rate%</span>
+                                    </div>
+                                }
+                                <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
+                                    <ul class="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
+                                        <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                            <a href="#modal-cart"
+                                               class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                               data-tippy-content="Quick View"
+                                               aria-label="Quick View">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </li>
+                                        <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                            <a href="whishlist.html"
+                                               class="text-black flex items-center justify-center text-md hover:text-orange"
+                                               data-tippy-content="Add to wishlist"
+                                               aria-label="Add to wishlist">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                            <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
+                                               class="text-black flex items-center justify-center text-md hover:text-orange"
+                                               data-tippy-content="Compare"
+                                               aria-label="compare">
+                                                <i class="fa-solid fa-arrows-rotate"></i>
+                                            </a>
+                                        </li>
+                                        <li class="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
+                                            <form action="/Home_63130260/AddProductToCart" method="post">
+                                                <input type="hidden" name="idProduct" value="@item.product_id" />
+                                                <button class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                                        data-tippy-content="Add to cart"
+                                                        aria-label="Add to cart">
+                                                    <i class="fa-solid fa-cart-plus"></i>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="py-5 px-4">
+                                <ul class="mb-3 text-sm capitalize">
+                                    <li class="flex flex-wrap items-center justify-between">
+                                        <span>
+                                            <span>Sold: </span><span class="text-orange-500">@item.qty_sold</span>
+                                        </span>
+                                        <span>
+                                            <span>Available: </span> <span class="text-orange-500">@item.qty_in_stock</span>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <div class="h-2 bg-gray-600 rounded">
+                                    <div class="h-full bg-orange-500 rounded-l"
+                                         aria-label="progress bar" role="progressbar"
+                                         style="width: @(Math.Round((double)item.qty_sold / (double)item.qty_received * 100, 2))%"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <h3 class="mt-4 ">
+                                    <a class="line-clamp-4 text-base hover:text-orange-500 transition-all min-h-[96px] "
+                                       href="/Product_63130260/Details/@item.product.id">
+                                        @item.product.name
+                                    </a>
+                                </h3>
+                                <h4 class="font-bold text-md leading-none text-orange-500 mt-3">
+
+                                    @if (price != item.price)
+                                    {
+
+                                        <del class="font-normal text-sm mr-1 inline-block">@String.Format("{0:N0}đ", item.price)</del>@String.Format("{0:N0}đ", price)
+                                    }
+                                    else
+                                    {
+                                        @String.Format("{0:N0}đ", item.price)
+                                    }
+                                </h4>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-buttons">
+            <div class="swiper-button-prev right-auto left-4 w-12 h-12 rounded-full bg-white border border-solid border-gray-200 text-sm text-black opacity-100 transition-all hover:text-orange-500 hover:border-orange-500 top-[40%]"></div>
+            <div class="swiper-button-next left-auto right-4 w-12 h-12 rounded-full bg-white border border-solid border-gray-200 text-sm text-black opacity-100 transition-all hover:text-orange-500 hover:border-orange-500 top-[40%]"></div>
+        </div>
+
+        <!-- If we need scrollbar -->
+    </div>
+    <!-- If we need pagination -->
+
+</section>
+
+<!-- LASTEST BLOG -->
+
+<!--<section class="py-[60px] flex items-center flex-col px-[60px] md:px-[120px] mt-[60px]">
+
+    <div class="">
+        <div class="section-title text-center pb-14">
+            <h3 class="font-semibold text-[45px] text-orange-500  font-serif">
+                Latest Blog
+            </h3>
+            <p class="font-normal text-black text-base">
+                There
+                are many variations of passages of Lorem
+            </p>
+        </div>
+    </div>
+    <div class="">
+        <div class="grid grid-col-1 md:grid-col-2 xl:grid-cols-3 gap-3"
+             aria-live="polite">-->
+            <!-- swiper-slide start -->
+            <!--<div class="" role="group" >
+                <div class="border border-solid border-gray-300 p-[20px] md:p-[30px] group">
+                    <div class="mb-6">
+                        <a href="#"
+                           class="overflow-hidden block">
+                            <img class="transform group-hover:scale-110 transition-transform duration-500 w-full h-full"
+                                 src="~/Content/assets/images/blog1.webp"
+                                 alt="blog image" loading="lazy"
+                                 >
+                        </a>
+                    </div>
+                    <h3>
+                        <a href="#"
+                           class="block text-base md:text-md hover:text-orange-500 transition-all font-medium pb-[10px]">
+                            Donec
+                            tellus Nulla lorem
+                        </a>
+                    </h3>
+                    <div class="blog-meta">
+                        <ul class="flex flex-wrap items-center pb-[10px]">
+                            <li class="text-sm">
+                                <a href="#"
+                                   class="text-sm text-black hover:text-orange-500 transition-all">
+                                    21
+                                    April, 2021
+                                </a>
+                                <span class="inline-block mx-2">\</span>
+                            </li>
+                            <li class="text-sm">
+                                <a href="#"
+                                   class="text-sm text-black hover:text-orange-500 transition-all">
+                                    0
+                                    comments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p class="font-normal text-black text-sm mb-[25px]">
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipisicing
+                        elit, sed do eiusmod tempor
+                        incididunt ut labore...
+                    </p>
+                    <a class="bg-white transition-all hover:bg-orange-500 hover:border-orange-500 hover:text-white text-black capitalize font-medium text-sm inline-block border border-solid border-gray-300 px-8 py-4 leading-none mb-[10px]"
+                       href="#">
+                        blog
+                        details
+                    </a>
+                </div>
+            </div>-->
+            <!-- swiper-slide end-->
+            <!-- swiper-slide start -->
+            <!--<div  role="group"
+                >
+                <div class="border border-solid border-gray-300 p-[20px] md:p-[30px] group">
+                    <div class="mb-6">
+                        <a href="#"
+                           class="overflow-hidden block">
+                            <img class="transform group-hover:scale-110 transition-transform duration-500 w-full h-full"
+                                 src="~/Content/assets/images/blog2.webp"
+                                 alt="blog image" loading="lazy"
+                                >
+                        </a>
+                    </div>
+
+                    <h3>
+                        <a href="#"
+                           class="block text-base md:text-md hover:text-orange-500 transition-all font-medium pb-[10px]">
+                            Norbi
+                            at omgula qorta
+                        </a>
+                    </h3>
+                    <div class="blog-meta">
+                        <ul class="flex flex-wrap items-center pb-[10px]">
+                            <li class="text-sm">
+                                <a href="#"
+                                   class="text-sm text-black hover:text-orange-500 transition-all">
+                                    21
+                                    April, 2021
+                                </a>
+                                <span class="inline-block mx-2">\</span>
+                            </li>
+                            <li class="text-sm">
+                                <a href="#"
+                                   class="text-sm text-black hover:text-orange-500 transition-all">
+                                    0
+                                    comments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p class="font-normal text-black text-sm mb-[25px]">
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipisicing
+                        elit, sed do eiusmod tempor
+                        incididunt ut labore...
+                    </p>
+                    <a class="bg-white transition-all hover:bg-orange-500 hover:border-orange-500 hover:text-white text-black capitalize font-medium text-sm inline-block border border-solid border-gray-300 px-8 py-4 leading-none mb-[10px]"
+                       href="#">
+                        blog
+                        details
+                    </a>
+                </div>
+            </div>-->
+            <!-- swiper-slide end-->
+            <!-- swiper-slide start -->
+            <!--<div role="group">
+                <div class="border border-solid border-gray-300 p-[20px] md:p-[30px] group">
+                    <div class="mb-6">
+                        <a href="#"
+                           class="overflow-hidden block">
+                            <img class="transform group-hover:scale-110 transition-transform duration-500 w-full h-full"
+                                 src="~/Content/assets/images/blog3.webp"
+                                 alt="blog image" loading="lazy"
+                                 >
+                        </a>
+                    </div>
+                    <h3>
+                        <a href="#"
+                           class="block text-base md:text-md hover:text-orange-500 transition-all font-medium pb-[10px]">
+                            Mithout
+                            wery warkness
+                        </a>
+                    </h3>
+                    <div class="blog-meta">
+                        <ul class="flex flex-wrap items-center pb-[10px]">
+                            <li class="text-sm">
+                                <a href="#"
+                                   class="text-sm text-black hover:text-orange-500 transition-all">
+                                    21
+                                    April, 2021
+                                </a>
+                                <span class="inline-block mx-2">\</span>
+                            </li>
+                            <li class="text-sm">
+                                <a href="#"
+                                   class="text-sm text-black hover:text-orange-500 transition-all">
+                                    0
+                                    comments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p class="font-normal text-black text-sm mb-[25px]">
+                        Lorem ipsum dolor sit amet,
+                        consectetur adipisicing
+                        elit, sed do eiusmod tempor
+                        incididunt ut labore...
+                    </p>
+                    <a class="bg-white transition-all hover:bg-orange-500 hover:border-orange-500 hover:text-white text-black capitalize font-medium text-sm inline-block border border-solid border-gray-300 px-8 py-4 leading-none mb-[10px]"
+                       href="#">
+                        blog
+                        details
+                    </a>
+                </div>
+            </div>-->
+            <!-- swiper-slide end-->
+            <!-- swiper-slide start -->
+
+
+        <!--</div>
+    </div>
+</section>-->
+
+@section scripts{
+    <script>
+        const swiper = new Swiper('.swiper', {
+            observer: true,
+            observeParents: true,
+            parallax: true,
+            autoplay: {
+                delay: 5000,
+            },
+            centerInsufficientSlides: true,
+            breakpoints: {
+                1200: {
+                    slidesPerView: 3,
+                },
+                850: {
+                    slidesPerView: 2,
+                },
+                400: {
+                    slidesPerView: 1,
+                }
+
+            },
+            spaceBetween: 20,
+            direction: 'horizontal',
+            loop: true,
+
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                type: 'bullets',
+            },
+
+        });
+    </script>
+}

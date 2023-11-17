@@ -1,0 +1,166 @@
+﻿@model List<DATA_63130260.Entity.shopping_cart_item>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+<!-- /cart-->
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        YOUR SHOPPING CART
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINS CART -->
+<!-- ITEM PRODUCT CART -->
+<section class="px-[60px] md:px-[100px] 2xl:px-[300px] py-[60px] gap-8">
+    <div class="grid grid-cols-1 gap-x-5">
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-max">
+                <thead>
+                    <tr>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Image
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Product
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Price
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Quantity
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Total
+                        </th>
+                        <th class="bg-gray-200 p-3 border border-solid border-gray-200 text-center font-medium text-sm capitalize">
+                            Remove
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item.product_item);
+                        <tr>
+                            <td class="md:w-32 w-20 p-3 border border-solid border-gray-200 text-center">
+                                <a href="#">
+                                    <img src="@item.product_item.product.product_image"
+                                         alt="product image">
+                                </a>
+                            </td>
+                            <td class="p-3 border border-solid border-gray-200 text-center md:w-[120px] w-[70px] xl:w-[180px]">
+                                <a href="/Product_63130260/Details/@item.product_item.product_id"
+                                   class="transition-all hover:text-orange">
+                                    @item.product_item.product.name
+                                </a>
+                            </td>
+                            <td class="p-3 border border-solid border-gray-200 text-center">
+                                @if (price == item.product_item.price)
+                                {
+                                    <span>@String.Format("{0:N0}đ", item.product_item.price)</span>
+                                }
+                                else
+                                {
+                                    <div class="flex flex-col gap-2">
+                                        <span class="line-through">@String.Format("{0:N0}đ", item.product_item.price)</span>
+                                        <span class="">@String.Format("{0:N0}đ", price)</span>
+                                    </div>
+                                }
+                            </td>
+                            <td class="p-3 border border-solid border-gray-200 text-center">
+
+                                <div class="flex count border border-solid border-gray-200 p-2 h-11">
+
+                                    <p class=" flex-auto w-4 text-center focus:outline-none input-appearance-none">
+                                        @item.qty
+                                    </p>
+
+
+                                </div>
+                            </td>
+                            <td class="p-3 border border-solid border-gray-200 text-center">
+
+                                <span>@String.Format("{0:N0}đ", price * item.qty)</span>
+                            </td>
+                            <td class="p-3 border border-solid border-gray-200 text-center">
+                                <form action="/Home_63130260/DeleteProductCart" method="post">
+                                    <input type="hidden" name="idProduct" value="@item.product_item.id" />
+                                    <button class="inline-block mx-1 hover:text-orange transition-all">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<!-- ACTION -->
+<section class="md:px-[150px]  px-[60px]  xl:px-[250px] py-[60px] gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
+        <div></div>
+        <div class="mt-4 lg:mt-0">
+            <div class="bg-gray-100 p-10 flex flex-col gap-5">
+                <ul class="flex flex-wrap items-center justify-between">
+                    <li class="text-base font-semibold">Product</li>
+                    <li class="text-base font-semibold">Total</li>
+                </ul>
+
+                <ul class="flex flex-wrap items-center justify-between">
+                    <li class="text-base font-semibold">Shipping</li>
+                    <li class="text-base font-semibold">
+                        ...
+                    </li>
+                </ul>
+                <div class="border-t border-b border-gray-600 py-5 mt-5">
+                    <ul class="flex flex-wrap items-center justify-between">
+                        <li class="text-base font-semibold">Total</li>
+                        <li class="text-base font-semibold text-orange-500">
+                            @{
+                                decimal total = 0;
+                                foreach (var item2 in Model)
+                                {
+                                    var price2 = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item2.product_item);
+                                    total += price2 * (decimal)item2.qty;
+
+                                }
+                            }
+                            @String.Format("{0:N0}đ", @total)
+</ul>
+                </div>
+            </div>
+            <div class="mt-8 flex gap-2 md:flex-row flex-col" >
+                <a href="#"
+                   class="inline-block text-center bg-black leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
+                    Update
+                    Cart
+                </a>
+                <a href="/Home_63130260/Checkout"
+                   class="inline-block bg-black text-center leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">checkout</a>
+            </div>
+        </div>
+    </div>
+</section>

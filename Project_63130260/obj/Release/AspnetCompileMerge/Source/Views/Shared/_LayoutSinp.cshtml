@@ -1,0 +1,513 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+@{ var user = Project_63130260.App_Start.SessionConfig.GetUser();
+    List<DATA_63130260.Entity.shopping_cart_item> list = new List<DATA_63130260.Entity.shopping_cart_item>();
+    decimal total = 0;
+}
+@if (user != null)
+{
+    DATA_63130260.mapCart map = new DATA_63130260.mapCart();
+    list = map.GetCartItems(map.GetCart(user.id).id);
+
+    foreach (var item2 in list)
+    {
+        var price2 = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item2.product_item);
+        total += price2 * (decimal)item2.qty;
+
+    }
+}
+<body class="">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 md:p-10 gap-4 md:gap-8 px-4">
+        <a href="/" class="min-w-[125px]"> <img src="~/Content/assets/images/logo.webp" alt=""></a>
+
+        <ul class="hidden md:flex items-center justify-between gap-4 md:gap-12 xl:text-2xl text-xl">
+            <li class="hover:text-orange-500 cursor-pointer group relative">
+                <a href="/">Home</a>
+            </li>
+            <li class="hover:text-orange-500 cursor-pointer"><a href="/Product_63130260/">Product</a></li>
+            <li class="hover:text-orange-500 cursor-pointer"><a href="/Home_63130260/Cart">Cart</a></li>
+            <li class="hover:text-orange-500 cursor-pointer"><a href="/Home_63130260/Compare">Compare</a></li>
+        </ul>
+        <div class="hidden md:flex items-center justify-between gap-[40px] xl:text-2xl text-xl">
+            @*<div class="">
+                    <i class="fa-solid fa-magnifying-glass hover:text-orange-500 cursor-pointer"></i>
+                </div>*@
+            <div class="" id="btn-cart">
+                <i class="fa-regular fa-clipboard hover:text-orange-500 cursor-pointer"></i>
+                <span>@String.Format("{0:N0}đ", total)</span>
+            </div>
+            <div class="">
+                <i class="fa-solid fa-gear hover:text-orange-500 cursor-pointer"
+                   id="btn-option"></i>
+                <div id="settings-card"
+                     class="bg-white absolute  px-8 py-5 shadow-xl w-80 opacity-0 invisible transition-all duration-300 ease-in-out z-20 top-[80px] right-[30px]">
+                    <h4 class="text-md text-black font-normal capitalize tracking-wide pb-5 border-b border-solid border-gray-300 mb-5">
+                        Account
+                    </h4>
+                    <ul>
+                        @if (user == null)
+                        {
+                            <li class="my-4">
+                                <a href="/Auth_63130260/Login"
+                                   class="text-base text-black hover:text-orange-500 transition-all font-light capitalize tracking-wide">Login</a>
+                            </li>
+                            <li class="mt-4">
+                                <a href="/Auth_63130260/Register"
+                                   class="text-base text-black hover:text-orange-500 transition-all font-light capitalize tracking-wide">
+                                    Register
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="my-4">
+                                <a href="/account_63130260/"
+                                   class="text-base text-black hover:text-orange-500 transition-all font-light capitalize tracking-wide">@user.first_name @user.last_name</a>
+                            </li>
+                            <li class="my-4">
+                                <a href="/Home_63130260/Cart"
+                                   class="text-base text-black hover:text-orange-500 transition-all font-light capitalize tracking-wide">Cart</a>
+                            </li>
+                            <li class="mt-4">
+                                <a href="/Auth_63130260/Logout"
+                                   class="text-base text-black hover:text-orange-500 transition-all font-light capitalize tracking-wide">
+                                    Logout
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section id="cart-sidebar"
+                 class="left-auto z-[60] right-0 transform translate-x-translate-x-full-120 translate-x-[500px] fixed font-normal text-sm top-0 z-50 h-screen w-80 lg:w-96 transition-all ease-in-out duration-300 bg-white overflow-y-auto ">
+            <div class="px-8">
+                <div class="flex flex-wrap justify-between items-center border-b border-solid border-gray-300">
+                    <h4 class="font-normal text-xl text-dark capitalize py-4">
+                        Shoping
+                        Cart
+                    </h4>
+                    <button class="offcanvas-close hover:text-orange"
+                            id="close-cart-icon" aria-label="close icon">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                </div>
+                <ul class="2xl:h-[60vh] h-[50vh] overflow-y-auto mt-8">
+
+                    @if (list.Count >= 1)
+                    {
+                        foreach (var item in list)
+                        {
+                            var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item.product_item);
+                            <li class="flex flex-wrap group mb-8">
+                                <div class="mr-5 relative">
+                                    <a href="#">
+                                        <img src="@item.product_item.product.product_image"
+                                             alt="product image" loading="lazy" width="90"
+                                             height="100">
+                                    </a>
+                                    <button class="absolute top-3 left-3 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all hover:text-orange">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="flex-1">
+                                    <h4>
+                                        <a class="font-light text-sm md:text-lg text-dark hover:text-orange transition-all tracking-wide"
+                                           href="#">@item.product_item.product.name</a>
+                                    </h4>
+                                    <span class="font-light text-sm text-dark transition-all tracking-wide">
+                                        @item.qty
+                                        x
+                                        @if (price == item.product_item.price)
+                                        {
+                                            <span>@String.Format("{0:N0}đ", price)</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="line-through">@String.Format("{0:N0}đ", item.product_item.price)</span>
+                                            <span>@String.Format("{0:N0}đ", price)</span>
+                                        }
+                                    </span>
+                                </div>
+                            </li>
+                        }
+                    }
+
+
+
+                </ul>
+                <div class="pb-4">
+                    <div class="flex flex-wrap justify-between items-center py-4 my-6 border-t border-b border-solid border-gray-300 font-normal text-base text-dark capitalize">
+                        Total:<span>@String.Format("{0:N0}đ", total)</span>
+                    </div>
+                    <div class="text-center">
+                        <a class="py-5 px-10 block bg-white border border-solid border-gray-300 uppercase font-semibold text-base hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all leading-none"
+                           href="/Home_63130260/Checkout">Checkout</a><a class="py-5 px-10 block bg-white border border-solid border-gray-300 uppercase font-semibold text-base hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all leading-none mt-3"
+                                                                         href="/Home_63130260/Cart">View Cart</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="font-poppins md:hidden">
+            <div class="max-w-6xl px-4 mx-auto" x-data="{open:false}">
+                <nav class="flex items-center justify-between py-4">
+                    <div class="flex lg:hidden">
+                        <button class="flex items-center px-3 py-2 text-orange-600 border border-orange-200 rounded hover:text-orange-800 hover:border-orange-300 "
+                                @@click="open =true">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                 height="16" fill="currentColor" class="bi bi-list"
+                                 viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="ml-2 flex gap-1 items-center px-3 py-2 text-orange-600 border border-orange-200 rounded hover:text-orange-800 hover:border-orange-300 h-[33.6px]" id="btn-cart-mobile">
+                        <i class="fa-regular fa-clipboard hover:text-orange-500 cursor-pointer"></i>
+                        <span>@String.Format("{0:N0}đ", list.Sum(m => m.product_item.price * m.qty))</span>
+                    </div>
+
+                    <div class="items-center hidden pl-2 ml-auto mr-8 lg:flex lg:ml-0 lg:mr-0">
+                        <div class="flex px-6 py-2 border border-gray-700 rounded-full ">
+                            <input type="text"
+                                   class="w-full pr-4 text-sm text-gray-700 bg-white   placeholder-text-100 "
+                                   placeholder="search...">
+                            <button class="flex items-center text-gray-700   hover:text-orange-700">
+                                <span class="mr-1 ml-2">Go</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                     height="16" fill="currentColor"
+                                     class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Mobile Sidebar -->
+                <div class="fixed inset-0 w-full bg-white opacity-25 md:hidden bottom-0"
+                     :class="{'translate-x-0 ease-in-opacity-100' :open===true, '-translate-x-full ease-out opacity-0' : open===false}">
+                </div>
+                <div class="shadow-xl absolute inset-0 z-50 h-screen p-3 text-gray-700 duration-500 transform shadow-md  bg-white w-80 lg:hidden lg:transform-none lg:relative"
+                     :class="{'translate-x-0 ease-in-opacity-100' :open===true, '-translate-x-full ease-out opacity-0' : open===false}">
+                    <div class="flex justify-between px-5 py-2">
+                        <a href="/" class="min-w-[125px]">
+                            <img src="~/Content/assets/images/logo.webp" alt="">
+                        </a>
+                        <button class="rounded-md hover:text-orange-300 lg:hidden "
+                                @@click="open=false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" fill="currentColor"
+                                 class="bi bi-x-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <ul class="px-5 text-left mt-7">
+                        <li class="text-lg text-gray-800 hover:text-orange-400 pb-3">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="text-lg text-gray-800 hover:text-orange-400 pb-3">
+                            <a href="/Product_63130260/">Product</a>
+                        </li>
+                        <li class="text-lg text-gray-800 hover:text-orange-400  pb-3">
+                            <a href="/Home_63130260/Cart">Cart</a>
+                        </li>
+                        <li class="text-lg text-gray-800 hover:text-orange-400 pb-3">
+                            <a href="/Home_63130260/Compare">Compare</a>
+                        </li>
+                    </ul>
+                    <div class="flex flex-col lg:hidden px-5 text-left gap-3">
+
+                        <div class="">
+                            <ul>
+                                @if (user == null)
+                                {
+                                    <li class="my-4">
+                                        <a href="/Auth_63130260/Login"
+                                           class="text-lg hover:text-white hover:text-orange-500 border border-orange-500 transition-all flex justify-center items-center  px-2 py-1 hover:bg-orange-500 rounded-[25px]  capitalize tracking-wide">Login</a>
+                                    </li>
+                                    <li class="mt-4">
+                                        <a href="/Auth_63130260/Register"
+                                           class="text-lg hover:text-white hover:text-orange-500 border border-orange-500 transition-all flex justify-center items-center  px-2 py-1 hover:bg-orange-500 rounded-[25px]  capitalize tracking-wide">
+                                            Register
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="my-4">
+                                        <a href="/account_63130260/"
+                                           class="text-lg hover:text-white hover:text-orange-500 border border-orange-500 transition-all flex justify-center items-center  px-2 py-1 hover:bg-orange-500 rounded-[25px]  capitalize tracking-wide">@user.first_name @user.last_name</a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="/Auth_63130260/Logout"
+                                           class="text-lg hover:text-white hover:text-orange-500 border border-orange-500 transition-all flex justify-center items-center  px-2 py-1 hover:bg-orange-500 rounded-[25px]  capitalize tracking-wide">
+                                            Logout
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+
+    <!-- Home Page -->
+
+    <main>
+        @RenderBody()
+
+        <!-- CONTACT -->
+
+        <div class="news-letter-section bg-gray-100 pt-24 pb-24 px-[120px]">
+            <div class="container">
+                <div class="max-w-[600px] mx-auto">
+                    <div class="text-center">
+                        <a href="#" class="inline-block mb-11">
+                            <img src="~/Content/assets/images/logo.webp" alt="brand logo"
+                                 loading="lazy" width="125" height="45">
+                        </a>
+
+                        <p class="mb-10">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit.aliqua. Ut enim ad
+                            minim. Lorem ipsum dolor sit amet.
+                        </p>
+
+                        <form id="mc-form"
+                              class="relative text-center md:max-w-xl mx-auto mb-10">
+                            <input id="mc-email" type="email" name="EMAIL"
+                                   placeholder="email@example.com"
+                                   class="border border-solid border-black w-full h-14 sm:h-16 rounded-full bg-transparent placeholder-primary placeholder-opacity-50 text-sm sm:text-base focus:outline-none py-1 pl-8 pr-14 sm:pr-36">
+                            <button id="mc-submit" type="submit"
+                                    class="bg-black transition-all hover:bg-orange-500 hover:text-white px-10 sm:px-3 py-5 sm:py-1 rounded-l-full sm:rounded-l-none rounded-r-full text-white capitalize font-medium text-sm lg:text-md sm:absolute sm:top-0 sm:right-0 sm:h-full mt-3 sm:mt-0 leading-none w-full sm:w-auto">
+                                Subscribe
+                            </button>
+                        </form>
+                        <!-- mailchimp-alerts Start -->
+                        <div class="mailchimp-alerts text-centre">
+                            <div class="mailchimp-submitting"></div>
+                            <!-- mailchimp-submitting end -->
+                            <div class="mailchimp-success text-green-400"></div>
+                            <!-- mailchimp-success end -->
+                            <div class="mailchimp-error text-red-600"></div>
+                            <!-- mailchimp-error end -->
+                        </div>
+                        <!-- mailchimp-alerts end -->
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center">
+                        <a href="#" aria-label="social links"
+                           class="text-lg text-black hover:text-orange-500 mx-3 leading-none transition">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="social links"
+                           class="text-lg text-black hover:text-orange-500 mx-3 leading-none transition">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" aria-label="social links"
+                           class="text-lg text-black hover:text-orange-500 mx-3 leading-none transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="social links"
+                           class="text-lg text-black hover:text-orange-500 mx-3 leading-none transition">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" aria-label="social links"
+                           class="text-lg text-black hover:text-orange-500 mx-3 leading-none transition">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-bottom-section py-8 bg-gray-500 px-[120px]">
+            <div class="container">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex order-last md:order-first flex-wrap items-center justify-center md:justify-start">
+                        <p class="text-white flex flex-wrap items-center text-sm lg:text-base">
+                            © 2022 Sinp. Made with <i class="fa-regular fa-heart mx-2"></i> by<a href="#"
+                                                                                                 class="ml-1 transition hover:text-orange-500">DoanHaiDuy</a>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-center md:justify-end">
+                        <a href="#">
+                            <img class="w-full h-full"
+                                 src="~/Content/assets/images/payment.webp"
+                                 alt="payment logo" loading="lazy" width="286"
+                                 height="23">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+
+    <div id="modal-overlay"
+         class="modal-overlay hidden fixed inset-0 bg-black opacity-50 z-40 ">
+    </div>
+
+    <!-- Cart -->
+    <div id="modal-cart"
+         class="modal fixed transition-opacity w-7/12 duration-300 opacity-0 hidden ease-linear z-40 left-8 right-8 md:left-1/2 top-1/2 transform -translate-y-1/2 md:-translate-x-1/2 p-7 bg-white modal-open">
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="w-full">
+                <img class="w-full h-full" src="~/Content/assets/images/product1.webp"
+                     alt="product image" loading="lazy" width="432" height="480">
+            </div>
+            <div>
+                <button class="text-black text-lg absolute top-7 right-7 modal-close">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+
+                <h3 class="text-black font-medium text-md lg:text-lg leading-none mb-4">
+                    Airpod product kiebd
+                </h3>
+                <h5 class="font-bold text-md leading-none text-orange-500 mb-8">
+                    $130.00
+                    <del class="font-normal text-base mr-1 inline-block">$110.00</del>
+                </h5>
+
+                <p class="mb-5 text-sm">
+                    All the Lorem Ipsum generators on the
+                    Internet tend to repeat predefined chunks as necessary,
+                    making this the first true generator on the Internet. All
+                    the Lorem Ipsum generators on the Internet tend to repeat
+                    predefined chunks as necessary,
+                </p>
+
+                <select class="w-full h-12 border border-solid border-gray-300  px-5 py-2 appearance-none"
+                        style="background: rgba(0,0,0,0) url('~/Content/assets/images/icon/qcv-arrow-down.webp') no-repeat scroll right 20px center;">
+                    <option value="red">red</option>
+                    <option value="green">green</option>
+                    <option value="blue">blue</option>
+                </select>
+
+                <div class="flex flex-wrap items-center mt-8">
+                    <div class="flex count border border-solid border-gray-300 p-2 h-11">
+                        <button class="decrement flex-auto w-5 leading-none"
+                                aria-label="button">
+                            -
+                        </button>
+                        <input type="number" min="1" max="100" step="1"
+                               value="1"
+                               class="quantity__input flex-auto w-8 text-center focus:outline-none input-appearance-none">
+                        <button class="increment flex-auto w-5 leading-none"
+                                aria-label="button">
+                            +
+                        </button>
+                    </div>
+                    <div class="ml-2 sm:ml-8">
+                        <button class="bg-black leading-none  py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange-500">
+                            Add
+                            to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+    <script>
+        const btnOption = document.getElementById("btn-option")
+        const card = document.getElementById("settings-card")
+        const modelOverlay = document.getElementById("modal-overlay")
+        btnOption.onclick = function () {
+            if (card.classList.contains("opacity-0")) {
+                card.classList.remove("opacity-0", "invisible");
+            }
+            else {
+                card.classList.add("opacity-0", "invisible")
+            }
+        }
+
+        const btnCart = document.getElementById("btn-cart")
+        const btnCartMobile = document.getElementById("btn-cart-mobile")
+        const cart = document.getElementById("cart-sidebar")
+        const btnCloseCart = document.getElementById("close-cart-icon")
+        btnCart.onclick = function () {
+            cart.classList.remove("translate-x-[500px]");
+            modelOverlay.classList.remove("hidden")
+            modelOverlay.onclick = function () {
+                cart.classList.add("translate-x-[500px]");
+                modelOverlay.classList.add("hidden")
+            }
+        }
+        btnCartMobile.onclick = function () {
+            cart.classList.remove("translate-x-[500px]");
+            modelOverlay.classList.remove("hidden")
+            modelOverlay.onclick = function () {
+                cart.classList.add("translate-x-[500px]");
+                modelOverlay.classList.add("hidden")
+            }
+        }
+
+        btnCloseCart.onclick = function () {
+            cart.classList.add("translate-x-[500px]");
+            modelOverlay.classList.add("hidden")
+        }
+
+    </script>
+</body>
+
+</html>
