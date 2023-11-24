@@ -1,16 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "DeleteOrder";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Confirm Delete Order";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 
-<section class="flex items-center h-screen bg-gray-100 font-poppins  ">
-    <div class="justify-center flex-1 max-w-6xl py-4 mx-auto text-center lg:py-10 ">
-        <div class="">
+<section class="flex items-center font-poppins">
+    <div class="justify-center flex-1 py-4 mx-auto text-center lg:py-10 ">
+        
             <div class="absolute top-0 left-0 flex items-center justify-center w-full h-full"
-                 style="background-color: rgba(0,0,0,.5);" x-show="open">
+                >
                 <div class="h-auto p-4 mx-2 text-left bg-white shadow-3xl rounded-3xl  md:max-w-xl md:p-6 lg:p-8 md:mx-0"
-                     @@click.away="open = false">
+                   >
                     <div class="flex justify-center mb-4">
                         <span class="text-orange-500 ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -51,5 +51,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>

@@ -1,8 +1,8 @@
 ﻿@model DATA_63130260.Entity.promotion
 
 @{
-    ViewBag.Title = "UpdatePromotion";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Update Promotion " + Model.name;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 
 <style>
@@ -20,7 +20,7 @@
     <i class="fas fa-list mr-3"></i> Update Promotion
 </p>
 
-<section class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+<section class="">
     <div class="py-16 bg-stone-100 font-poppins">
         <form method="post" class="max-w-4xl px-4 py-4 mx-auto bg-white border shadow-sm lg:py-4 md:px-6  ">
             <div class="mb-10">
@@ -87,7 +87,7 @@
                             Start date
                         </label>
                         @{
-                            DateTime currentDateTime = DateTime.Now;
+                            DateTime currentDateTime = DATA_63130260.mapDateTime.GetVietnamDateTime();
                             string formattedCurrentDateTime = currentDateTime.ToString("yyyy-MM-dd");
                         }
                         <input type="date" required name="start_date" id="start_date" min="@formattedCurrentDateTime" value=" @Model.start_date.Value.ToString("yyyy-MM-dd")" class="block w-full px-4 py-2 leading-tight outline-none placeholder-gray-400 bg-gray-100 border rounded  focus:ring-2 focus:ring-inset focus:ring-orange-600  " />

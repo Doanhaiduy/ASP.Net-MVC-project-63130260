@@ -13,7 +13,7 @@ namespace Project_63130260.Areas.Admin.Controllers
 		// GET: Admin/Order_63130260
 
 		[RoleAdmin]
-		public ActionResult Index(string all, bool selected = true)
+		public ActionResult Index()
         {
 			if (TempData["error"] != null)
 			{
@@ -21,12 +21,7 @@ namespace Project_63130260.Areas.Admin.Controllers
 			}
 			var map = new mapOrder();
 			var listOrder = map.GetListOrder();
-            if(all == "0" )
-            {
-			    ViewBag.Selected = selected;
-			    listOrder = listOrder.Where(x => x.order_status == selected).ToList();
-            }
-			ViewBag.count = listOrder.Count;
+            
 			return View(listOrder);
         }
 

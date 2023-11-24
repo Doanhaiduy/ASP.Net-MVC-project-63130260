@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Failure Payment";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+
+
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/" class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        <!-- Display "Payment Failed" for unsuccessful payment -->
+                        <span class="text-red-500">Payment Failed</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="p-4 rounded shadow-lg">
+        <div class="flex flex-col items-center space-y-5">
+            <!-- Display a different icon for payment failure -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-red-500 w-28 h-28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <h1 class="text-4xl font-bold">Payment Failed</h1>
+            <!-- Display a specific message for payment failure -->
+            <p class="text-center">We're sorry, but the payment for your order could not be processed successfully. Please check your payment information and try again.</p>
+            <p class="text-center">@ViewBag.Message</p>
+            <!-- Provide options for the user, such as returning to the cart or contacting support -->
+            <a href="/Payment_63130260/Checkout" class="inline-flex items-center px-4 py-2 text-white bg-orange-500 border border-orange-500 rounded rounded-full hover:bg-orange-700 focus:outline-none focus:ring">
+                <span class="text-sm font-medium">Return to payment page</span>
+            </a>
+
+            @*<a href="/contact-support" class="inline-flex items-center px-4 py-2 text-white bg-red-500 border border-red-500 rounded rounded-full hover:bg-red-700 focus:outline-none focus:ring">
+                <span class="text-sm font-medium">Contact Support</span>
+            </a>*@
+        </div>
+    </div>
+</div>

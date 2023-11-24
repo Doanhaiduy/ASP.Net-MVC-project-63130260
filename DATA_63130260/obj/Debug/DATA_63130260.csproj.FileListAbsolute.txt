@@ -1,16 +1,9 @@
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\DATA_63130260.dll.config
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\DATA_63130260.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\DATA_63130260.pdb
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\BouncyCastle.Crypto.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\EntityFramework.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\EntityFramework.SqlServer.dll
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\EntityFramework.xml
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\EntityFramework.SqlServer.xml
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.csproj.AssemblyReference.cache
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.csproj.CoreCompileInputs.cache
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.csproj.CopyComplete
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.dll
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.pdb
-D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\BouncyCastle.Crypto.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\Firebase.Auth.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\Firebase.Storage.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\jose-jwt.dll
@@ -56,6 +49,8 @@ D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.Security.Principal.Windows.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.Text.Encodings.Web.dll
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\BouncyCastle.Crypto.xml
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\EntityFramework.xml
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\EntityFramework.SqlServer.xml
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\Microsoft.AspNetCore.Authentication.xml
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\Microsoft.AspNetCore.Authentication.Abstractions.xml
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\Microsoft.AspNetCore.Authentication.Core.xml
@@ -96,3 +91,8 @@ D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.Net.Http.Formatting.xml
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\bin\Debug\System.Text.Encodings.Web.xml
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.csproj.AssemblyReference.cache
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.csproj.CoreCompileInputs.cache
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.csproj.CopyComplete
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.dll
+D:\THCode\NTU\2023-2024\ASP_MVC\Project_63130260\DATA_63130260\obj\Debug\DATA_63130260.pdb

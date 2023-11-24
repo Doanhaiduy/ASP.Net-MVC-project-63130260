@@ -11,15 +11,17 @@ namespace Project_63130260.Areas.Admin.Controllers
 
 	public class Home_63130260Controller : Controller
     {
-	    int currentMonth = Convert.ToInt32(DateTime.Now.Month);
-	    int currentYear = Convert.ToInt32(DateTime.Now.Year);
+	    int currentMonth = Convert.ToInt32(mapDateTime.GetVietnamDateTime().Month);
+	    int currentYear = Convert.ToInt32(mapDateTime.GetVietnamDateTime().Year);
         // GET: Admin/Home_63130260
 
         [RoleAdmin]
-        public ActionResult Index(int month = 0)
+        public ActionResult Index(int month = 0, int page = 1)
 		{
+			var size =10;
+			ViewBag.page = page;
 
-            if(month == 0) { 
+			if (month == 0) { 
                 ViewBag.month = currentMonth;
 			}
             else
@@ -31,7 +33,9 @@ namespace Project_63130260.Areas.Admin.Controllers
           
 			var map = new mapUser();
             var list = map.GetListUser();
-            return View(list);
+			ViewBag.Count = Math.Ceiling((double)list.Count/ size);
+			list = list.Skip((page - 1) * size).Take(size).ToList();
+			return View(list);
         }
     }
 }

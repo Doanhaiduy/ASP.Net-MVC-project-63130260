@@ -397,6 +397,7 @@
     <Compile Include="Controllers\Account_63130260Controller.cs" />
     <Compile Include="Controllers\Auth_63130260Controller.cs" />
     <Compile Include="Controllers\Home_63130260Controller.cs" />
+    <Compile Include="Controllers\Payment_63130260Controller.cs" />
     <Compile Include="Controllers\Product_63130260Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -408,6 +409,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="VNPay\OrderDataModel.cs" />
+    <Compile Include="VNPay\PayCompare.cs" />
+    <Compile Include="VNPay\PayLib.cs" />
+    <Compile Include="VNPay\Ultil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\images\Admin-amico.png" />
@@ -431,6 +436,32 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Logo\android-icon-144x144.png" />
+    <Content Include="Logo\android-icon-192x192.png" />
+    <Content Include="Logo\android-icon-36x36.png" />
+    <Content Include="Logo\android-icon-48x48.png" />
+    <Content Include="Logo\android-icon-72x72.png" />
+    <Content Include="Logo\android-icon-96x96.png" />
+    <Content Include="Logo\apple-icon-114x114.png" />
+    <Content Include="Logo\apple-icon-120x120.png" />
+    <Content Include="Logo\apple-icon-144x144.png" />
+    <Content Include="Logo\apple-icon-152x152.png" />
+    <Content Include="Logo\apple-icon-180x180.png" />
+    <Content Include="Logo\apple-icon-57x57.png" />
+    <Content Include="Logo\apple-icon-60x60.png" />
+    <Content Include="Logo\apple-icon-72x72.png" />
+    <Content Include="Logo\apple-icon-76x76.png" />
+    <Content Include="Logo\apple-icon-precomposed.png" />
+    <Content Include="Logo\apple-icon.png" />
+    <Content Include="Logo\browserconfig.xml" />
+    <Content Include="Logo\favicon-16x16.png" />
+    <Content Include="Logo\favicon-32x32.png" />
+    <Content Include="Logo\favicon-96x96.png" />
+    <Content Include="Logo\favicon.ico" />
+    <Content Include="Logo\ms-icon-144x144.png" />
+    <Content Include="Logo\ms-icon-150x150.png" />
+    <Content Include="Logo\ms-icon-310x310.png" />
+    <Content Include="Logo\ms-icon-70x70.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -463,6 +494,9 @@
     <Content Include="Areas\Admin\Views\Promotion_63130260\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Promotion_63130260\UpdatePromotion.cshtml" />
     <Content Include="Areas\Admin\Views\Promotion_63130260\DeletePromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin2.cshtml" />
+    <Content Include="Logo\manifest.json" />
+    <Content Include="Logo\logo.webp" />
     <None Include="Properties\PublishProfiles\doanhaiduy2-001-site1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\doanhaiduy2-001-site1 - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -480,6 +514,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Account_63130260\index.cshtml" />
+    <Content Include="Views\Auth_63130260\Login.cshtml" />
+    <Content Include="Views\Auth_63130260\Register.cshtml" />
+    <Content Include="Views\Product_63130260\Details.cshtml" />
+    <Content Include="Views\Product_63130260\index.cshtml" />
+    <Content Include="Views\Product_63130260\Review.cshtml" />
+    <Content Include="Views\Product_63130260\ReviewSuccess.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutSinp.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -487,27 +533,14 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home_63130260\Index.cshtml" />
-    <Content Include="Views\Shared\_LayoutSinp.cshtml" />
-    <Content Include="Views\Product_63130260\Details.cshtml" />
-    <Content Include="Views\Auth_63130260\Login.cshtml" />
-    <Content Include="Views\Auth_63130260\Register.cshtml" />
     <Content Include="Views\Home_63130260\Cart.cshtml" />
-    <Content Include="Views\Home_63130260\Checkout.cshtml" />
-    <Content Include="Views\Home_63130260\Whish.cshtml" />
+    <Content Include="Views\Payment_63130260\Checkout.cshtml" />
     <Content Include="Views\Home_63130260\Compare.cshtml" />
-    <Content Include="Views\Product_63130260\index.cshtml" />
-    <Content Include="Views\Account_63130260\index.cshtml" />
     <Content Include="Views\Home_63130260\DetailsOrder.cshtml" />
-    <Content Include="Views\Product_63130260\Review.cshtml" />
-    <Content Include="Views\Product_63130260\ReviewSuccess.cshtml" />
-    <Content Include="Views\Home_63130260\FailureView.cshtml" />
-    <Content Include="Views\Home_63130260\SuccessView.cshtml" />
-    <Content Include="Views\Home_63130260\OrderSuccess.cshtml" />
+    <Content Include="Views\Payment_63130260\FailureView.cshtml" />
+    <Content Include="Views\Home_63130260\Index.cshtml" />
+    <Content Include="Views\Payment_63130260\OrderSuccess.cshtml" />
+    <Content Include="Views\Home_63130260\Whish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

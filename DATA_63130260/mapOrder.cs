@@ -92,7 +92,7 @@ namespace DATA_63130260
 		{
 			shop_order newOrder = new shop_order();
 			newOrder.user_id = order.user_id;
-			newOrder.order_date = DateTime.Now;
+			newOrder.order_date = mapDateTime.GetVietnamDateTime();
 			newOrder.order_first_name = order.order_first_name;
 			newOrder.order_last_name = order.order_last_name;
 			newOrder.order_phone = order.order_phone;

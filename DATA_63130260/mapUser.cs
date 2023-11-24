@@ -43,7 +43,7 @@ namespace DATA_63130260
 			//Mã hóa mật khẩu trước khi đưa vào csdl
 			string encryptPassword = mapEncryption.Encrypt(user.password);
 			newUser.password = encryptPassword;
-			newUser.created_date = DateTime.Now;
+			newUser.created_date = mapDateTime.GetVietnamDateTime();
 			newUser.gender = true;
 			db.site_user.Add(newUser);
 			db.SaveChanges();

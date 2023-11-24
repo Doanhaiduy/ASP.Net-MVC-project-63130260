@@ -27,7 +27,7 @@ namespace DATA_63130260
 			newReview.user_id = userReview.user_id;
 			newReview.ordered_product_id = userReview.ordered_product_id;
 			newReview.rating_value = userReview.rating_value;
-			newReview.rating_date = DateTime.Now;
+			newReview.rating_date = mapDateTime.GetVietnamDateTime();
 			newReview.comment = userReview.comment;
 			var orderLine = db.order_line.Find(userReview.ordered_product_id);
 			orderLine.reviewed = true;

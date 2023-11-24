@@ -19,12 +19,14 @@ namespace Project_63130260.Controllers
 		site_user user = SessionConfig.GetUser(); // Lấy ra user của session hiện tại
 		// GET: Product_63130260
 
-		public ActionResult Index(string search, string sortBy, string priceFrom, string priceTo)
+		public ActionResult Index(string search, string sortBy, string priceFrom, string priceTo , int page = 1)
 		{
-            ViewBag.search = search;
+			ViewBag.search = search;
             ViewBag.sortBy = sortBy;
             ViewBag.priceFrom = priceFrom;
             ViewBag.priceTo = priceTo;
+			var size = 9;
+            ViewBag.page = page;
 			mapProduct map = new mapProduct();
 			var listProdcut = map.getListProduct();
 			if (!string.IsNullOrEmpty(search))
@@ -45,9 +47,11 @@ namespace Project_63130260.Controllers
 			}
 
 			ViewBag.Count = listProdcut.Count;
-				return View(listProdcut);
+			listProdcut = listProdcut.Skip((page - 1) * size).Take(size).ToList();
+			return View(listProdcut);
 		}
 
+		
 		// GET: Product_63130260/Details/5
 		public ActionResult Details(int? id)
         {

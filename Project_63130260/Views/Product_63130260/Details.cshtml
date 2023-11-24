@@ -1,8 +1,9 @@
 ﻿@model DATA_63130260.Entity.product_item
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.product.name;
     Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+        var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(Model);
 }
 
 <style>
@@ -66,7 +67,7 @@
                     @{
                         var mapReview = new DATA_63130260.mapReview();
                         var valueRating = mapReview.GetAvgRatingProduct(Model.id);
-                            var listReview = mapReview.GetAllReviews(Model.id);
+                        var listReview = mapReview.GetAllReviews(Model.id);
                     }
 
                     <div class="relative mb-6 lg:mb-10">
@@ -112,7 +113,7 @@
             <div class="w-full px-4 md:w-1/2 ">
                 <div class="lg:pl-20">
                     <div class="pb-6 mb-8 border-b border-gray-200 ">
-                        @*<span class="text-lg font-medium text-rose-500 ">New</span>*@
+                        <span class="text-lg font-medium text-rose-500 ">@(price != Model.price ? "SALE" : "")</span>
                         <h2 class="max-w-xl mt-2 mb-6 text-xl font-bold  md:text-4xl">
                             @Model.product.name
                         </h2>
@@ -138,9 +139,9 @@
                                         </li>
 
                                     }
-                            <li class="ml-2 text-orange-500">
-                                |  <a href="#reviews">@listReview.Count Reviews</a>
-                            </li>
+                                    <li class="ml-2 text-orange-500">
+                                        |  <a href="#reviews">@listReview.Count Reviews</a>
+                                    </li>
                                 }
                                 else
                                 {
@@ -172,9 +173,7 @@
                             </div>
                         </div>
                         <p class="inline-block text-2xl font-semibold text-gray-700  ">
-                            @{
-                                var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(Model);
-                            }
+
                             @if (price != Model.price)
                             {
 
@@ -323,7 +322,7 @@
             This section displays customer reviews for the product. Ratings are based on a scale of 0 to 5 stars.
         </p>
     </div>
-  
+
     @if (listReview.Count > 0)
     {
         foreach (var item in listReview)
@@ -414,7 +413,7 @@
                                         </a>
                                     </li>
                                     <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                        <a href="whishlist.html"
+                                        <a href="#"
                                            class="text-black flex items-center justify-center text-md hover:text-orange"
                                            data-tippy-content="Add to wishlist"
                                            aria-label="Add to wishlist">

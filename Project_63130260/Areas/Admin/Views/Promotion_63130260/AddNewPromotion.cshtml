@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "AddNewPromotion";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Add New Promotion";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 <style>
     input[type=number]::-webkit-inner-spin-button,
@@ -18,8 +18,8 @@
     <i class="fas fa-list mr-3"></i> Add New Promotion
 </p>
 
-<section class="w-full h-screen overflow-x-hidden border-t flex flex-col ">
-    <div class="py-16 bg-stone-100 font-poppins mx-5">
+<section class="">
+    <div class="py-16 font-poppins mx-5">
         <form method="post" class="max-w-4xl px-4 py-4 mx-auto bg-white border shadow-sm lg:py-4 md:px-6  ">
             <div class="mb-10">
                 <h2 class="pb-2 mb-2 text-xl font-bold text-gray-800 md:text-3xl ">
@@ -85,7 +85,7 @@
                                 Start date
                             </label>
                             @{
-                                DateTime currentDateTime = DateTime.Now;
+                                DateTime currentDateTime = DATA_63130260.mapDateTime.GetVietnamDateTime();
                                 string formattedCurrentDateTime = currentDateTime.ToString("yyyy-MM-dd");
                             }
                             <input type="date" required name="start_date" id="start_date" min="@formattedCurrentDateTime" value="@(ViewBag.promotion != null ? ViewBag.promotion.start_date.ToString("yyyy-MM-dd") : null )" class="block w-full px-4 py-2 leading-tight outline-none placeholder-gray-400 bg-gray-100 border rounded  focus:ring-2 focus:ring-inset focus:ring-orange-600  " />

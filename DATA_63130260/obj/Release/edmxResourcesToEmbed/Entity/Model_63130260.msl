@@ -25,6 +25,21 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Project_63130260Model.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Project_63130260Model.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="site_admin">
+      <EntityTypeMapping TypeName="Project_63130260Model.site_admin">
+        <MappingFragment StoreEntitySet="site_admin">
+          <ScalarProperty Name="avatar" ColumnName="avatar" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="email_address" ColumnName="email_address" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="addresses">
       <EntityTypeMapping TypeName="Project_63130260Model.address">
         <MappingFragment StoreEntitySet="address">
@@ -160,20 +175,6 @@
           <ScalarProperty Name="qty" ColumnName="qty" />
           <ScalarProperty Name="product_item_id" ColumnName="product_item_id" />
           <ScalarProperty Name="cart_id" ColumnName="cart_id" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="site_admin">
-      <EntityTypeMapping TypeName="Project_63130260Model.site_admin">
-        <MappingFragment StoreEntitySet="site_admin">
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="gender" ColumnName="gender" />
-          <ScalarProperty Name="created_date" ColumnName="created_date" />
-          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
-          <ScalarProperty Name="email_address" ColumnName="email_address" />
-          <ScalarProperty Name="last_name" ColumnName="last_name" />
-          <ScalarProperty Name="first_name" ColumnName="first_name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

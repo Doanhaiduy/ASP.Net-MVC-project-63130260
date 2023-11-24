@@ -85,6 +85,8 @@ namespace DATA_63130260
 			return newAddress.id;
 		}
 
+
+		// đặt lại địa chỉ mặc định cho người dùng
 		public void SetDefaultAddressUser(int idUser, int idAddress)
 		{
 			var addressUser = db.user_address.FirstOrDefault(m => m.user_id == idUser && m.address_id == idAddress);

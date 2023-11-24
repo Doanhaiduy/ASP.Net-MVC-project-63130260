@@ -27,6 +27,7 @@ namespace DATA_63130260.Entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<site_admin> site_admin { get; set; }
         public virtual DbSet<address> addresses { get; set; }
         public virtual DbSet<order_line> order_line { get; set; }
         public virtual DbSet<payment_type> payment_type { get; set; }
@@ -39,7 +40,6 @@ namespace DATA_63130260.Entity
         public virtual DbSet<shop_order> shop_order { get; set; }
         public virtual DbSet<shopping_cart> shopping_cart { get; set; }
         public virtual DbSet<shopping_cart_item> shopping_cart_item { get; set; }
-        public virtual DbSet<site_admin> site_admin { get; set; }
         public virtual DbSet<site_user> site_user { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user_address> user_address { get; set; }

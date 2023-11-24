@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Success Order";
+    Layout = "~/Views/Shared/_LayoutSinp.cshtml";
+}
+
+
+<div class="py-9 bg-gray-100">
+    <div class="flex justify-center items-center">
+        <div class="">
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center">
+                    <li class="mr-5">
+                        <a href="/"
+                           class="text-black font-medium text-base uppercase transition-all hover:text-orange-500">Home</a>
+                    </li>
+                    /
+
+                    <li class="text-black font-medium text-base uppercase ml-5">
+                        Order Success
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<div class="">
+    <div class="p-4 rounded shadow-lg">
+        <div class="flex flex-col items-center space-y-5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-green-600 w-28 h-28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h1 class="text-4xl font-bold">Thank You !</h1>
+            <p>The order has been paid successfully, thank you for your purchase.</p>
+            <a href="/" class="inline-flex items-center px-4 py-2 text-white bg-orange-500 border border-orange-500 rounded rounded-full hover:bg-orange-700 focus:outline-none focus:ring">
+              
+                <span class="text-sm font-medium">
+                    Home
+                </span>
+            </a>
+            <a href="/Home_63130260/DetailsOrder/@ViewBag.id" class="inline-flex items-center px-4 py-2 text-white bg-orange-500 border border-orange-500 rounded rounded-full hover:bg-orange-700 focus:outline-none focus:ring">
+              
+                <span class="text-sm font-medium">
+                    Order tracking
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

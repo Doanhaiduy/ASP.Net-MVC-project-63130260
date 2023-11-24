@@ -44,7 +44,7 @@
         </div>
         <div class="">
             <p class="text-[18px] font-semibold">Time order</p>
-            <span>@Model.order_date.Value.ToString("hh:mm MMM dd, yyyy")</span>
+            <span>@Model.order_date.Value.ToString("HH:mm MMM dd, yyyy")</span>
         </div>
         <div class="">
             <p class="text-[18px] font-semibold">
@@ -146,7 +146,7 @@
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-[18px]">
                                     @if (!mapReview.CheckReviewedProduct(item.id))
                 {
-                                        <a href="@Url.Action("Review","product_63130260", new { id = @item.product_item_id, ordered_product_id = item.id })" class="relative inline-flex items-center justify-start px-4 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-orange-500 group border border-orange-500">
+                                        <a href="@Url.Action("Review","product_63130260", new { id = @item.product_item.product_id, ordered_product_id = item.id})" class="relative inline-flex items-center justify-start px-4 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-orange-500 group border border-orange-500">
                                             <span class="w-48 h-48 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
                                             <span class="relative w-full text-left text-[14px] text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">Review</span>
                                         </a>

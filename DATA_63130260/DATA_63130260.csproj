@@ -389,6 +389,7 @@
     <Compile Include="mapAdmin.cs" />
     <Compile Include="mapCart.cs" />
     <Compile Include="mapCategory.cs" />
+    <Compile Include="mapDateTime.cs" />
     <Compile Include="mapDeletedItems.cs" />
     <Compile Include="mapEncryption.cs" />
     <Compile Include="mapFirebase.cs" />
@@ -396,6 +397,7 @@
     <Compile Include="mapPayment.cs" />
     <Compile Include="mapProduct.cs" />
     <Compile Include="mapPromotion.cs" />
+    <Compile Include="mapSendEmail.cs" />
     <Compile Include="mapStatistics.cs" />
     <Compile Include="mapReview.cs" />
     <Compile Include="mapShipping.cs" />

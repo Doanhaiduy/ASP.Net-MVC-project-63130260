@@ -31,6 +31,7 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="site_admin" EntityType="Project_63130260Model.site_admin" />
     <EntitySet Name="addresses" EntityType="Project_63130260Model.address" />
     <EntitySet Name="order_line" EntityType="Project_63130260Model.order_line" />
     <EntitySet Name="payment_type" EntityType="Project_63130260Model.payment_type" />
@@ -43,7 +44,6 @@
     <EntitySet Name="shop_order" EntityType="Project_63130260Model.shop_order" />
     <EntitySet Name="shopping_cart" EntityType="Project_63130260Model.shopping_cart" />
     <EntitySet Name="shopping_cart_item" EntityType="Project_63130260Model.shopping_cart_item" />
-    <EntitySet Name="site_admin" EntityType="Project_63130260Model.site_admin" />
     <EntitySet Name="site_user" EntityType="Project_63130260Model.site_user" />
     <EntitySet Name="sysdiagrams" EntityType="Project_63130260Model.sysdiagram" />
     <EntitySet Name="user_address" EntityType="Project_63130260Model.user_address" />
@@ -128,6 +128,20 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="site_admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email_address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="gender" Type="Boolean" />
+    <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="address">
     <Key>
       <PropertyRef Name="id" />
@@ -187,8 +201,8 @@
     <Property Name="length" Type="Decimal" Precision="7" Scale="2" />
     <Property Name="width" Type="Decimal" Precision="7" Scale="2" />
     <Property Name="height" Type="Decimal" Precision="7" Scale="2" />
-    <Property Name="materials" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="other_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="materials" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="other_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="product" Relationship="Project_63130260Model.fk_prodattr_product" FromRole="product_attributes" ToRole="product" />
   </EntityType>
   <EntityType Name="product_category">
@@ -280,19 +294,6 @@
     <Property Name="qty" Type="Int32" />
     <NavigationProperty Name="product_item" Relationship="Project_63130260Model.fk_shopcartitem_proditem" FromRole="shopping_cart_item" ToRole="product_item" />
     <NavigationProperty Name="shopping_cart" Relationship="Project_63130260Model.fk_shopcartitem_shopcart" FromRole="shopping_cart_item" ToRole="shopping_cart" />
-  </EntityType>
-  <EntityType Name="site_admin">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="email_address" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="created_date" Type="DateTime" Precision="3" />
-    <Property Name="gender" Type="Boolean" />
-    <Property Name="password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="site_user">
     <Key>

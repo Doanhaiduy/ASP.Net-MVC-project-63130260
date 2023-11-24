@@ -1,6 +1,6 @@
 ﻿@model DATA_63130260.Entity.site_user
 @{
-    ViewBag.Title = "Account";
+    ViewBag.Title = Model.first_name +" " + Model.last_name;
     Layout = "~/Views/Shared/_LayoutSinp.cshtml";
 }
 <!-- /account-->
@@ -325,36 +325,42 @@
                         <h3 class="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-300 leading-none">
                             Account Details
                         </h3>
-                        <form action="/Account_63130260/UpdateInfo" method="post">
-                            <div class="grid grid-cols-12 gap-x-5">
+                        <form action="/Account_63130260/UpdateInfo" method="post" id="form-setting">
+                            <div class="grid grid-cols-12 gap-x-5 gap-y-3">
                                 <div class="col-span-12 lg:col-span-6 mb-5">
-                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                    <input class="border border-solid border-gray-300 w-full py-1 px-5  placeholder-current text-black h-12 focus:outline-none text-base"
                                            id="first_name"
                                            name="first_name"
                                            placeholder="First Name"
                                            value="@Model.first_name"
                                            required
                                            type="text">
+                                    <span class="text-[12px] text-red-500 hidden" id="first_name_error">First name invalidate</span>
+
                                 </div>
 
                                 <div class="col-span-12 lg:col-span-6 mb-5">
-                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 placeholder-current text-black h-12 focus:outline-none text-base"
                                            id="last_name"
                                            name="last_name"
                                            placeholder="Last Name"
                                            value="@Model.last_name"
                                            required
                                            type="text">
+                                    <span class="text-[12px] text-red-500  hidden" id="last_name_error">Last name invalidate</span>
+
                                 </div>
 
                                 <div class="col-span-12 mb-5">
-                                    <input class="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-black h-12 focus:outline-none text-base"
+                                    <input class="border border-solid border-gray-300 w-full py-1 px-5  placeholder-current text-black h-12 focus:outline-none text-base"
                                            id="phone_number"
                                            name="phone_number"
                                            placeholder="Phone Number"
                                            value="@Model.phone_number"
                                            required
                                            type="text">
+                                    <span class="text-[12px] text-red-500 mb-5  hidden" id="phone_error">Phone number invalidate</span>
+
                                 </div>
 
                                 <div class="col-span-12 mb-5">
@@ -458,5 +464,56 @@
             addressInfo.classList.remove("hidden");
             addressForm.classList.add("hidden");
         }
+
+
+        //Validate
+
+        const inputFirstName = document.querySelector('input[name="first_name"]')
+        const inputLastName = document.querySelector('input[name="last_name"]')
+        const inputPhone = document.querySelector('input[name="phone_number"]')
+
+        var nameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]{2,}$/u
+        const regexPhoneNumber = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+
+        inputFirstName.onchange = function () {
+            if (inputFirstName.value.match(nameRegex)) {
+                inputFirstName.classList.remove("border-red-500")
+                document.getElementById("first_name_error").classList.add("hidden")
+            }
+            else {
+                inputFirstName.classList.add("border-red-500")
+                document.getElementById("first_name_error").classList.remove("hidden")
+
+            }
+        }
+
+        inputLastName.onchange = function () {
+            if (inputLastName.value.match(nameRegex)) {
+                inputLastName.classList.remove("border-red-500")
+                document.getElementById("last_name_error").classList.add("hidden")
+            }
+            else {
+                inputLastName.classList.add("border-red-500")
+                document.getElementById("last_name_error").classList.remove("hidden")
+
+            }
+        }
+
+        inputPhone.onchange = function () {
+            if (inputPhone.value.match(regexPhoneNumber)) {
+                inputPhone.classList.remove("border-red-500")
+                document.getElementById("phone_error").classList.add("hidden")
+            }
+            else {
+                inputPhone.classList.add("border-red-500")
+                document.getElementById("phone_error").classList.remove("hidden")
+            }
+        }
+
+        document.getElementById('form-setting').addEventListener("submit", function (event) {
+            if (!inputFirstName.value.match(nameRegex) || !inputFirstName.value.match(nameRegex) || !inputPhone.value.match(regexPhoneNumber)) {
+                event.preventDefault();
+            }
+        });
     </script>
 }

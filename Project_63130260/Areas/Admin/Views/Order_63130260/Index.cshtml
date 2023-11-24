@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<DATA_63130260.Entity.shop_order>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Orders";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 
 
 
 <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i> List of order</p>
 
-<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+<section class="">
     <div class="sm:px-6 w-full">
         <div class="px-4 md:px-10 py-4 md:py-7">
             <div class="flex items-center justify-between">
@@ -23,21 +23,21 @@
         <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
             <div class="sm:flex items-center justify-between">
                 <div class="flex items-center">
-                    <a class="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800" href="/admin/order_63130260/">
-                        <div class="py-2 px-8  rounded-full @(ViewBag.selected == null? "bg-indigo-100 text-indigo-700" : "text-gray-600" )">
+                    <div data-status="all" class=" cursor-pointer rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8 itemnav bg-indigo-100 text-indigo-700">
+                        <div class="py-2 px-8 rounded-full">
                             <p>All</p>
                         </div>
-                    </a>
-                    <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" href="/admin/order_63130260?selected=false&all=0">
-                        <div class="py-2 px-8 hover:text-indigo-700 hover:bg-indigo-100 rounded-full @(ViewBag.selected == false? " bg-indigo-100 text-indigo-700" : "text-gray-600" )">
+                    </div>
+                    <div data-status="False" class="cursor-pointer rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8 itemnav" >
+                        <div class="py-2 px-8 hover:text-indigo-700 hover:bg-indigo-100 rounded-full">
                             <p>In Transit</p>
                         </div>
-                    </a>
-                    <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" href="/admin/order_63130260?selected=true&all=0">
-                        <div class="py-2 px-8 hover:text-indigo-700 hover:bg-indigo-100 rounded-full @(ViewBag.selected == true ? " bg-indigo-100 text-indigo-700" : "text-gray-600" )">
+                    </div>
+                    <div data-status="True" class=" cursor-pointer rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8 itemnav" >
+                        <div class="py-2 px-8 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
                             <p>Delivered</p>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
             <div class="mt-7 overflow-x-auto">
@@ -87,7 +87,7 @@
                         @foreach (var item in Model)
                         {
 
-                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                            <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded order" data-status="@item.order_status">
                                 <td class="">
                                     <div class="flex items-center pl-5">
                                         <p class="text-base font-medium leading-none text-gray-700 mr-2">#@item.id</p>
@@ -144,6 +144,40 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
+@section scripts{
+    <script>
+        // lọc đơn hàng theo trạng thái
+        var nav = document.querySelectorAll(".itemnav");
+        var rows = document.querySelectorAll(".order");
 
+        nav.forEach((item) => {
+            item.onclick = function () {
+                var selectedStatus = item.dataset.status;
+
+                // Xóa trạng thái đã chọn ở các nút khác
+                nav.forEach((otherItem) => {
+                    otherItem.classList.remove("bg-indigo-100", "text-indigo-700");
+                    otherItem.classList.add("text-gray-600");
+                });
+
+                // Thêm trạng thái đã chọn vào nút này
+                item.classList.remove("text-gray-600");
+                item.classList.add("bg-indigo-100", "text-indigo-700");
+
+                // Hiển thị chỉ những hàng có data-status giống với itemnav
+                rows.forEach((row) => {
+                    var rowStatus = row.dataset.status;
+                    if (rowStatus === selectedStatus || selectedStatus === "all") {
+                        row.classList.remove("hidden")
+                    } else {
+                        row.classList.add("hidden")
+
+                    }
+                });
+            }
+        });
+    </script>
+
+}

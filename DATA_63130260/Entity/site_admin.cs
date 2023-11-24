@@ -22,5 +22,6 @@ namespace DATA_63130260.Entity
         public Nullable<System.DateTime> created_date { get; set; }
         public Nullable<bool> gender { get; set; }
         public string password { get; set; }
+        public string avatar { get; set; }
     }
 }

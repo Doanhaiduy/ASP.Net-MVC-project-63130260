@@ -5,23 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="284587b9bdd641cd91470bac9c70afc3" Name="Diagram1" ZoomLevel="109">
-        <EntityTypeShape EntityType="Project_63130260Model.address" Width="1.5" PointX="3.75" PointY="1.75" />
-        <EntityTypeShape EntityType="Project_63130260Model.order_line" Width="1.5" PointX="8.25" PointY="5" />
-        <EntityTypeShape EntityType="Project_63130260Model.payment_type" Width="1.5" PointX="3.75" PointY="16.625" />
-        <EntityTypeShape EntityType="Project_63130260Model.product" Width="1.5" PointX="3.75" PointY="19.125" />
-        <EntityTypeShape EntityType="Project_63130260Model.product_attributes" Width="1.5" PointX="6" PointY="23.25" />
-        <EntityTypeShape EntityType="Project_63130260Model.product_category" Width="1.5" PointX="1.5" PointY="19.625" />
-        <EntityTypeShape EntityType="Project_63130260Model.product_item" Width="1.5" PointX="6" PointY="19" />
-        <EntityTypeShape EntityType="Project_63130260Model.promotion" Width="1.5" PointX="3.75" PointY="23.5" />
-        <EntityTypeShape EntityType="Project_63130260Model.shipping_method" Width="1.5" PointX="3.75" PointY="9.125" />
-        <EntityTypeShape EntityType="Project_63130260Model.shop_order" Width="1.5" PointX="6" PointY="4.25" />
-        <EntityTypeShape EntityType="Project_63130260Model.shopping_cart" Width="1.5" PointX="3" PointY="13.75" />
-        <EntityTypeShape EntityType="Project_63130260Model.shopping_cart_item" Width="1.5" PointX="5.25" PointY="13.625" />
-        <EntityTypeShape EntityType="Project_63130260Model.site_admin" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Project_63130260Model.address" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Project_63130260Model.order_line" Width="1.5" PointX="8.25" PointY="3" />
+        <EntityTypeShape EntityType="Project_63130260Model.payment_type" Width="1.5" PointX="3.75" PointY="12.125" />
+        <EntityTypeShape EntityType="Project_63130260Model.product" Width="1.5" PointX="3.75" PointY="18.125" />
+        <EntityTypeShape EntityType="Project_63130260Model.product_attributes" Width="1.5" PointX="6" PointY="22.25" />
+        <EntityTypeShape EntityType="Project_63130260Model.product_category" Width="1.5" PointX="1.5" PointY="18.625" />
+        <EntityTypeShape EntityType="Project_63130260Model.product_item" Width="1.5" PointX="6" PointY="18" />
+        <EntityTypeShape EntityType="Project_63130260Model.promotion" Width="1.5" PointX="3.75" PointY="22.5" />
+        <EntityTypeShape EntityType="Project_63130260Model.shipping_method" Width="1.5" PointX="3.75" PointY="15.375" />
+        <EntityTypeShape EntityType="Project_63130260Model.shop_order" Width="1.5" PointX="6" PointY="2.25" />
+        <EntityTypeShape EntityType="Project_63130260Model.shopping_cart" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="Project_63130260Model.shopping_cart_item" Width="1.5" PointX="5.25" PointY="8.375" />
         <EntityTypeShape EntityType="Project_63130260Model.site_user" Width="1.5" PointX="0.75" PointY="4.875" />
-        <EntityTypeShape EntityType="Project_63130260Model.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Project_63130260Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Project_63130260Model.user_address" Width="1.5" PointX="3" PointY="5.375" />
-        <EntityTypeShape EntityType="Project_63130260Model.user_review" Width="1.5" PointX="10.5" PointY="5.25" />
+        <EntityTypeShape EntityType="Project_63130260Model.user_review" Width="1.5" PointX="10.5" PointY="4.375" />
         <AssociationConnector Association="Project_63130260Model.fk_shoporder_shipaddress" />
         <AssociationConnector Association="Project_63130260Model.fk_useradd_address" />
         <AssociationConnector Association="Project_63130260Model.fk_orderline_order" />

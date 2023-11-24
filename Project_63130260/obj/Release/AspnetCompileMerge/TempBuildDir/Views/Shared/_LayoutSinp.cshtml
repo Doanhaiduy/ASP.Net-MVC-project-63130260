@@ -5,9 +5,30 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the world of technology at Sinp - Your go-to destination for top-notch electronic products with high reliability. We offer a diverse range of products, from smartphones and laptops to smart home devices. Shop now to experience convenience and quality with Sinp.">
+    <link rel="canonical" href="http://project-63130260.site/">
     <link href="" rel="stylesheet" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Sinp</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" sizes="57x57" href="Logo/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/Logo/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/Logo/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/Logo/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/Logo/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/Logo/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/Logo/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/Logo/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Logo/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/Logo/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/Logo/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Logo/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Electronic products, Consumer electronics,Gadget store, Tech devices, shopping, ecommerce, Sinp">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -54,15 +75,15 @@
 <body class="">
     <!-- Header -->
     <header class="flex items-center justify-between p-4 md:p-10 gap-4 md:gap-8 px-4">
-        <a href="/" class="min-w-[125px]"> <img src="~/Content/assets/images/logo.webp" alt=""></a>
+        <a href="/" class="min-w-[125px]"> <img src="/logo/Logo.webp" alt=""></a>
 
-        <ul class="hidden md:flex items-center justify-between gap-4 md:gap-12 xl:text-2xl text-xl">
-            <li class="hover:text-orange-500 cursor-pointer group relative">
+        <ul class="hidden md:flex items-center justify-between gap-4 md:gap-12 xl:text-2xl text-xl font-medium">
+            <li class="hover:text-orange-500 transition-colors cursor-pointer group relative @(ViewBag.Title == "Home" ? "text-orange-500" : "" )">
                 <a href="/">Home</a>
             </li>
-            <li class="hover:text-orange-500 cursor-pointer"><a href="/Product_63130260/">Product</a></li>
-            <li class="hover:text-orange-500 cursor-pointer"><a href="/Home_63130260/Cart">Cart</a></li>
-            <li class="hover:text-orange-500 cursor-pointer"><a href="/Home_63130260/Compare">Compare</a></li>
+            <li class="hover:text-orange-500 transition-colors cursor-pointer @(ViewBag.Title == "Products" ? "text-orange-500" : "" )"><a href="/Product_63130260/">Product</a></li>
+            <li class="hover:text-orange-500 transition-colors cursor-pointer @(ViewBag.Title == "Cart" ? "text-orange-500" : "" )"><a href="/Home_63130260/Cart">Cart</a></li>
+            <li class="hover:text-orange-500 transition-colors cursor-pointer @(ViewBag.Title == "Compare" ? "text-orange-500" : "" )"><a href="/Home_63130260/Compare">Compare</a></li>
         </ul>
         <div class="hidden md:flex items-center justify-between gap-[40px] xl:text-2xl text-xl">
             @*<div class="">
@@ -173,16 +194,31 @@
 
 
                 </ul>
-                <div class="pb-4">
-                    <div class="flex flex-wrap justify-between items-center py-4 my-6 border-t border-b border-solid border-gray-300 font-normal text-base text-dark capitalize">
-                        Total:<span>@String.Format("{0:N0}đ", total)</span>
-                    </div>
+                @if (user == null)
+                {
                     <div class="text-center">
+                        <p class="my-3 text-centre font-medium text-orange-500">You need to log in to view cart and checkout</p>
                         <a class="py-5 px-10 block bg-white border border-solid border-gray-300 uppercase font-semibold text-base hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all leading-none"
-                           href="/Home_63130260/Checkout">Checkout</a><a class="py-5 px-10 block bg-white border border-solid border-gray-300 uppercase font-semibold text-base hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all leading-none mt-3"
-                                                                         href="/Home_63130260/Cart">View Cart</a>
+                           href="/Auth_63130260/Login">Login</a>
                     </div>
-                </div>
+
+
+                }
+                else
+                {
+                    <div class="pb-4">
+                        <div class="flex flex-wrap justify-between items-center py-4 my-6 border-t border-b border-solid border-gray-300 font-normal text-base text-dark capitalize">
+                            Total:<span>@String.Format("{0:N0}đ", total)</span>
+                        </div>
+                        <div class="text-center">
+                            <a class="py-5 px-10 block bg-white border border-solid border-gray-300 uppercase font-semibold text-base hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all leading-none"
+                               href="/Payment_63130260/Checkout">Checkout</a><a class="py-5 px-10 block bg-white border border-solid border-gray-300 uppercase font-semibold text-base hover:bg-orange-500 hover:border-orange-500 hover:text-white transition-all leading-none mt-3"
+                                                                             href="/Home_63130260/Cart">View Cart</a>
+                        </div>
+                    </div>
+
+                }
+
 
             </div>
         </section>
@@ -232,7 +268,7 @@
                      :class="{'translate-x-0 ease-in-opacity-100' :open===true, '-translate-x-full ease-out opacity-0' : open===false}">
                     <div class="flex justify-between px-5 py-2">
                         <a href="/" class="min-w-[125px]">
-                            <img src="~/Content/assets/images/logo.webp" alt="">
+                            <img src="/logo/Logo.webp" alt="">
                         </a>
                         <button class="rounded-md hover:text-orange-300 lg:hidden "
                                 @@click="open=false">
@@ -311,7 +347,7 @@
                 <div class="max-w-[600px] mx-auto">
                     <div class="text-center">
                         <a href="#" class="inline-block mb-11">
-                            <img src="~/Content/assets/images/logo.webp" alt="brand logo"
+                            <img src="/logo/logo.webp" alt="brand logo"
                                  loading="lazy" width="125" height="45">
                         </a>
 
@@ -377,7 +413,7 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="flex order-last md:order-first flex-wrap items-center justify-center md:justify-start">
                         <p class="text-white flex flex-wrap items-center text-sm lg:text-base">
-                            © 2022 Sinp. Made with <i class="fa-regular fa-heart mx-2"></i> by<a href="#"
+                            © 2023 Sinp. Made with <i class="fa-regular fa-heart mx-2"></i> by<a href="#"
                                                                                                  class="ml-1 transition hover:text-orange-500">DoanHaiDuy</a>.
                         </p>
                     </div>
@@ -465,6 +501,13 @@
 
     </div>
 
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @RenderSection("scripts", required: false)
 
@@ -508,6 +551,31 @@
         }
 
     </script>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "178817015313578");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v18.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 
 </html>
+

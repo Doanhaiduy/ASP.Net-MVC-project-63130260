@@ -1,8 +1,9 @@
 ﻿@model List<DATA_63130260.Entity.product_item>
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Products";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
+
 <style>
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
@@ -14,8 +15,7 @@
     }
 </style>
 <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i> List Products</p>
-
-<div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+<div class="">
     <div class="mt-12 mx-4">
 
         <div class="bg-white overflow-x-auto">
@@ -23,7 +23,7 @@
                 <thead>
                     <tr class="text-md">
                         <th class="px-2 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
-                            ID
+                            No
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left  font-semibold text-gray-600 uppercase tracking-wider">
                             Product name
@@ -47,25 +47,27 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @{
+                        var index = (ViewBag.page - 1) * 10 + 1;
+                    }
                     @foreach (var item in Model)
                     {
                         <tr>
                             <td class="px-2 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap text-lg font-bold">
-                                    #@item.product_id
+                                    #@index
                                 </p>
                             </td>
                             <td class="w-1/5  px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-14 h-14">
                                         @*@{
-                                                var imageUrl = item.Anh;
-                                                if (!System.IO.File.Exists(Server.MapPath(imageUrl)))
-                                                {
-                                                    imageUrl = Url.Content("/assets/imgs/index/product/pro_1.webp");
-                                                }
-                                            }*@
+                                var imageUrl = item.Anh;
+                                if (!System.IO.File.Exists(Server.MapPath(imageUrl)))
+                                {
+                                    imageUrl = Url.Content("/assets/imgs/index/product/pro_1.webp");
+                                }
+                            }*@
 
                                         <img class="w-full h-full object-cover"
                                              src="@item.product.product_image"
@@ -110,11 +112,11 @@
                             <td class="px-4 py-5 border-b border-gray-200 bg-white text-md  ">
                                 <div class="flex flex-col gap-2">
                                     @*<div class="flex justify-start space-x-2">
-                                        <a href="@Url.Action("DetailsProduct","product_63130260", new { id = item.product_id })"
-                                           class="flex items-center justify-center gap-1 min-w-[107px] px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-600">
-                                            <i class="fa-solid fa-pen-to-square"></i> Details
-                                        </a>
-                                    </div>*@
+                            <a href="@Url.Action("DetailsProduct","product_63130260", new { id = item.product_id })"
+                               class="flex items-center justify-center gap-1 min-w-[107px] px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-600">
+                                <i class="fa-solid fa-pen-to-square"></i> Details
+                            </a>
+                        </div>*@
                                     <div class="flex justify-start space-x-2">
                                         <a href="@Url.Action("UpdateProduct","product_63130260", new { id = item.product_id })"
                                            class="flex items-center justify-center gap-1 min-w-[107px] px-6 py-2.5 bg-blue-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-600">
@@ -133,9 +135,54 @@
 
 
                         </tr>
+                        index++;
                     }
                 </tbody>
             </table>
+            <div class="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
+                @{ var page = 1;}
+                <div class="flex justify-center">
+                    <ul class="flex items-center space-x-1">
+                        <li>
+                            <a href="/admin/product_63130260?page=@(ViewBag.page-1)#tb"
+                               class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-100 @(ViewBag.page ==1? "pointer-events-none opacity-75 ": "" )">
+                                <span class="sr-only">Previous</span>
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        @for (var i = 1; i <= ViewBag.Count; i++)
+                        {
+                            <li>
+                                <a href="/admin/product_63130260?page=@page#tb"
+                                   class="px-4 py-2  rounded-md hover:bg-orange-400 hover:text-white @(ViewBag.page == page? "text-gray-100 bg-orange-500" : " border border-gray-300 text-gray-700 bg-white")">
+                                    @page
+                                </a>
+                            </li>
+                            page++;
+                        }
+
+
+                        <li>
+                            <a href="/admin/product_63130260?page=@(ViewBag.page+1)#tb"
+                               class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md  hover:bg-gray-100 @(ViewBag.page ==page-1? "pointer-events-none opacity-75 ": "" )">
+                                <span class="sr-only">Next</span>
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <p class="pt-3 text-gray-600">
         </p>

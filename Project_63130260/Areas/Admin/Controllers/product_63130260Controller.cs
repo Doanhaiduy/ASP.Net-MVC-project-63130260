@@ -3,11 +3,13 @@ using DATA_63130260.Entity;
 using QLBH_AnkerShop.App_Start;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace Project_63130260.Areas.Admin.Controllers
 {
@@ -16,12 +18,16 @@ namespace Project_63130260.Areas.Admin.Controllers
 		// GET: Admin/product_63130260
 
 		[RoleAdmin]
-		public ActionResult Index()
+		public ActionResult Index(int page =1)
         {
-            mapProduct map = new mapProduct();
+			var size = 10;
+			ViewBag.page = page;
+			mapProduct map = new mapProduct();
             var list = map.getListProduct();
-            return View(list);
-        }
+			ViewBag.Count = Math.Ceiling((double)list.Count / size);
+			list = list.Skip((page - 1) * size).Take(size).ToList();
+			return View(list);
+		}
 
 		[RoleAdmin]
 		public ActionResult AddNewProduct()
@@ -70,7 +76,7 @@ namespace Project_63130260.Areas.Admin.Controllers
 
 		[RoleAdmin]
 		[HttpPost]
-		public async Task<ActionResult> UpdateProduct(int id,product product, int price, int qty_in_stock, HttpPostedFileBase product_image, HttpPostedFileBase product_image2, product_attributes proAttr)
+		public async Task<ActionResult> UpdateProduct(int id,product product, float price,  int qty_in_stock, HttpPostedFileBase product_image, HttpPostedFileBase product_image2, product_attributes proAttr)
 		{
 
 			FileStream stream;
@@ -110,7 +116,7 @@ namespace Project_63130260.Areas.Admin.Controllers
 			}
 			mapProduct map = new mapProduct();
             product_item productItem = new product_item();
-            productItem.price = price;
+            productItem.price = (int)price;
             productItem.qty_in_stock = qty_in_stock;
 			productItem.product_image = imageItem;
 			if (map.UpdateProduct(id, productItem, product, proAttr))

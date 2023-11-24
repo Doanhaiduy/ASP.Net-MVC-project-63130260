@@ -1,7 +1,7 @@
 ﻿@model DATA_63130260.Entity.product_item
 @{
-    ViewBag.Title = "AddNewProduct";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Upadte Product " + Model.product.name;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 <style>
     input[type=number]::-webkit-inner-spin-button,
@@ -13,7 +13,7 @@
         -moz-appearance: textfield;
     }
 </style>
-<section class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+<section class="">
     <div class="py-16 bg-stone-100 font-poppins ">
         <div class="max-w-4xl px-4 py-4 mx-auto bg-white border shadow-sm  lg:py-4 md:px-6">
             <div class="mb-10 ">
@@ -82,7 +82,7 @@
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <span class="text-gray-500 sm:text-sm">đ</span>
                                 </div>
-                                <input required min="10000" max="9999999999" value="@Model.price" type="number" name="price" id="price" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="0.00">
+                                <input required min="10000" max="9999999999" value="@Model.price" type="number" name="price" id="price" class="block w-full rounded-md outline-none border-0 py-1.5 pl-7 pr-20 text-gray-900  bg-gray-100 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 flex items-center">
                                     <label for="currency" class="sr-only">Currency</label>
                                     <p class="h-full rounded-md border-0 bg-transparent py-2 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">VND</p>

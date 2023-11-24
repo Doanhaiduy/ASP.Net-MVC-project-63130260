@@ -50,8 +50,8 @@
     <Property Name="length" Type="decimal" Precision="7" Scale="2" />
     <Property Name="width" Type="decimal" Precision="7" Scale="2" />
     <Property Name="height" Type="decimal" Precision="7" Scale="2" />
-    <Property Name="materials" Type="varchar" MaxLength="100" />
-    <Property Name="other_info" Type="varchar" MaxLength="1000" />
+    <Property Name="materials" Type="nvarchar" MaxLength="100" />
+    <Property Name="other_info" Type="nvarchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="product_category">
     <Key>
@@ -139,6 +139,7 @@
     <Property Name="created_date" Type="datetime" />
     <Property Name="gender" Type="bit" />
     <Property Name="password" Type="varchar" MaxLength="500" />
+    <Property Name="avatar" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="site_user">
     <Key>

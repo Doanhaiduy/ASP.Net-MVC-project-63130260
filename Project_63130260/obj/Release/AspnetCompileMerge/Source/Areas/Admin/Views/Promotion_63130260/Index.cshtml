@@ -1,14 +1,14 @@
 ﻿@model List<DATA_63130260.Entity.promotion>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Promotions";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 
 <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 m-2  mt-4"><i class="fas fa-list mr-3"></i> List Promotion</p>
 
 
-<section class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+<section class="">
     <div class="items-center lg:flex bg-gray-50 ">
         <div class="justify-center flex-1 px-4 py-4 mx-auto lg:py-8 md:px-6">
             <div class="pt-4 bg-white rounded shadow ">
@@ -16,7 +16,7 @@
                 <div class="p-4 overflow-x-auto">
                     <table class="w-full table-auto">
                         <thead>
-                            <tr class="text-md text-left text-gray-500 ">
+                            <tr class="text-md text-left text-gray-500 uppercase">
                                 <th class="px-6 pb-3 font-medium">
                                     ID
                                 </th>
@@ -52,7 +52,7 @@
                                     <td>
                                         @if (item.active == true)
                                         {
-                                            if (item.start_date > DateTime.Now)
+                                            if (item.start_date > DATA_63130260.mapDateTime.GetVietnamDateTime())
                                             {
                                                 <span class="inline-block px-2 py-1 text-center text-blue-600 bg-blue-100 rounded-full  ">Upcoming</span>
                                             }
@@ -64,7 +64,7 @@
                                         }
                                         else
                                         {
-                                            <span class="inline-block px-2 py-1 text-center text-red-600 bg-red-100 rounded-full">expired</span>
+                                            <span class="inline-block px-2 py-1 text-center text-red-600 bg-red-100 rounded-full">Expired</span>
                                         }
                                     </td>
                                     <td class="px-6 py-5 font-semibold ">
@@ -80,7 +80,7 @@
                                                class="text-center px-4 py-2 font-semibold text-blue-500 border border-blue-500 rounded-md   hover:text-gray-100 hover:bg-blue-500 ">
                                                 Edit
                                             </a>
-                                            @if (item.start_date < DateTime.Now)
+                                            @if (item.start_date < DATA_63130260.mapDateTime.GetVietnamDateTime())
                                             {
                                            <a href="/admin/promotion_63130260/Deactivatepromotion/@item.id"
                                               class="px-4 py-2 font-semibold text-red-500 border border-red-500 rounded-md   hover:text-gray-100 hover:bg-red-500">

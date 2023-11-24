@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<DATA_63130260.Entity.site_user>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin2.cshtml";
 }
 
 <link rel="stylesheet"
@@ -367,12 +367,27 @@
             <p class="text-xl pb-3 flex items-center">
                 <i class="fas fa-list mr-3"></i> list of customers
             </p>
+            <div class='flex justify-between my-2'>
+                <div class="w-3/2 flex-1"></div>
+                <div class="relative flex items-center w-1/3 h-12 rounded-lg focus-within:shadow-2xl bg-white overflow-hidden">
+                    <div class="grid place-items-center h-full w-12 text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+
+                    <input class="peer h-full w-full outline-none text-sm text-gray-600 pr-2"
+                           type="text"
+                           id="search"
+                           placeholder="Search customers name.." />
+                </div>
+            </div>
             <div class="bg-white overflow-auto">
-                <table class="min-w-full bg-white">
-                    <thead class="bg-gray-800 text-white">
+                <table class="min-w-full bg-white" id="tb">
+                    <thead class="bg-gray-500 text-white">
                         <tr>
                             <th class=" text-left py-3 px-4 uppercase font-semibold text-sm">
-                                ID
+                                No
                             </th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
                                 First name
@@ -399,17 +414,17 @@
                     </thead>
                     <tbody class="text-gray-700">
                         @{
-                            var index = 1;
+                            var index = (ViewBag.page-1)* 10 + 1;
                         }
                         @foreach (var item in Model)
                         {
                             string addressRender = "";
-                            <tr class="@(index % 2 == 0 ? " bg-gray-200" : null)">
-                                <td class="text-left py-3 px-4">#@item.id</td>
-                                <td class=" text-left py-3 px-4">
+                            <tr class="@(index % 2 == 0 ? " bg-gray-200" : null) customer">
+                                <td class="text-left py-3 px-4">#@index</td>
+                                <td class=" text-left py-3 px-4 fname">
                                     @item.first_name
                                 </td>
-                                <td class=" text-left py-3 px-4">
+                                <td class=" text-left py-3 px-4 lname">
                                     @item.last_name
                                 </td>
                                 <td class="text-left py-3 px-4">
@@ -456,13 +471,58 @@
                                 </td>
                             </tr>
                             index++;
+
                         }
                     </tbody>
                 </table>
+                <div class="justify-center flex-1 px-4 py-6 mx-auto max-w-7xl lg:py-4 md:px-6">
+                    @{ var page = 1;}
+                    <div class="flex justify-center">
+                        <ul class="flex items-center space-x-1">
+                            <li>
+                                <a href="/admin?page=@(ViewBag.page-1)#tb"
+                                   class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-100 @(ViewBag.page ==1? "pointer-events-none opacity-75 ": "" )">
+                                    <span class="sr-only">Previous</span>
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                         fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                            
+                            @for (var i = 1; i <= ViewBag.Count; i ++)
+                            {
+                                <li>
+                                    <a href="/admin?page=@page#tb"
+                                       class="px-4 py-2  rounded-md hover:bg-orange-400 hover:text-white @(ViewBag.page == page? "text-gray-100 bg-orange-500" : " border border-gray-300 text-gray-700 bg-white")">
+                                        @page
+                                    </a>
+                                </li>
+                                page++;
+                            }
+                            
+          
+                            <li>
+                                <a href="/admin?page=@(ViewBag.page+1)#tb"
+                                   class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md  hover:bg-gray-100 @(ViewBag.page ==page-1? "pointer-events-none opacity-75 ": "" )">
+                                    <span class="sr-only">Next</span>
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                         fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
-    </body>
+   
 
     <footer class="w-full bg-white text-right p-4">
     </footer>
@@ -491,9 +551,32 @@
             });
         });
 
-
+        // submit form khi chọn tháng 
         document.getElementById('monthSelect').addEventListener('change', function () {
             document.getElementById('monthlyStatisticsForm').submit();
         });
+
+        // Tìm kiếm
+        var searchInput = document.getElementById("search");
+        var customerList = document.querySelectorAll(".customer")
+
+        // Bắt sự kiện nhấn phím nhập vào input
+        searchInput.onkeyup = function () {
+            customerList.forEach((cus) => {
+                // Lấy ra firstname và lastname của người dùng
+                var fname = cus.querySelector(".fname").innerText.toLowerCase();
+                var lname = cus.querySelector(".lname").innerText.toLowerCase();
+                var fullname = fname + " " + lname;
+                //Kiểm tra nếu giá trị của ô input tìm kiếm vừa nhập nằm trong fullname thì hiển thị ra sản phẩm đó bằng cách xóa class hidden
+                if (fullname.toLowerCase().includes(searchInput.value.toLowerCase())) {
+                    cus.classList.remove("hidden");
+                }
+                //người lại sẽ ẩn các sản phẩm không thỏa mãn bằng cách thêm class hidden
+
+                else {
+                    cus.classList.add("hidden");
+                }
+            })
+        }
     </script>
 }

@@ -32,13 +32,14 @@ namespace Project_63130260.Areas.Admin.Controllers
 		public ActionResult AddNewPromotion(promotion promotion)
 		{
 			mapPromotion mapPromotion = new mapPromotion();
-			if (mapPromotion.AddNewPromotion(promotion))
+			string result = mapPromotion.AddNewPromotion(promotion);
+			if (result == null)
 			{
 				ViewBag.promotion = "";
 				ViewBag.error = "";
 				return RedirectToAction("index") ;
 			}
-			ViewBag.error = "An error occurred, please check the fields are valid!";
+			ViewBag.error = result;
 			ViewBag.promotion = promotion;
 			return View();
 		}
@@ -57,12 +58,13 @@ namespace Project_63130260.Areas.Admin.Controllers
 		{
 			mapPromotion map = new mapPromotion();
 			var promotion = map.GetPromotionDetailsById(id);
-			if (map.UpdatePromotion(id, newpromotion))
+			string result = map.UpdatePromotion(id, newpromotion);
+			if (result == null)
 			{
 				ViewBag.error = "";
 				return RedirectToAction("index");
 			}
-			ViewBag.error = "An error occurred, please check the fields are valid!";
+			ViewBag.error = result;
 			return View(promotion);
 			
 		}
