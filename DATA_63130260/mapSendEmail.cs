@@ -19,7 +19,7 @@ namespace DATA_63130260
 				var mapOrder = new mapOrder();
 				var list = mapOrder.GetOrderItems(order.id);
 
-				var senderEmail = new MailAddress("duy.dh.63cntt@ntu.edu.vn", "Đoàn Hải Duy");
+				var senderEmail = new MailAddress("duy.dh.63cntt@ntu.edu.vn", "Đoàn Hải Duy - Sinp Shop");
 				var receiverEmail = new MailAddress(receiver, "Receiver");
 				var password = "haiduy10";
 				var sub = "Order Confirmation";

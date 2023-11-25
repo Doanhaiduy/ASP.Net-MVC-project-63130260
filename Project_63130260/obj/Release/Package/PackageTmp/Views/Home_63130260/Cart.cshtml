@@ -52,7 +52,9 @@
                         </th>
                     </tr>
                 </thead>
+
                 <tbody>
+
                     @foreach (var item in Model)
                     {
                         var price = DATA_63130260.mapPromotion.CheckAndCalculatePrice(item.product_item);
@@ -107,12 +109,20 @@
                             </td>
                         </tr>
                     }
-                    
+
+
 
 
 
                 </tbody>
             </table>
+            @if (Model.Count <= 0)
+            {
+                <p class="text-[20px] text-center mt-4">
+                    You have no items in your shopping cart !
+                <a class="text-orange-500 text-center" href="/Product_63130260">Buy Now</a>
+                </p>
+            }
         </div>
     </div>
 </section>
@@ -153,11 +163,11 @@
                 </div>
             </div>
             <div class="mt-8 flex gap-2 md:flex-row flex-col" >
-                <a href="#"
+                @*<a href="#"
                    class="inline-block text-center bg-black leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">
                     Update
                     Cart
-                </a>
+                </a>*@
                 <a href="/Payment_63130260/Checkout"
                    class="inline-block bg-black text-center leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange-500 uppercase font-semibold hover:text-white">checkout</a>
             </div>

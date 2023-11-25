@@ -402,42 +402,45 @@
                                     <span class="font-medium uppercase text-sm  inline-block py-1 leading-none">-@promotion.discount_rate%</span>
                                 </div>
                             }
-                            <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
-                                <ul class="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
-                                    <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                        <a href="#modal-cart"
-                                           class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
-                                           data-tippy-content="Quick View"
-                                           aria-label="Quick View">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </a>
-                                    </li>
-                                    <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                        <a href="#"
-                                           class="text-black flex items-center justify-center text-md hover:text-orange"
-                                           data-tippy-content="Add to wishlist"
-                                           aria-label="Add to wishlist">
-                                            <i class="fa-regular fa-heart"></i>
-                                        </a>
-                                    </li>
-                                    <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                        <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
-                                           class="text-black flex items-center justify-center text-md hover:text-orange"
-                                           data-tippy-content="Compare"
-                                           aria-label="compare">
-                                            <i class="fa-solid fa-arrows-rotate"></i>
-                                        </a>
-                                    </li>
-                                    <li class="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
-                                        <a href="#modal-addto-cart"
-                                           class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
-                                           data-tippy-content="Add to cart"
-                                           aria-label="Add to cart">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
+                            <ul class="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
+                                <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                    <a href="/Product_63130260"
+                                       class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                       data-tippy-content="Quick View"
+                                       aria-label="Quick View">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </a>
+                                </li>
+                                <li class="py-4 pl-7 md:py-5 md:pl-8" title="Add To Cart">
+                                    <form action="/Home_63130260/AddProductToCart" method="post">
+                                        <input type="hidden" name="idProduct" value="@item.product_id" />
+                                        <button class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                                data-tippy-content="Add to cart"
+                                                aria-label="Add to cart">
+                                            <i class="fa-solid fa-cart-plus hover:text-orange-500"></i>
+                                        </button>
+                                    </form>
+
+                                </li>
+                                <li class="py-4 pl-7 md:py-5 md:pl-8" title="Add To Compare">
+                                    <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
+                                       class="text-black flex items-center justify-center text-md hover:text-orange-500"
+                                       data-tippy-content="Compare"
+                                       aria-label="compare">
+                                        <i class="fa-solid fa-arrows-rotate"></i>
+                                    </a>
+                                </li>
+                                <li class="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
+                                    <a href="/home_63130260/whish"
+                                       class="text-black flex items-center justify-center text-md hover:text-orange-500"
+                                       data-tippy-content="Add to wishlist"
+                                       aria-label="Add to wishlist">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                         </div>
 
                         <div class="py-5 px-4">

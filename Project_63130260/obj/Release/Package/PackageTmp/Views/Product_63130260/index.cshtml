@@ -168,27 +168,25 @@
                         <input type="hidden" name="search">
                         <div class="flex flex-wrap items-center gap-1">
                             <div class="shop-select flex mr-12">
-                                <label for="sortBy">Sort by :</label>
-                                <select id="sortBy" name="sortBy"
-                                        class="px-2 bg-transparent">
+                                <label for="sortBy1">Sort by :</label>
+                                <select id="sortBy1" name="sortBy" class="px-2 bg-transparent">
                                     <option value="">Featured</option>
-                                    <option value="best-selling" null="">
+                                    <option value="best-selling" @(ViewBag.sortBy == "best-selling" ? "selected" : "null" )>
                                         Best Selling
                                     </option>
-                                    <option value="name-ascending" null="">
+                                    <option value="name-ascending" @(ViewBag.sortBy == "name-ascending" ? "selected" : "null" )>
                                         Alphabetically,
                                         A-Z
                                     </option>
-                                    <option value="name-descending" null="">
+                                    <option value="name-descending" @(ViewBag.sortBy == "name-descending" ? "selected" : "null" )>
                                         Alphabetically,
                                         Z-A
                                     </option>
-                                    <option value="price-ascending" null="">
+                                    <option value="price-ascending" @(ViewBag.sortBy == "price-ascending" ? "selected" : "null" )>
                                         Price, low to
                                         high
                                     </option>
-                                    <option value="price-descending"
-                                            null="">
+                                    <option value="price-descending" @(ViewBag.sortBy == "price-descending" ? "selected" : "null" )>
                                         Price, high to
                                         low
                                     </option>
@@ -231,7 +229,7 @@
 
 
                         <button class="px-2 py-1 border hover:border-orange-500">
-                            Apply
+                            Apply filter
                         </button>
                         <div>
                             <ul class="shop-tab-nav flex flex-wrap">
@@ -276,46 +274,45 @@
                                             <span class="font-medium uppercase text-sm  inline-block py-1 leading-none">-@promotion.discount_rate%</span>
                                         </div>
                                     }
-                                    <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
-                                        <ul class="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
-                                            <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                                <a href="#modal-cart"
-                                                   class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
-                                                   data-tippy-content="Quick View"
-                                                   aria-label="Quick View">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                </a>
-                                            </li>
-                                            <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                                <a href="#"
-                                                   class="text-black flex items-center justify-center text-md hover:text-orange-500"
-                                                   data-tippy-content="Add to wishlist"
-                                                   aria-label="Add to wishlist">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-                                            </li>
-                                            <li class="py-4 pl-7 md:py-5 md:pl-8">
-                                                <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
-                                                   class="text-black flex items-center justify-center text-md hover:text-orange-500"
-                                                   data-tippy-content="Compare"
-                                                   aria-label="compare">
-                                                    <i class="fa-solid fa-arrows-rotate"></i>
-                                                </a>
-                                            </li>
-                                            <li class="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
-                                                <form action="/Home_63130260/AddProductToCart" method="post" class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
-                                                      data-tippy-content="Add to cart"
-                                                      aria-label="Add to cart">
-                                                    <input type="hidden" name="idProduct" value="@item.product_id" />
-                                                    <input type="hidden" name="qty" value="1" />
-                                                    <button>
-                                                        <i class="fa-solid fa-cart-plus"></i>
-                                                    </button>
-                                                </form>
+                                <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
+                                    <ul class="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
+                                        <li class="py-4 pl-7 md:py-5 md:pl-8">
+                                            <a href="/Product_63130260"
+                                               class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                               data-tippy-content="Quick View"
+                                               aria-label="Quick View">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </a>
+                                        </li>
+                                        <li class="py-4 pl-7 md:py-5 md:pl-8" title="Add To Cart">
+                                            <form action="/Home_63130260/AddProductToCart" method="post">
+                                                <input type="hidden" name="idProduct" value="@item.product_id" />
+                                                <button class="text-black flex items-center justify-center text-md hover:text-orange-500 modal-toggle"
+                                                        data-tippy-content="Add to cart"
+                                                        aria-label="Add to cart">
+                                                    <i class="fa-solid fa-cart-plus hover:text-orange-500"></i>
+                                                </button>
+                                            </form>
 
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        </li>
+                                        <li class="py-4 pl-7 md:py-5 md:pl-8" title="Add To Compare">
+                                            <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
+                                               class="text-black flex items-center justify-center text-md hover:text-orange-500"
+                                               data-tippy-content="Compare"
+                                               aria-label="compare">
+                                                <i class="fa-solid fa-arrows-rotate"></i>
+                                            </a>
+                                        </li>
+                                        <li class="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
+                                            <a href="/home_63130260/whish"
+                                               class="text-black flex items-center justify-center text-md hover:text-orange-500"
+                                               data-tippy-content="Add to wishlist"
+                                               aria-label="Add to wishlist">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                                 </div>
 
                                 <div class="py-5 px-4">
@@ -373,7 +370,7 @@
                             </li>
 
 
-                            @for (var i = 0; i < ViewBag.Count; i += 6)
+                            @for (var i = 1; i <= ViewBag.Count; i++)
                             {
                                 <li class="mx-2">
                                     <a class="flex flex-wrap items-center justify-center   w-11 h-11 shadow leading-none transition-all hover:bg-orange-500 hover:text-white active @(ViewBag.page == page? "bg-orange-500 text-white": "bg-white text-orange-500" )"
@@ -472,7 +469,7 @@
                     <option value="4">4</option>
                 </select>
             </div>*@
-                    <button class="px-4 py-1 border hover:border-orange-500">Apply</button>
+                <button class="px-4 py-1 border hover:border-orange-500">Apply filter</button>
                     <div>
                         <ul class="shop-tab-nav flex flex-wrap">
                             <li class="active" onclick="toGrid()">
@@ -505,7 +502,7 @@
                                 <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
                                     <ul class="flex items-center justify-center bg-white shadow opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all ease-linear transform translate-y-4 group-hover:-translate-y-0">
                                         <li>
-                                            <a href="#modal-cart"
+                                            <a href="/Product_63130260/Details/@item.product.id"
                                                class="text-dark flex items-center justify-center text-md hover:text-orange-500 modal-toggle px-4 py-4"
                                                aria-label="quick view"
                                                data-tippy-content="Quick View">
@@ -531,7 +528,7 @@
 
                                 <ul class="flex items-center">
                                     <li class="mr-2">
-                                        <a href="#"
+                                        <a href="/home_63130260/whish"
                                            class="text-dark flex items-center justify-center text-md hover:text-white border border-solid border-dark hover:bg-orange-500 transition-all px-4 md:px-5 py-3 leading-none hover:border-orange"
                                            aria-label="Add to wishlist"
                                            data-tippy-content="Add to wishlist">
@@ -553,7 +550,7 @@
 
                                         </form>
                                     </li>
-                                    <li class="mr-2">
+                                    <li class="mr-2" title="Add To Compare">
                                         <a href="@Url.Action("AddToCompare","Home_63130260", new { id = item.product_id })"
                                            class="text-dark flex items-center justify-center text-md hover:text-white border border-solid border-dark hover:bg-orange-500 transition-all px-4 md:px-5 py-3 leading-none hover:border-orange"
                                            aria-label="Compare"
@@ -581,7 +578,7 @@
                             </a>
                         </li>
 
-                        @for (var i = 0; i < ViewBag.Count; i += 6)
+                        @for (var i = 1; i <= ViewBag.Count; i++)
                         {
                             <li class="mx-2">
                                 <a class="flex flex-wrap items-center justify-center  w-11 h-11shadowleading-none transition-all hover:bg-orange-500 hover:text-white active @(ViewBag.page ==page2? "bg-orange-500 text-white": "bg-white text-orange-500" )" 

@@ -19,7 +19,7 @@ namespace Project_63130260.Controllers
 		site_user user = SessionConfig.GetUser(); // Lấy ra user của session hiện tại
 		// GET: Product_63130260
 
-		public ActionResult Index(string search, string sortBy, string priceFrom, string priceTo , int page = 1)
+		public ActionResult Index(string search, string priceFrom, string priceTo , int page = 1, string sortBy = "best-selling")
 		{
 			ViewBag.search = search;
             ViewBag.sortBy = sortBy;
@@ -45,8 +45,7 @@ namespace Project_63130260.Controllers
 			{
 				listProdcut = listProdcut.Where(m => m.price <= Convert.ToInt32(priceTo)).ToList();
 			}
-
-			ViewBag.Count = listProdcut.Count;
+			ViewBag.Count = Math.Ceiling((double)listProdcut.Count / size);
 			listProdcut = listProdcut.Skip((page - 1) * size).Take(size).ToList();
 			return View(listProdcut);
 		}

@@ -83,7 +83,6 @@ namespace Project_63130260.Controllers
 		}
 
 
-		[RoleUser]
 		public ActionResult Whish()
 		{
 
