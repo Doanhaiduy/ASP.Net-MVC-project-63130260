@@ -1,8 +1,8 @@
 # ASP.Net-MVC-project-63130260
 Final project of web application development course for 3rd year students
-# Your Website Name
+# Sinp Shop
 
-Welcome to [Your Website Name], an online platform that offers a diverse range of products and a seamless shopping experience. This README.md file provides an overview of the features available for different types of users: guests, logged-in users, and administrators.
+Welcome to Sinp Shop, an online platform that offers a diverse range of products and a seamless shopping experience. This README.md file provides an overview of the features available for different types of users: guests, logged-in users, and administrators.
 
 ## Features for Guest Users (Not Logged In)
 
