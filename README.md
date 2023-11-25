@@ -120,6 +120,6 @@ Welcome to Sinp Shop, an online platform that offers a diverse range of products
 
 ## Getting Started
 
-To get started with [Your Website Name], simply visit our [website link] and explore the various features available. For more information or assistance, feel free to contact our support team through the integrated messenger.
+To get started with Sinp Shop, simply visit our https://project-63130260.site/ and explore the various features available. For more information or assistance, feel free to contact our support team through the integrated messenger.
 
 Happy Shopping!
