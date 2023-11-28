@@ -74,7 +74,7 @@ namespace DATA_63130260
 			// Kiểm tra xem thông tin đăng nhập có khớp với bất kì user nào không
 			// mã hóa mật khẩu để kiểm tra với csdl
 			string encryptPassword = mapEncryption.Encrypt(password);
-			var user = db.site_user.Where(m => m.email_address == username && m.password == encryptPassword).ToList();
+			var user = db.site_user.Where(m => m.email_address.ToLower() == username.ToLower() && m.password == encryptPassword).ToList();
 			if (user.Count > 0)
 			{
 				return user[0];
